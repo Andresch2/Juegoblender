@@ -27,9 +27,9 @@ export default class Prize {
         // Agregar al grupo principal
         this.pivot.add(visual)
 
-        // Ejes para depuración, fijos al cubo
-        const helper = new THREE.AxesHelper(0.5)
-        this.pivot.add(helper)
+        // Ejes para depuración — DESACTIVADO (limpieza visual)
+        // const helper = new THREE.AxesHelper(0.5)
+        // this.pivot.add(helper)
 
         this.scene.add(this.pivot)
         this.pivot.visible = role !== 'finalPrize'

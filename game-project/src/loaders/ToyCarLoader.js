@@ -10,6 +10,7 @@ export default class ToyCarLoader {
         this.resources = this.experience.resources;
         this.physics = this.experience.physics;
         this.prizes = [];
+        this.loadedBlocks = [];
     }
 
     _applyTextureToMeshes(root, imagePath, matcher, options = {}) {
@@ -128,6 +129,7 @@ export default class ToyCarLoader {
 
             }
 
+            this.loadedBlocks = blocks;
             this._processBlocks(blocks, precisePhysicsModels);
         } catch (err) {
             console.error('Error al cargar bloques o lista Trimesh:', err);
@@ -145,6 +147,7 @@ export default class ToyCarLoader {
             const blocks = await res.json();
             console.log(`📦 Bloques cargados (${blocks.length}) desde ${apiUrl}`);
 
+            this.loadedBlocks = blocks;
             this._processBlocks(blocks, precisePhysicsModels);
         } catch (err) {
             console.error('Error al cargar bloques desde URL:', err);
@@ -152,6 +155,23 @@ export default class ToyCarLoader {
     }
 
     _processBlocks(blocks, precisePhysicsModels) {
+        // Patrones que SI deben tener colision fisica (superficies caminables)
+        const PHYSICS_PATTERNS = [
+            'plat', 'platform', 'plataforma', 'puente', 'bridge',
+            'plane', 'track', 'floor', 'ramp', 'stair', 'step'
+        ];
+
+        // Patrones FORZADOS a tener física (obstáculos intencionales)
+        const OBSTACLE_PATTERNS = [
+            'obstacle_', 'collider_', 'wall_'
+        ];
+
+        // Patrones de objetos INVISIBLES (no agregar a escena ni física)
+        const INVISIBLE_PATTERNS = [
+            'helper', 'trigger', 'spawn', 'respawn', 
+            'patrol', 'debug', 'target', 'spawn_circle_lev1'
+        ];
+
         blocks.forEach(block => {
             if (!block.name) {
                 console.warn('Bloque sin nombre:', block);
@@ -167,6 +187,7 @@ export default class ToyCarLoader {
             }
 
             const model = glb.scene.clone();
+            const nameLower = block.name.toLowerCase();
 
             //  MARCAR modelo como perteneciente al nivel
             model.userData.levelObject = true;
@@ -177,6 +198,13 @@ export default class ToyCarLoader {
                     child.parent.remove(child);
                 }
             });
+
+            // Objetos invisibles: NO agregar a la escena
+            const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
+            if (isInvisible) {
+                console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
+                return;
+            }
 
             //  Manejo de carteles: aplicar textura a meshes
             this._applyTextureToMeshes(
@@ -212,7 +240,6 @@ export default class ToyCarLoader {
 
             //  Si es un premio (coin)
             if (block.name.startsWith('coin')) {
-                // console.log('🧪 Revisando coin desde API:', block)
                 const prize = new Prize({
                     model,
                     position: new THREE.Vector3(block.x, block.y, block.z),
@@ -220,46 +247,53 @@ export default class ToyCarLoader {
                     role: block.role || "default"
                 });
 
-                // 🔵 MARCAR modelo del premio
+                // Marcar modelo del premio
                 prize.model.userData.levelObject = true;
 
                 this.prizes.push(prize);
-                //this.scene.add(prize.model);
                 return;
             }
 
+            // Agregar modelo visualmente a la escena
             this.scene.add(model);
 
-            // Físicas
-            let shape;
-            let position = new THREE.Vector3();
+            // Determinar si este objeto debe tener fisica
+            const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p));
+            const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p));
+            const shouldHavePhysics = hasPhysicsPattern || isObstacleForced;
 
-            if (precisePhysicsModels.includes(block.name)) {
-                shape = createTrimeshShapeFromModel(model);
-                if (!shape) {
-                    console.warn(`No se pudo crear Trimesh para ${block.name}`);
-                    return;
-                }
-                position.set(0, 0, 0);
-            } else {
-                shape = createBoxShapeFromModel(model, 0.9);
-                const bbox = new THREE.Box3().setFromObject(model);
-                const center = new THREE.Vector3();
-                const size = new THREE.Vector3();
-                bbox.getCenter(center);
-                bbox.getSize(size);
-                center.y -= size.y / 2;
-                position.copy(center);
+            if (!shouldHavePhysics) {
+                // Decoracion: solo visual, sin CANNON.Body
+                return;
             }
+
+            // Calcular bounding box real del modelo
+            const bbox = new THREE.Box3().setFromObject(model);
+            const center = new THREE.Vector3();
+            const size = new THREE.Vector3();
+            bbox.getCenter(center);
+            bbox.getSize(size);
+
+            // Box collider alineado al bounding box
+            const halfX = Math.max(size.x / 2, 0.01);
+            const halfY = Math.max(size.y / 2, 0.01);
+            const halfZ = Math.max(size.z / 2, 0.01);
+
+            const shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
 
             const body = new CANNON.Body({
                 mass: 0,
+                type: CANNON.Body.STATIC,
                 shape: shape,
-                position: new CANNON.Vec3(position.x, position.y, position.z),
+                position: new CANNON.Vec3(center.x, center.y, center.z),
                 material: this.physics.obstacleMaterial
             });
 
-            // 🔵 MARCAR cuerpo físico
+            body.velocity.setZero();
+            body.angularVelocity.setZero();
+            body.fixedRotation = true;
+
+            // Marcar cuerpo fisico
             body.userData = { levelObject: true };
             model.userData.physicsBody = body;
             body.userData.linkedModel = model;

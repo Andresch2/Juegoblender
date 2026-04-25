@@ -7,6 +7,8 @@ export default class Physics {
         this.world.gravity.set(0, -9.82, 0)
         this.world.broadphase = new CANNON.SAPBroadphase(this.world)
         this.world.allowSleep = true
+        this.world.solver.iterations = 10
+        this.world.solver.tolerance = 0.001
 
         this.defaultMaterial = new CANNON.Material('default')
         const defaultContact = new CANNON.ContactMaterial(
@@ -28,12 +30,12 @@ export default class Physics {
             this.robotMaterial,
             this.obstacleMaterial,
             {
-                friction: 0.6,
+                friction: 0.3,
                 restitution: 0.0,
-                contactEquationStiffness: 1e9,
-                contactEquationRelaxation: 3,
-                frictionEquationStiffness: 1e7,
-                frictionEquationRelaxation: 3
+                contactEquationStiffness: 1e8,
+                contactEquationRelaxation: 4,
+                frictionEquationStiffness: 1e8,
+                frictionEquationRelaxation: 4
             }
         )
         this.world.addContactMaterial(robotObstacleContact)

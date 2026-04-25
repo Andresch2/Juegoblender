@@ -32,9 +32,9 @@ export default class Raycaster {
 
 
             if (intersects.length > 0) {
-                const point = intersects[0].point
-                //console.log('🟢 Punto seleccionado:', point)
-                this.placeObject(point)
+                // const point = intersects[0].point
+                // Desactivado: no generar cubos al hacer clic
+                // this.placeObject(point)
             }
         })
     }

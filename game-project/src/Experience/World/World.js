@@ -1,17 +1,20 @@
 import * as THREE from 'three'
-import Environment from './Environment.js'
-import Fox from './Fox.js'
-import Robot from './Robot.js'
-import ToyCarLoader from '../../loaders/ToyCarLoader.js'
-import Floor from './Floor.js'
-import ThirdPersonCamera from './ThirdPersonCamera.js'
-import Sound from './Sound.js'
-import AmbientSound from './AmbientSound.js'
 import MobileControls from '../../controls/MobileControls.js'
-import LevelManager from './LevelManager.js';
-import BlockPrefab from './BlockPrefab.js'
+import ToyCarLoader from '../../loaders/ToyCarLoader.js'
 import FinalPrizeParticles from '../Utils/FinalPrizeParticles.js'
+import AmbientSound from './AmbientSound.js'
+import BlockPrefab from './BlockPrefab.js'
 import Enemy from './Enemy.js'
+import Environment from './Environment.js'
+import Floor from './Floor.js'
+import Fox from './Fox.js'
+import LevelManager from './LevelManager.js'
+import Robot from './Robot.js'
+import Sound from './Sound.js'
+import ThirdPersonCamera from './ThirdPersonCamera.js'
+
+// Nivel mínimo para que aparezcan enemigos
+const ENEMY_MIN_LEVEL = 3
 
 
 export default class World {
@@ -49,14 +52,23 @@ export default class World {
             this.fox = new Fox(this.experience)
             this.robot = new Robot(this.experience)
 
-            // Enemigos múltiples: plantilla y spawn lejos del jugador
+            // Buscar spawn en los bloques cargados inicialmente
+            if (this.loader.loadedBlocks && this.loader.loadedBlocks.length > 0) {
+                const spawnPoint = this.getSpawnForLevel(1, this.loader.loadedBlocks);
+                this.resetRobotPosition(spawnPoint);
+            }
+
+            // Enemigos multiples: plantilla y spawn lejos del jugador
             this.enemyTemplate = new THREE.Mesh(
                 new THREE.BoxGeometry(1, 1, 1),
                 new THREE.MeshStandardMaterial({ color: 0xff0000 })
             )
-            const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '3', 10)
-            const enemiesCount = Number.isFinite(enemiesCountEnv) && enemiesCountEnv > 0 ? enemiesCountEnv : 3
-            this.spawnEnemies(enemiesCount)
+            // Solo crear enemigos si el nivel actual lo permite
+            if (this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
+                const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '3', 10)
+                const enemiesCount = Number.isFinite(enemiesCountEnv) && enemiesCountEnv > 0 ? enemiesCountEnv : 3
+                this.spawnEnemies(enemiesCount)
+            }
 
             this.experience.vr.bindCharacter(this.robot)
             this.thirdPersonCamera = new ThirdPersonCamera(this.experience, this.robot.group)
@@ -69,11 +81,11 @@ export default class World {
             })
 
             if (!this.experience.physics || !this.experience.physics.world) {
-                console.error("🚫 Sistema de físicas no está inicializado al cargar el mundo.");
+                console.error("Sistema de fisicas no esta inicializado al cargar el mundo.");
                 return;
             }
 
-            // Si se está en modo VR, ocultar el robot
+            // Si se esta en modo VR, ocultar el robot
             this._checkVRMode()
 
             this.experience.renderer.instance.xr.addEventListener('sessionstart', () => {
@@ -128,8 +140,8 @@ export default class World {
         this.robot?.update()
         this.blockPrefab?.update()
 
-        // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó
-        if (this.gameStarted) {
+        // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
+        if (this.gameStarted && this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
             this.enemies?.forEach(e => e.update(delta))
 
             // 💀 Verificar si algún enemigo atrapó al jugador
@@ -196,179 +208,139 @@ export default class World {
 
         const speed = this.robot?.body?.velocity?.length?.() || 0
         const moved = speed > 0.5
+        const pointsTarget = this.levelManager.getCurrentLevelTargetPoints()
 
+        // 1. Recolección de monedas normales
         this.loader.prizes.forEach((prize) => {
-            if (!prize.pivot) return
+            if (!prize.pivot || prize.role === "finalPrize") return // Ignorar finalPrize del array aquí
 
             const dist = prize.pivot.position.distanceTo(pos)
             if (dist < 1.2 && moved && !prize.collected) {
                 prize.collect()
                 prize.collected = true
 
-                if (prize.role === "default") {
-                    this.points = (this.points || 0) + 1
-                    this.robot.points = this.points
+                this.points = (this.points || 0) + 1
+                this.robot.points = this.points
 
-                    const pointsTarget = this.levelManager.getCurrentLevelTargetPoints()
-                    console.log(`🎯 Monedas recolectadas: ${this.points} / ${pointsTarget}`)
-
-                    if (!this.finalPrizeActivated && this.points === pointsTarget) {
-                        const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize")
-                        if (finalCoin && !finalCoin.collected && finalCoin.pivot) {
-                            finalCoin.pivot.visible = true
-                            if (finalCoin.model) finalCoin.model.visible = true
-                            this.finalPrizeActivated = true
-
-                            new FinalPrizeParticles({
-                                scene: this.scene,
-                                targetPosition: finalCoin.pivot.position,
-                                sourcePosition: this.robot.body.position,
-                                experience: this.experience
-                            })
-
-                            // Faro visual
-                            this.discoRaysGroup = new THREE.Group()
-                            this.scene.add(this.discoRaysGroup)
-
-                            const rayMaterial = new THREE.MeshBasicMaterial({
-                                color: 0xaa00ff,
-                                transparent: true,
-                                opacity: 0.25,
-                                side: THREE.DoubleSide
-                            })
-
-                            const rayCount = 4
-                            for (let i = 0; i < rayCount; i++) {
-                                const cone = new THREE.ConeGeometry(0.2, 4, 6, 1, true)
-                                const ray = new THREE.Mesh(cone, rayMaterial)
-
-                                ray.position.set(0, 2, 0)
-                                ray.rotation.x = Math.PI / 2
-                                ray.rotation.z = (i * Math.PI * 2) / rayCount
-
-                                const spot = new THREE.SpotLight(0xaa00ff, 2, 12, Math.PI / 7, 0.2, 0.5)
-                                spot.castShadow = false
-                                spot.shadow.mapSize.set(1, 1)
-                                spot.position.copy(ray.position)
-                                spot.target.position.set(
-                                    Math.cos(ray.rotation.z) * 10,
-                                    2,
-                                    Math.sin(ray.rotation.z) * 10
-                                )
-
-                                ray.userData.spot = spot
-                                this.discoRaysGroup.add(ray)
-                                this.discoRaysGroup.add(spot)
-                                this.discoRaysGroup.add(spot.target)
-                            }
-
-                            this.discoRaysGroup.position.copy(finalCoin.pivot.position)
-
-                            if (window.userInteracted) {
-                                this.portalSound.play()
-                            }
-
-                            console.log("🪙 Coin final activado correctamente.")
-                        }
-                    }
-                }
-
-                if (prize.role === "finalPrize") {
-                    if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
-                        this.levelManager.nextLevel()
-                        this.points = 0
-                        this.robot.points = 0
-                    } else {
-                        const elapsed = this.experience.tracker.stop()
-                        this.experience.tracker.saveTime(elapsed)
-                        this.experience.tracker.showEndGameModal(elapsed)
-
-                        this.experience.obstacleWavesDisabled = true
-                        clearTimeout(this.experience.obstacleWaveTimeout)
-                        this.experience.raycaster?.removeAllObstacles()
-
-                        if (window.userInteracted) {
-                            this.winner.play()
-                        }
-                    }
-                }
+                console.log(`🎯 Monedas recolectadas: ${this.points} / ${pointsTarget}`)
+                console.log(`[PORTAL] Monedas: ${this.points} / ${pointsTarget}`)
 
                 if (this.experience.raycaster?.removeRandomObstacles) {
                     const reduction = 0.2 + Math.random() * 0.1
                     this.experience.raycaster.removeRandomObstacles(reduction)
                 }
 
-                if (window.userInteracted) {
+                if (window.userInteracted && this.coinSound) {
                     this.coinSound.play()
                 }
 
-                this.experience.menu.setStatus?.(`🎖️ Puntos: ${this.points}`)
+                this.experience.menu?.setStatus?.(`Puntos: ${this.points}`)
             }
-        })
+        });
 
-        // ✅ Verificar si todas las monedas se han recogido y aún no se activó el finalPrize
-        // ✅ Activar finalPrize si todas las monedas default fueron recolectadas (desde VR o PC)
-        if (!this.finalPrizeActivated && this.loader?.prizes) {
-            const totalDefault = this.loader.prizes.filter(p => p.role === 'default').length
-            const collectedDefault = this.loader.prizes.filter(p => p.role === 'default' && p.collected).length
+        // 2. Activar portal si recogió todo y no está activado aún
+        if (!this.finalPrizeActivated && this.points >= pointsTarget) {
+            const portalPos = this.getPortalForLevel(this.levelManager.currentLevel, this.loader.loadedBlocks);
 
-            if (totalDefault > 0 && collectedDefault === totalDefault) {
-                const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize")
-                if (finalCoin && !finalCoin.collected && finalCoin.pivot) {
-                    finalCoin.pivot.visible = true
-                    if (finalCoin.model) finalCoin.model.visible = true
-                    this.finalPrizeActivated = true
+            if (portalPos) {
+                this.finalPrizeActivated = true;
 
-                    new FinalPrizeParticles({
-                        scene: this.scene,
-                        targetPosition: finalCoin.pivot.position,
-                        sourcePosition: this.experience.vrDolly?.position ?? this.experience.camera.instance.position,
-                        experience: this.experience
-                    })
+                // Mover finalCoin visualmente a la posición del portal
+                const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize");
+                if (finalCoin && finalCoin.pivot) {
+                    finalCoin.pivot.position.copy(portalPos);
+                    finalCoin.pivot.visible = true;
+                    if (finalCoin.model) finalCoin.model.visible = true;
+                }
 
-                    // Faro visual
-                    this.discoRaysGroup = new THREE.Group()
-                    this.scene.add(this.discoRaysGroup)
+                new FinalPrizeParticles({
+                    scene: this.scene,
+                    targetPosition: portalPos,
+                    sourcePosition: this.experience.vrDolly?.position ?? this.experience.camera.instance.position,
+                    experience: this.experience
+                })
 
-                    const rayMaterial = new THREE.MeshBasicMaterial({
-                        color: 0xaa00ff,
-                        transparent: true,
-                        opacity: 0.25,
-                        side: THREE.DoubleSide
-                    })
+                // Faro visual
+                this.discoRaysGroup = new THREE.Group()
+                this.scene.add(this.discoRaysGroup)
 
-                    const rayCount = 4
-                    for (let i = 0; i < rayCount; i++) {
-                        const cone = new THREE.ConeGeometry(0.2, 4, 6, 1, true)
-                        const ray = new THREE.Mesh(cone, rayMaterial)
+                const rayMaterial = new THREE.MeshBasicMaterial({
+                    color: 0xaa00ff,
+                    transparent: true,
+                    opacity: 0.25,
+                    side: THREE.DoubleSide
+                })
 
-                        ray.position.set(0, 2, 0)
-                        ray.rotation.x = Math.PI / 2
-                        ray.rotation.z = (i * Math.PI * 2) / rayCount
+                const rayCount = 4
+                for (let i = 0; i < rayCount; i++) {
+                    const cone = new THREE.ConeGeometry(0.2, 4, 6, 1, true)
+                    const ray = new THREE.Mesh(cone, rayMaterial)
 
-                        const spot = new THREE.SpotLight(0xaa00ff, 2, 12, Math.PI / 7, 0.2, 0.5)
-                        spot.castShadow = false
-                        spot.shadow.mapSize.set(1, 1)
-                        spot.position.copy(ray.position)
-                        spot.target.position.set(
-                            Math.cos(ray.rotation.z) * 10,
-                            2,
-                            Math.sin(ray.rotation.z) * 10
-                        )
+                    ray.position.set(0, 2, 0)
+                    ray.rotation.x = Math.PI / 2
+                    ray.rotation.z = (i * Math.PI * 2) / rayCount
 
-                        ray.userData.spot = spot
-                        this.discoRaysGroup.add(ray)
-                        this.discoRaysGroup.add(spot)
-                        this.discoRaysGroup.add(spot.target)
+                    const spot = new THREE.SpotLight(0xaa00ff, 2, 12, Math.PI / 7, 0.2, 0.5)
+                    spot.castShadow = false
+                    spot.shadow.mapSize.set(1, 1)
+                    spot.position.copy(ray.position)
+                    spot.target.position.set(
+                        Math.cos(ray.rotation.z) * 10,
+                        2,
+                        Math.sin(ray.rotation.z) * 10
+                    )
+
+                    ray.userData.spot = spot
+                    this.discoRaysGroup.add(ray)
+                    this.discoRaysGroup.add(spot)
+                    this.discoRaysGroup.add(spot.target)
+                }
+
+                this.discoRaysGroup.position.copy(portalPos)
+
+                if (window.userInteracted && this.portalSound) {
+                    this.portalSound.play()
+                }
+
+                console.log("🪙 Portal final activado correctamente en:", portalPos)
+            } else {
+                console.warn("No se encontro un bloque de portal valido.");
+            }
+        }
+
+        // 3. Chequear si el jugador entró al portal activado
+        if (this.finalPrizeActivated && this.points >= pointsTarget) {
+            const portalPos = this.getPortalForLevel(this.levelManager.currentLevel, this.loader.loadedBlocks);
+
+            // Distancia horizontal (ignorar Y porque el efecto está elevado)
+            const dx = portalPos.x - pos.x;
+            const dz = portalPos.z - pos.z;
+            const horizontalDist = Math.sqrt(dx * dx + dz * dz);
+
+            if (portalPos && horizontalDist < 2.5 && moved) {
+                this.points = -999; // hack para evitar triggers repetidos
+
+                const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize");
+                if (finalCoin && !finalCoin.collected) {
+                    finalCoin.collect()
+                    finalCoin.collected = true
+                    if (window.userInteracted && this.winner) {
+                        this.winner.play()
                     }
+                }
 
-                    this.discoRaysGroup.position.copy(finalCoin.pivot.position)
+                if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
+                    this.levelManager.nextLevel()
+                    this.points = 0
+                    this.robot.points = 0
+                } else {
+                    const elapsed = this.experience.tracker.stop()
+                    this.experience.tracker.saveTime(elapsed)
+                    this.experience.tracker.showEndGameModal(elapsed)
 
-                    if (window.userInteracted) {
-                        this.portalSound.play()
-                    }
-
-                    console.log("🪙 FinalPrize activado automáticamente desde VR.")
+                    this.experience.obstacleWavesDisabled = true
+                    clearTimeout(this.experience.obstacleWaveTimeout)
+                    this.experience.raycaster?.removeAllObstacles()
                 }
             }
         }
@@ -405,6 +377,11 @@ export default class World {
             const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
             const apiUrl = `${backendUrl}/api/blocks?level=${level}`;
 
+            const publicPath = (p) => {
+                const base = import.meta.env.BASE_URL || '/';
+                return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
+            };
+
             let data;
             try {
                 const res = await fetch(apiUrl);
@@ -419,10 +396,7 @@ export default class World {
                 console.log(`📦 Datos del nivel ${level} cargados desde API`);
             } catch (error) {
                 console.warn(`⚠️ No se pudo conectar con el backend. Usando datos locales para nivel ${level}...`);
-                const publicPath = (p) => {
-                    const base = import.meta.env.BASE_URL || '/';
-                    return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
-                };
+
 
                 const localUrl = publicPath('data/toy_car_blocks.json');
                 const localRes = await fetch(localUrl);
@@ -441,33 +415,43 @@ export default class World {
 
                 data = {
                     blocks: filteredBlocks,
-                    spawnPoint: { x: -17, y: 1.5, z: -67 } // valor por defecto si no viene en JSON
+                    spawnPoint: this.levelManager.getSpawnPoint(level)
                 };
             }
 
-            const spawnPoint = data.spawnPoint || { x: 5, y: 1.5, z: 5 };
+            let blocksArray = data.blocks ? data.blocks : (Array.isArray(data) ? data : []);
+            let spawnPoint = this.getSpawnForLevel(level, blocksArray);
             this.points = 0;
             this.robot.points = 0;
             this.finalPrizeActivated = false;
             this.experience.menu.setStatus?.(`🎖️ Puntos: ${this.points}`);
 
             if (data.blocks) {
-                const publicPath = (p) => {
-                    const base = import.meta.env.BASE_URL || '/';
-                    return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
-                };
-                const preciseUrl = publicPath('config/precisePhysicsModels.json');
-                const preciseRes = await fetch(preciseUrl);
-                if (!preciseRes.ok) {
-                    const preview = (await preciseRes.text()).slice(0, 120);
-                    throw new Error(`No se pudo cargar ${preciseUrl} (HTTP ${preciseRes.status}). Vista previa: ${preview}`);
+                // Intentar cargar configuración de física precisa (Trimesh)
+                let preciseModels = [];
+                try {
+                    const preciseLevelUrl = publicPath(`config/precisePhysicsModels${level}.json`);
+                    const resLevel = await fetch(preciseLevelUrl);
+
+                    if (resLevel.ok) {
+                        preciseModels = await resLevel.json();
+                        console.log(`Usando modelos fisicos precisos especificos del nivel ${level}`);
+                    } else {
+                        // Fallback al archivo general
+                        const preciseUrl = publicPath('config/precisePhysicsModels.json');
+                        const resGeneral = await fetch(preciseUrl);
+                        if (resGeneral.ok) {
+                            preciseModels = await resGeneral.json();
+                            console.log(`Usando modelos fisicos precisos generales (fallback)`);
+                        } else {
+                            console.warn(`No se encontro configuracion de fisica precisa en ${preciseUrl}`);
+                        }
+                    }
+                } catch (e) {
+                    console.error('Error al cargar configuracion de fisica precisa:', e);
                 }
-                const preciseCt = preciseRes.headers.get('content-type') || '';
-                if (!preciseCt.includes('application/json')) {
-                    const preview = (await preciseRes.text()).slice(0, 120);
-                    throw new Error(`Contenido no JSON en ${preciseUrl}. Vista previa: ${preview}`);
-                }
-                const preciseModels = await preciseRes.json();
+
+                // Procesar bloques con la configuración obtenida
                 this.loader._processBlocks(data.blocks, preciseModels);
             } else {
                 await this.loader.loadFromURL(apiUrl);
@@ -598,10 +582,84 @@ export default class World {
         }
 
         /** Fin faro para limpianza */
-
     }
 
-    resetRobotPosition(spawn = { x: -17, y: 1.5, z: -67 }) {
+    getSpawnForLevel(level, blocksArray) {
+        let spawnPosition = this.levelManager ? this.levelManager.getSpawnPoint(level) : { x: 0, y: 2, z: 0 };
+
+        console.log("[SPAWN] Nivel:", level);
+
+        if (!blocksArray || blocksArray.length === 0) {
+            console.log("[SPAWN] Bloques disponibles: 0");
+            console.log("[SPAWN] Coordenadas usadas:", spawnPosition);
+            return spawnPosition;
+        }
+
+        console.log("[SPAWN] Bloques disponibles:", blocksArray.length);
+
+        const spawnBlock = blocksArray.find(b => {
+            if (!b.name) return false;
+            const name = b.name.toLowerCase();
+            return name.includes('spawn_circle') ||
+                name.includes('player_spawn') ||
+                name.includes('spawn') ||
+                name.includes('respawn');
+        });
+
+        if (spawnBlock) {
+            console.log("[SPAWN] Bloque encontrado:", spawnBlock.name);
+            spawnPosition = { x: spawnBlock.x, y: spawnBlock.y + 1.5, z: spawnBlock.z };
+        } else {
+            console.log("[SPAWN] Bloque no encontrado, usando fallback.");
+        }
+
+        console.log("[SPAWN] Coordenadas usadas:", spawnPosition);
+
+        // Guardar en LevelManager para uso posterior
+        if (this.levelManager) {
+            this.levelManager.setSpawnPoint(level, spawnPosition);
+        }
+
+        return spawnPosition;
+    }
+
+    getPortalForLevel(level, blocksArray) {
+        if (!blocksArray || blocksArray.length === 0) return null;
+
+        // Prioridad 1: Buscar el aro real (portal_final)
+        let portalBlock = blocksArray.find(b => b.name && b.name.toLowerCase().includes('portal_final'));
+
+        // Prioridad 2: Cualquier portal
+        if (!portalBlock) {
+            portalBlock = blocksArray.find(b => b.name && b.name.toLowerCase().includes('portal'));
+        }
+
+        // Prioridad 3: Otros nombres de meta
+        if (!portalBlock) {
+            portalBlock = blocksArray.find(b => {
+                if (!b.name) return false;
+                const name = b.name.toLowerCase();
+                return name.includes('meta') || name.includes('finish') || name.includes('victory');
+            });
+        }
+
+        if (portalBlock) {
+            console.log("[PORTAL] Bloque usado:", portalBlock.name);
+            // El JSON ya tiene Y=2.2 para portal_final, no sumamos offset extra.
+            // Si el bloque tiene Y cerca de 0 (como un cartel), sumamos 2 para elevar el efecto.
+            const yOffset = portalBlock.y < 1.0 ? 2.0 : 0.0;
+            const pos = new THREE.Vector3(portalBlock.x, portalBlock.y + yOffset, portalBlock.z);
+            console.log("[PORTAL] Posicion final:", pos);
+            return pos;
+        }
+
+        return null;
+    }
+
+    resetRobotPosition(spawn) {
+        if (!spawn) {
+            spawn = this.levelManager ? this.levelManager.getSpawnPoint(this.levelManager.currentLevel) : { x: 0, y: 2, z: 0 };
+        }
         if (!this.robot?.body || !this.robot?.group) return
 
         this.robot.body.position.set(spawn.x, spawn.y, spawn.z)

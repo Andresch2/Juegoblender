@@ -117,8 +117,8 @@ export default class Experience {
       onCancelGame: () => this.tracker.handleCancelGame() // 🔴 aquí se integra la lógica central
     })
 
-    //Generar obstaculos
-    this._startObstacleWaves()
+    // Generar obstaculos — DESACTIVADO para estabilizar niveles
+    // this._startObstacleWaves()
 
 
 
@@ -306,7 +306,7 @@ export default class Experience {
     console.log('🎮 Juego iniciado')
     this.isThirdPerson = true // ⬅️ asegurar el modo
     this.tracker.start()
-    this._startObstacleWaves()
+    // this._startObstacleWaves() // DESACTIVADO
     if (this.menu && this.menu.toggleButton && this.menu.toggleButton.style) {
       this.menu.toggleButton.style.display = 'block'
     }
