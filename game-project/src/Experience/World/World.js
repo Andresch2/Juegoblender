@@ -27,6 +27,7 @@ export default class World {
         this.finalPrizeActivated = false
         this.gameStarted = false
         this.enemies = []
+        this.totalDefaultCoins = 0
 
         this.coinSound = new Sound('/sounds/coin.ogg')
         this.ambientSound = new AmbientSound('/sounds/ambiente.mp3')
@@ -48,6 +49,7 @@ export default class World {
 
             this.loader = new ToyCarLoader(this.experience)
             await this.loader.loadFromAPI()
+            this.refreshLevelProgress(1)
 
             this.fox = new Fox(this.experience)
             this.robot = new Robot(this.experience)
@@ -208,14 +210,14 @@ export default class World {
 
         const speed = this.robot?.body?.velocity?.length?.() || 0
         const moved = speed > 0.5
-        const pointsTarget = this.levelManager.getCurrentLevelTargetPoints()
+        const pointsTarget = this.getCurrentPointsTarget()
 
         // 1. Recolección de monedas normales
         this.loader.prizes.forEach((prize) => {
             if (!prize.pivot || prize.role === "finalPrize") return // Ignorar finalPrize del array aquí
 
             const dist = prize.pivot.position.distanceTo(pos)
-            if (dist < 1.2 && moved && !prize.collected) {
+            if (dist < 1.8 && moved && !prize.collected) {
                 prize.collect()
                 prize.collected = true
 
@@ -234,13 +236,14 @@ export default class World {
                     this.coinSound.play()
                 }
 
-                this.experience.menu?.setStatus?.(`Puntos: ${this.points}`)
+                this.experience.menu?.setPoints?.(this.points, pointsTarget)
             }
         });
 
         // 2. Activar portal si recogió todo y no está activado aún
         if (!this.finalPrizeActivated && this.points >= pointsTarget) {
             const portalPos = this.getPortalForLevel(this.levelManager.currentLevel, this.loader.loadedBlocks);
+            if (!portalPos) return
 
             if (portalPos) {
                 this.finalPrizeActivated = true;
@@ -260,43 +263,7 @@ export default class World {
                     experience: this.experience
                 })
 
-                // Faro visual
-                this.discoRaysGroup = new THREE.Group()
-                this.scene.add(this.discoRaysGroup)
-
-                const rayMaterial = new THREE.MeshBasicMaterial({
-                    color: 0xaa00ff,
-                    transparent: true,
-                    opacity: 0.25,
-                    side: THREE.DoubleSide
-                })
-
-                const rayCount = 4
-                for (let i = 0; i < rayCount; i++) {
-                    const cone = new THREE.ConeGeometry(0.2, 4, 6, 1, true)
-                    const ray = new THREE.Mesh(cone, rayMaterial)
-
-                    ray.position.set(0, 2, 0)
-                    ray.rotation.x = Math.PI / 2
-                    ray.rotation.z = (i * Math.PI * 2) / rayCount
-
-                    const spot = new THREE.SpotLight(0xaa00ff, 2, 12, Math.PI / 7, 0.2, 0.5)
-                    spot.castShadow = false
-                    spot.shadow.mapSize.set(1, 1)
-                    spot.position.copy(ray.position)
-                    spot.target.position.set(
-                        Math.cos(ray.rotation.z) * 10,
-                        2,
-                        Math.sin(ray.rotation.z) * 10
-                    )
-
-                    ray.userData.spot = spot
-                    this.discoRaysGroup.add(ray)
-                    this.discoRaysGroup.add(spot)
-                    this.discoRaysGroup.add(spot.target)
-                }
-
-                this.discoRaysGroup.position.copy(portalPos)
+                this.createPortalVortex(portalPos)
 
                 if (window.userInteracted && this.portalSound) {
                     this.portalSound.play()
@@ -313,11 +280,13 @@ export default class World {
             const portalPos = this.getPortalForLevel(this.levelManager.currentLevel, this.loader.loadedBlocks);
 
             // Distancia horizontal (ignorar Y porque el efecto está elevado)
+            if (!portalPos) return
+
             const dx = portalPos.x - pos.x;
             const dz = portalPos.z - pos.z;
             const horizontalDist = Math.sqrt(dx * dx + dz * dz);
 
-            if (portalPos && horizontalDist < 2.5 && moved) {
+            if (horizontalDist < 2.5 && moved) {
                 this.points = -999; // hack para evitar triggers repetidos
 
                 const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize");
@@ -347,8 +316,14 @@ export default class World {
 
 
         // Faro rotación
-        if (this.discoRaysGroup) {
-            this.discoRaysGroup.rotation.y += delta * 0.5
+        if (this.portalVortexGroup) {
+            this.portalVortexGroup.rotation.y += delta * 0.9
+            this.portalVortexGroup.children.forEach((child, index) => {
+                if (child.userData?.spin) {
+                    child.rotation.z += delta * child.userData.spin
+                    child.scale.setScalar(1 + Math.sin(Date.now() * 0.003 + index) * 0.04)
+                }
+            })
         }
 
         // Optimización física por distancia
@@ -369,6 +344,83 @@ export default class World {
                 }
             }
         })
+    }
+
+    getCurrentPointsTarget() {
+        return this.totalDefaultCoins || this.levelManager.getCurrentLevelTargetPoints()
+    }
+
+    refreshLevelProgress(level) {
+        this.totalDefaultCoins = this.loader?.prizes?.filter(p => p.role === "default").length || 0
+        this.experience.menu?.setLevel?.(level)
+        this.experience.menu?.setPoints?.(this.points || 0, this.getCurrentPointsTarget())
+        console.log(`Meta dinamica nivel ${level}: ${this.totalDefaultCoins} monedas default`)
+    }
+
+    createPortalVortex(position) {
+        this.clearPortalVortex()
+
+        const group = new THREE.Group()
+        group.position.copy(position)
+
+        const ringColors = [0x27f5d2, 0xffd166, 0xffffff]
+        for (let i = 0; i < 3; i++) {
+            const geometry = new THREE.TorusGeometry(1.1 + i * 0.35, 0.035, 8, 80)
+            const material = new THREE.MeshBasicMaterial({
+                color: ringColors[i],
+                transparent: true,
+                opacity: 0.78 - i * 0.13,
+                side: THREE.DoubleSide
+            })
+            const ring = new THREE.Mesh(geometry, material)
+            ring.rotation.x = Math.PI / 2
+            ring.rotation.z = i * 0.75
+            ring.position.y = 1.05 + i * 0.35
+            ring.userData.spin = i % 2 === 0 ? 1.4 : -1.1
+            group.add(ring)
+        }
+
+        const spiralMaterial = new THREE.MeshBasicMaterial({
+            color: 0x27f5d2,
+            transparent: true,
+            opacity: 0.34,
+            side: THREE.DoubleSide,
+            depthWrite: false
+        })
+
+        for (let i = 0; i < 5; i++) {
+            const geometry = new THREE.ConeGeometry(0.08, 3.2, 5, 1, true)
+            const beam = new THREE.Mesh(geometry, spiralMaterial.clone())
+            beam.position.y = 1.9
+            beam.rotation.x = Math.PI / 2
+            beam.rotation.z = (i * Math.PI * 2) / 5
+            beam.userData.spin = 0.9 + i * 0.12
+            group.add(beam)
+        }
+
+        const pointLight = new THREE.PointLight(0x27f5d2, 4, 9)
+        pointLight.position.set(0, 2.2, 0)
+        group.add(pointLight)
+
+        this.portalVortexGroup = group
+        this.scene.add(group)
+    }
+
+    clearPortalVortex() {
+        if (!this.portalVortexGroup) return
+
+        this.portalVortexGroup.traverse((obj) => {
+            if (obj.geometry) obj.geometry.dispose()
+            if (obj.material) {
+                if (Array.isArray(obj.material)) {
+                    obj.material.forEach(mat => mat.dispose())
+                } else {
+                    obj.material.dispose()
+                }
+            }
+        })
+        this.scene.remove(this.portalVortexGroup)
+        this.portalVortexGroup = null
     }
 
 
@@ -424,6 +476,7 @@ export default class World {
             this.points = 0;
             this.robot.points = 0;
             this.finalPrizeActivated = false;
+            this.experience.menu?.setLevel?.(level);
             this.experience.menu.setStatus?.(`🎖️ Puntos: ${this.points}`);
 
             if (data.blocks) {
@@ -463,7 +516,7 @@ export default class World {
                 p.collected = false;
             });
 
-            this.totalDefaultCoins = this.loader.prizes.filter(p => p.role === "default").length;
+            this.refreshLevelProgress(level);
             console.log(`🎯 Total de monedas default para el nivel ${level}: ${this.totalDefaultCoins}`);
 
             this.resetRobotPosition(spawnPoint);
@@ -569,6 +622,8 @@ export default class World {
                 p.collected = false;
             }
         })
+
+        this.clearPortalVortex()
 
 
         /** Esto es de faro para limpienza */
@@ -681,7 +736,7 @@ export default class World {
             p.collected = false;
         });
 
-        this.totalDefaultCoins = this.loader.prizes.filter(p => p.role === "default").length;
+        this.refreshLevelProgress(this.levelManager.currentLevel);
         console.log(`🎯 Total de monedas default para el nivel local: ${this.totalDefaultCoins}`);
     }
 

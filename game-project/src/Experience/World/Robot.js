@@ -161,12 +161,12 @@ export default class Robot {
 
         // Shift para correr: detectar si Shift esta presionado
         const isShiftDown = keys.shift || false
-        const walkForce = 70
-        const runForce = 120
+        const walkForce = 52
+        const runForce = 90
         const moveForce = isShiftDown ? runForce : walkForce
 
-        const walkMaxSpeed = 10
-        const runMaxSpeed = 16
+        const walkMaxSpeed = 7.5
+        const runMaxSpeed = 12
         const maxSpeed = isShiftDown ? runMaxSpeed : walkMaxSpeed
 
         const turnSpeed = 2.5
@@ -190,9 +190,8 @@ export default class Robot {
 
         // Salto -- impulso puramente vertical
         const grounded = this.isGrounded();
-        console.log("[GROUND] grounded:", grounded);
         if (keys.space && grounded) {
-            this.body.applyImpulse(new CANNON.Vec3(0, 5, 0))
+            this.body.applyImpulse(new CANNON.Vec3(0, 4.5, 0))
             this.animation.play('jump')
             return
         }
@@ -204,7 +203,7 @@ export default class Robot {
         }
 
         // No permitir que el robot salga del escenario
-        if (this.body.position.y > 25 || this.body.position.y < -10) {
+        if (this.body.position.y > 25 || this.body.position.y < 0.25) {
             console.warn('Robot fuera del escenario. Reubicando al spawn del nivel...')
             this.respawn();
         }

@@ -7,19 +7,21 @@ export default class FinalPrizeParticles {
     this.experience = experience
     this.clock = new THREE.Clock()
 
-    this.count = 60 
+    this.count = 140
     this.angles = new Float32Array(this.count)
     this.radii = new Float32Array(this.count)
+    this.heights = new Float32Array(this.count)
     this.positions = new Float32Array(this.count * 3)
 
     for (let i = 0; i < this.count; i++) {
       const i3 = i * 3
       const angle = Math.random() * Math.PI * 2
-      const radius = 2 + Math.random() * 2
-      const y = Math.random() * 2
+      const radius = 1.2 + Math.random() * 3.2
+      const y = Math.random() * 4
 
       this.angles[i] = angle
       this.radii[i] = radius
+      this.heights[i] = y
 
       this.positions[i3 + 0] = sourcePosition.x + Math.cos(angle) * radius
       this.positions[i3 + 1] = sourcePosition.y + y
@@ -30,8 +32,8 @@ export default class FinalPrizeParticles {
     this.geometry.setAttribute('position', new THREE.BufferAttribute(this.positions, 3))
 
     const material = new THREE.PointsMaterial({
-      size: 0.3,
-      color: 0xffff00,
+      size: 0.22,
+      color: 0x27f5d2,
       transparent: true,
       opacity: 0.9,
       sizeAttenuation: true,
@@ -54,12 +56,18 @@ export default class FinalPrizeParticles {
     for (let i = 0; i < this.count; i++) {
       const i3 = i * 3
 
-      this.angles[i] += 1.5 * delta // velocidad angular
-      this.radii[i] *= 0.98 // espiral
+      this.angles[i] += 2.8 * delta
+      this.radii[i] *= 0.992
+      this.heights[i] += 1.3 * delta
+
+      if (this.radii[i] < 0.35 || this.heights[i] > 4.8) {
+        this.radii[i] = 1.4 + Math.random() * 3
+        this.heights[i] = Math.random() * 0.5
+      }
 
       this.positions[i3 + 0] = this.target.x + Math.cos(this.angles[i]) * this.radii[i]
       this.positions[i3 + 2] = this.target.z + Math.sin(this.angles[i]) * this.radii[i]
-      this.positions[i3 + 1] += 0.01 // subir lentamente
+      this.positions[i3 + 1] = this.target.y + this.heights[i]
     }
 
     this.geometry.attributes.position.needsUpdate = true

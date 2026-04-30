@@ -115,8 +115,9 @@ export default class ToyCarLoader {
 
                 if (!res.ok) throw new Error('Conexión fallida');
 
-                blocks = await res.json();
-                console.log('Datos cargados desde la API:', blocks.length);
+                const apiBlocks = await res.json();
+                blocks = this._dedupeBlocks(apiBlocks.filter(b => b.level === 1));
+                console.log('Datos cargados desde la API (nivel 1):', blocks.length);
                 //console.log('🧩 Lista de bloques:', blocks.map(b => b.name))
             } catch (apiError) {
                 console.warn('No se pudo conectar con la API. Cargando desde archivo local...');
@@ -124,7 +125,7 @@ export default class ToyCarLoader {
                 const allBlocks = await localRes.json();
 
                 // 🔍 Filtrar solo nivel 1
-                blocks = allBlocks.filter(b => b.level === 1);
+                blocks = this._dedupeBlocks(allBlocks.filter(b => b.level === 1));
                 console.log(`Datos cargados desde archivo local (nivel 1): ${blocks.length}`);
 
             }
@@ -144,7 +145,7 @@ export default class ToyCarLoader {
             const res = await fetch(apiUrl);
             if (!res.ok) throw new Error('Conexión fallida al cargar bloques de nivel.');
 
-            const blocks = await res.json();
+            const blocks = this._dedupeBlocks(await res.json());
             console.log(`📦 Bloques cargados (${blocks.length}) desde ${apiUrl}`);
 
             this.loadedBlocks = blocks;
@@ -155,10 +156,14 @@ export default class ToyCarLoader {
     }
 
     _processBlocks(blocks, precisePhysicsModels) {
+        blocks = this._dedupeBlocks(blocks);
+
         // Patrones que SI deben tener colision fisica (superficies caminables)
         const PHYSICS_PATTERNS = [
             'plat', 'platform', 'plataforma', 'puente', 'bridge',
-            'plane', 'track', 'floor', 'ramp', 'stair', 'step'
+            'plane', 'track', 'floor', 'ramp', 'stair', 'step',
+            'tree', 'arbol', 'mountain', 'montana', 'rock', 'roca',
+            'rio', 'river', 'water', 'agua', 'pond'
         ];
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -239,7 +244,8 @@ export default class ToyCarLoader {
             }
 
             //  Si es un premio (coin)
-            if (block.name.startsWith('coin')) {
+            const isCollectibleCoin = nameLower.startsWith('coin_') && !nameLower.includes('coin_structure');
+            if (isCollectibleCoin) {
                 const prize = new Prize({
                     model,
                     position: new THREE.Vector3(block.x, block.y, block.z),
@@ -261,6 +267,7 @@ export default class ToyCarLoader {
             const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p));
             const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p));
             const shouldHavePhysics = hasPhysicsPattern || isObstacleForced;
+            const isWaterSurface = ['rio', 'river', 'water', 'agua', 'pond'].some(p => nameLower.includes(p));
 
             if (!shouldHavePhysics) {
                 // Decoracion: solo visual, sin CANNON.Body
@@ -275,9 +282,24 @@ export default class ToyCarLoader {
             bbox.getSize(size);
 
             // Box collider alineado al bounding box
-            const halfX = Math.max(size.x / 2, 0.01);
-            const halfY = Math.max(size.y / 2, 0.01);
-            const halfZ = Math.max(size.z / 2, 0.01);
+            let halfX = Math.max(size.x / 2, 0.01);
+            let halfY = Math.max(size.y / 2, 0.01);
+            let halfZ = Math.max(size.z / 2, 0.01);
+            const bodyCenter = center.clone();
+
+            // Los arboles tienen copa muy ancha. Si usamos todo el bounding box,
+            // el jugador queda flotando o choca con hojas invisibles.
+            if (nameLower.includes('tree') || nameLower.includes('arbol')) {
+                halfX = Math.max(Math.min(size.x * 0.12, 0.7), 0.25);
+                halfZ = Math.max(Math.min(size.z * 0.12, 0.7), 0.25);
+                halfY = Math.max(Math.min(size.y * 0.35, 2.5), 0.8);
+                bodyCenter.y = center.y - size.y * 0.22;
+            }
+
+            if (isWaterSurface) {
+                halfY = 0.03;
+                bodyCenter.y = block.y - 0.03;
+            }
 
             const shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
 
@@ -285,8 +307,8 @@ export default class ToyCarLoader {
                 mass: 0,
                 type: CANNON.Body.STATIC,
                 shape: shape,
-                position: new CANNON.Vec3(center.x, center.y, center.z),
-                material: this.physics.obstacleMaterial
+                position: new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z),
+                material: isWaterSurface ? this.physics.defaultMaterial : this.physics.obstacleMaterial
             });
 
             body.velocity.setZero();
@@ -299,6 +321,28 @@ export default class ToyCarLoader {
             body.userData.linkedModel = model;
             this.physics.world.addBody(body);
         });
+    }
+
+    _dedupeBlocks(blocks) {
+        const byName = new Map();
+
+        blocks.forEach((block) => {
+            if (!block?.name) return;
+
+            const key = `${block.level || 1}:${block.name.toLowerCase()}`;
+            const current = byName.get(key);
+
+            if (!current) {
+                byName.set(key, block);
+                return;
+            }
+
+            if (block.role === 'finalPrize' && current.role !== 'finalPrize') {
+                byName.set(key, { ...current, ...block, role: 'finalPrize' });
+            }
+        });
+
+        return Array.from(byName.values());
     }
 
 }

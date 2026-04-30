@@ -5,6 +5,8 @@
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '../.env') });
 const fs = require('fs');
+const mongoose = require('mongoose');
+const Block = require('../models/Block');
 
 // Patch para usar fetch en CommonJS con node-fetch
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
@@ -20,9 +22,15 @@ if (!level) {
 
 // Leer URL desde .env
 const API_URL = process.env.API_URL;
+const MONGO_URI = process.env.MONGO_URI;
 
 if (!API_URL) {
     console.error('ERROR: No se encontro API_URL en .env');
+    process.exit(1);
+}
+
+if (!MONGO_URI) {
+    console.error('ERROR: No se encontro MONGO_URI en .env');
     process.exit(1);
 }
 
@@ -58,8 +66,17 @@ async function sendJSON(fileName) {
     }
 }
 
+async function clearLevel() {
+    await mongoose.connect(MONGO_URI);
+    const result = await Block.deleteMany({ level: Number(level) });
+    console.log(`Nivel ${level} limpiado en MongoDB. Documentos eliminados: ${result.deletedCount}`);
+    await mongoose.disconnect();
+}
+
 // Enviar cada archivo que exista
 (async () => {
+    await clearLevel();
+
     for (const file of possibleFiles) {
         await sendJSON(file);
     }
