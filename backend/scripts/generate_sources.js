@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const modelsPath = path.join('C:/Users/labinf4.pasto/Desktop/Final_Juego_Blender/Juegoblender/game-project/public/models/toycar2');
+const modelsPath = path.join('C:/Users/User/Desktop/Juego_blender/Juegoblender/game-project/public/models/toycar2');
 const outputPath = path.join(__dirname, '../data/sources_2.js');
 
 if (!fs.existsSync(modelsPath)) {
