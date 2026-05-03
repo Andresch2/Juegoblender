@@ -180,8 +180,9 @@ export default class ToyCarLoader {
             'cube', 'coin_structure',
             // Agua (física especial plana)
             'pond', 'rio', 'river', 'water',
-            // Nivel 3
-            'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto'
+            // Nivel 3 - Cripta/Mazmorra
+            'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto',
+            'chamber_', 'chase_', 'crypt_', 'final_', 'portal_'
         ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -199,7 +200,12 @@ export default class ToyCarLoader {
             'banco', 'cartel', 'chimney', 'cilinder',
             'cylinder', 'pipe', 'rocket', 'fox_inicio',
             'portal_final', 'portal_roca_0', 'portal_roca_3',
-            'camino'
+            'camino',
+            // Nivel 3 decoraciones
+            'barrel', 'crate', 'skull', 'cobweb', 'cart',
+            'bricks', 'torch', 'horse', 'table', 'spikes',
+            'safe_zone', 'arch', 'column', 'col_', 'bars',
+            'danger_zone', 'ghost_danger', 'enemy_ghost'
         ]
 
         blocks.forEach(block => {
@@ -291,7 +297,8 @@ export default class ToyCarLoader {
             const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p))
             const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p))
             const isDecoration = DECORATION_PATTERNS.some(p => nameLower.includes(p))
-            const shouldHavePhysics = (hasPhysicsPattern || isObstacleForced) && !isDecoration
+            const isPrecise = Array.isArray(precisePhysicsModels) && precisePhysicsModels.includes(block.name);
+            const shouldHavePhysics = isPrecise || ((hasPhysicsPattern || isObstacleForced) && !isDecoration)
             const isWaterSurface = ['rio', 'river', 'water', 'agua', 'pond'].some(p => nameLower.includes(p));
 
             if (!shouldHavePhysics) {
@@ -341,13 +348,27 @@ export default class ToyCarLoader {
                 bodyCenter.y = block.y - 0.03;
             }
 
-            const shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
+            let shape;
+            let finalBodyPos = new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z);
+
+            if (isPrecise) {
+                shape = createTrimeshShapeFromModel(model);
+                if (shape) {
+                    // Los vértices del Trimesh ya están en coordenadas de mundo, 
+                    // así que el cuerpo debe estar en el origen (0,0,0)
+                    finalBodyPos = new CANNON.Vec3(0, 0, 0);
+                }
+            }
+
+            if (!shape) {
+                shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
+            }
 
             const body = new CANNON.Body({
                 mass: 0,
                 type: CANNON.Body.STATIC,
                 shape: shape,
-                position: new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z),
+                position: finalBodyPos,
                 material: isWaterSurface ? this.physics.defaultMaterial : this.physics.obstacleMaterial,
                 linearDamping: 0.9,
                 angularDamping: 1.0

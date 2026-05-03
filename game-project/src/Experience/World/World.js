@@ -58,27 +58,13 @@ export default class World {
                 this.resetRobotPosition(spawnPoint);
             }
 
-            // Enemigos multiples: seleccionar modelo según el nivel
-            let enemyModel = null
-            
-            if (this.levelManager.currentLevel === 3) {
-                // Usar modelo del nivel 3
-                enemyModel = this.resources.items.enemy_ghost_skull_lev3?.scene
-            } else {
-                // Fallback: usar ghostskull genérico
-                enemyModel = this.resources.items.ghostskull?.scene
-            }
-            
-            this.enemyTemplate = enemyModel || new THREE.Mesh(
-                new THREE.BoxGeometry(1, 1, 1),
-                new THREE.MeshStandardMaterial({ color: 0xff0000 })
-            )
-            
+            // Seleccionar modelo del enemigo según el nivel
+            this._updateEnemyTemplate(this.levelManager.currentLevel)
+
             // Solo crear enemigos si el nivel actual lo permite
             if (this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
-                const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '3', 10)
-                const enemiesCount = Number.isFinite(enemiesCountEnv) && enemiesCountEnv > 0 ? enemiesCountEnv : 3
-                this.spawnEnemies(enemiesCount)
+                await this._loadEnemyRouteData(this.levelManager.currentLevel)
+                this.spawnEnemies(1)
             }
 
             this.experience.vr.bindCharacter(this.robot)
@@ -116,13 +102,13 @@ export default class World {
             this.enemies.forEach(e => e?.destroy?.())
             this.enemies = []
         }
-        
+
         const patrolPoints = this.enemyPatrol || [];
         const chasePoints = this.ghostChasePoints || [];
         const spawnPoints = this.enemySpawn || [];
 
         let spawnPosition = new THREE.Vector3(0, 1.5, 0);
-        
+
         if (spawnPoints.length > 0) {
             const sp = spawnPoints[0];
             spawnPosition.set(sp.x, sp.y + 1.0, sp.z);
@@ -333,13 +319,13 @@ export default class World {
                     for (let i = 0; i < velocities.length; i++) {
                         const i3 = i * 3
                         positions[i3 + 1] += velocities[i].y * delta
-                        
+
                         // Rotación en el vórtice
                         const x = positions[i3 + 0]
                         const z = positions[i3 + 2]
                         positions[i3 + 0] = x * Math.cos(velocities[i].spin * delta) - z * Math.sin(velocities[i].spin * delta)
                         positions[i3 + 2] = x * Math.sin(velocities[i].spin * delta) + z * Math.cos(velocities[i].spin * delta)
-                        
+
                         if (positions[i3 + 1] > 5) {
                             positions[i3 + 1] = 0
                             positions[i3 + 0] = (Math.random() - 0.5) * 4
@@ -383,12 +369,22 @@ export default class World {
     }
 
     createPortalVortex(position) {
-        this.clearPortalVortex()
+        if (this.portalVortexGroup) {
+            this.clearPortalVortex()
+        }
 
         const group = new THREE.Group()
         group.position.copy(position)
 
-        const ringColors = [0x27f5d2, 0xffd166, 0xffffff]
+        const isLevel3 = this.levelManager?.currentLevel === 3
+
+        // Colores base del portal: Tonalidad fantasma para nivel 3, cyan/amarillo para nivel 1
+        const ringColors = isLevel3
+            ? [0x9d4edd, 0xff0055, 0x480ca8] // Morado, fucsia, azul oscuro
+            : [0x27f5d2, 0xffd166, 0xffffff] // Cyan, amarillo, blanco
+
+        const mainColor = isLevel3 ? 0x9d4edd : 0x27f5d2
+
         for (let i = 0; i < 3; i++) {
             const geometry = new THREE.TorusGeometry(1.1 + i * 0.35, 0.035, 8, 80)
             const material = new THREE.MeshBasicMaterial({
@@ -406,7 +402,7 @@ export default class World {
         }
 
         const spiralMaterial = new THREE.MeshBasicMaterial({
-            color: 0x27f5d2,
+            color: mainColor,
             transparent: true,
             opacity: 0.34,
             side: THREE.DoubleSide,
@@ -423,10 +419,10 @@ export default class World {
             group.add(beam)
         }
 
-        const pointLight = new THREE.PointLight(0x27f5d2, 4, 9)
+        const pointLight = new THREE.PointLight(mainColor, 4, 9)
         pointLight.position.set(0, 2.2, 0)
         group.add(pointLight)
-        
+
         // --- Partículas del portal ---
         const particleCount = 150
         const particlesGeometry = new THREE.BufferGeometry()
@@ -446,7 +442,7 @@ export default class World {
 
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3))
         const particlesMaterial = new THREE.PointsMaterial({
-            color: 0x27f5d2,
+            color: mainColor,
             size: 0.1,
             transparent: true,
             opacity: 0.8,
@@ -530,10 +526,10 @@ export default class World {
 
             let blocksArray = data.blocks ? data.blocks : (Array.isArray(data) ? data : []);
             let spawnPoint = this.getSpawnForLevel(level, blocksArray);
-            
+
             // Guardar datos del nivel (incluye empties como rutas)
             this.currentLevelData = data;
-            
+
             this.points = 0;
             this.robot.points = 0;
             this.finalPrizeActivated = false;
@@ -589,46 +585,83 @@ export default class World {
     }
 
     async setupEnemiesForLevel(level) {
-        if (level >= ENEMY_MIN_LEVEL) {
-            const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '1', 10);
-            const enemiesCount = Number.isFinite(enemiesCountEnv) && enemiesCountEnv > 0 ? enemiesCountEnv : 1;
-            
-            // Cargar puntos de patrulla si existen
-            if (level === 3) {
-                // Intentar cargar del modelo exportado que tiene empties
-                try {
-                    const publicPath = (p) => {
-                        const base = import.meta.env.BASE_URL || '/';
-                        return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
-                    };
-                    
-                    const res = await fetch(publicPath('/models/toycar3/toy_car_blocks3.json'));
-                    const data = await res.json();
-                    
-                    if (data.enemyPatrol && Array.isArray(data.enemyPatrol)) {
-                        this.enemyPatrol = data.enemyPatrol.sort((a, b) => a.order - b.order);
-                        console.log(`✅ Cargados ${this.enemyPatrol.length} puntos de patrulla del ghost`);
-                    }
-                    if (data.ghostChasePoints && Array.isArray(data.ghostChasePoints)) {
-                        this.ghostChasePoints = data.ghostChasePoints.sort((a, b) => a.order - b.order);
-                        console.log(`✅ Cargados ${this.ghostChasePoints.length} puntos de persecucion del ghost`);
-                    }
-                    if (data.enemySpawn && Array.isArray(data.enemySpawn)) {
-                        this.enemySpawn = data.enemySpawn;
-                        console.log(`✅ Cargado spawn point del ghost`);
-                    }
-                } catch (err) {
-                    console.warn('Error cargando chase/patrol points:', err);
-                }
-            }
-            
-            this.spawnEnemies(enemiesCount);
+        if (level === ENEMY_MIN_LEVEL) { // Solo en nivel 3
+            // Actualizar el modelo del enemigo para el nivel correcto
+            this._updateEnemyTemplate(level)
+
+            // Cargar puntos de patrulla/persecución/spawn
+            await this._loadEnemyRouteData(level)
+
+            this.spawnEnemies(1);
             return;
         }
 
         if (this.enemies?.length) {
             this.enemies.forEach(enemy => enemy?.destroy?.());
             this.enemies = [];
+        }
+    }
+
+    /**
+     * Seleccionar el modelo 3D del enemigo según el nivel
+     */
+    _updateEnemyTemplate(level) {
+        let enemyModel = null
+
+        if (level === 3) {
+            enemyModel = this.resources.items.enemy_ghost_skull_lev3?.scene
+            if (enemyModel) {
+                console.log('Usando modelo ghost skull del nivel 3')
+            }
+        }
+
+        if (!enemyModel) {
+            enemyModel = this.resources.items.ghostskull?.scene
+            if (enemyModel) {
+                console.log('Usando modelo ghostskull genérico')
+            }
+        }
+
+        this.enemyTemplate = enemyModel || new THREE.Mesh(
+            new THREE.BoxGeometry(1, 1, 1),
+            new THREE.MeshStandardMaterial({ color: 0xff0000 })
+        )
+    }
+
+    /**
+     * Cargar puntos de patrulla, persecución y spawn del JSON del nivel
+     */
+    async _loadEnemyRouteData(level) {
+        // Limpiar datos previos
+        this.enemyPatrol = []
+        this.ghostChasePoints = []
+        this.enemySpawn = []
+
+        if (level !== 3) return
+
+        try {
+            const publicPath = (p) => {
+                const base = import.meta.env.BASE_URL || '/';
+                return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
+            };
+
+            const res = await fetch(publicPath('/models/toycar3/toy_car_blocks3.json'));
+            const data = await res.json();
+
+            if (data.enemyPatrol && Array.isArray(data.enemyPatrol)) {
+                this.enemyPatrol = data.enemyPatrol.sort((a, b) => a.order - b.order);
+                console.log(`Cargados ${this.enemyPatrol.length} puntos de patrulla del ghost`);
+            }
+            if (data.ghostChasePoints && Array.isArray(data.ghostChasePoints)) {
+                this.ghostChasePoints = data.ghostChasePoints.sort((a, b) => a.order - b.order);
+                console.log(`Cargados ${this.ghostChasePoints.length} puntos de persecución del ghost`);
+            }
+            if (data.enemySpawn && Array.isArray(data.enemySpawn)) {
+                this.enemySpawn = data.enemySpawn;
+                console.log(`Cargado spawn point del ghost en (${this.enemySpawn[0]?.x?.toFixed(1)}, ${this.enemySpawn[0]?.y?.toFixed(1)}, ${this.enemySpawn[0]?.z?.toFixed(1)})`);
+            }
+        } catch (err) {
+            console.warn('Error cargando datos de ruta del enemigo:', err);
         }
     }
 

@@ -375,11 +375,6 @@ export const sources = [
         "path": "/models/toycar3/chase_spikes_2_lev3.glb"
     },
     {
-        "name": "coin_l3_1_lev3",
-        "type": "gltfModel",
-        "path": "/models/toycar3/coin_l3_1_lev3.glb"
-    },
-    {
         "name": "coin_l3_10_lev3",
         "type": "gltfModel",
         "path": "/models/toycar3/coin_l3_10_lev3.glb"
@@ -430,9 +425,9 @@ export const sources = [
         "path": "/models/toycar3/coin_l3_19_lev3.glb"
     },
     {
-        "name": "coin_l3_2_lev3",
+        "name": "coin_l3_1_lev3",
         "type": "gltfModel",
-        "path": "/models/toycar3/coin_l3_2_lev3.glb"
+        "path": "/models/toycar3/coin_l3_1_lev3.glb"
     },
     {
         "name": "coin_l3_20_lev3",
@@ -443,6 +438,11 @@ export const sources = [
         "name": "coin_l3_21_lev3",
         "type": "gltfModel",
         "path": "/models/toycar3/coin_l3_21_lev3.glb"
+    },
+    {
+        "name": "coin_l3_2_lev3",
+        "type": "gltfModel",
+        "path": "/models/toycar3/coin_l3_2_lev3.glb"
     },
     {
         "name": "coin_l3_3_lev3",

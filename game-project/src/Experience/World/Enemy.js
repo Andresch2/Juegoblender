@@ -17,7 +17,6 @@ export default class Enemy {
         this.chasePoints = chasePoints || []
         this.currentPatrolIndex = 0
         this.currentChaseIndex = 0
-        this.currentPatrolIndex = 0
         this.detectionRadius = 15 // distancia para detectar jugador
         this.isChasing = false
 
@@ -31,10 +30,26 @@ export default class Enemy {
         this._soundCooldown = 0
         this.proximitySound.play()
 
-        // Modelo visual
-        this.model = model.clone()
-        this.model.scale.set(4, 4, 4) // Asegurar que sea visible
+        // Modelo visual - clonar profundamente con materiales
+        this.model = this._deepClone(model)
+        this.model.scale.set(1, 1, 1) // Escala 1:1 
         this.model.position.copy(position)
+
+        // Asegurar que todos los materiales y meshes son visibles
+        this.model.visible = true
+        this.model.traverse((child) => {
+            if (child.isMesh) {
+                child.visible = true
+                child.frustumCulled = false
+                if (child.material) {
+                    child.material.transparent = false
+                    child.material.opacity = 1.0
+                    child.material.visible = true
+                    child.material.needsUpdate = true
+                }
+            }
+        })
+
         this.scene.add(this.model)
 
         //  Material físico del enemigo
@@ -89,6 +104,45 @@ export default class Enemy {
         }
 
         this.body.addEventListener('collide', this._onCollide)
+
+        console.log(`👻 Enemigo creado en (${position.x.toFixed(1)}, ${position.y.toFixed(1)}, ${position.z.toFixed(1)}) con ${this.patrolPoints.length} puntos de patrulla y ${this.chasePoints.length} puntos de persecución`)
+    }
+
+    /**
+     * Clona profundamente un Object3D incluyendo materiales y geometrías
+     * para evitar que el clon sea invisible por compartir materiales.
+     */
+    _deepClone(source) {
+        const clone = source.clone()
+
+        clone.traverse((child) => {
+            const srcChild = source.getObjectByName(child.name)
+
+            if (child.isMesh && child.material) {
+                // Clonar material para evitar referencias compartidas
+                if (Array.isArray(child.material)) {
+                    child.material = child.material.map(m => m.clone())
+                } else {
+                    child.material = child.material.clone()
+                }
+            }
+
+            // Copiar maps/texturas del original si se perdieron
+            if (child.isMesh && srcChild && srcChild.material) {
+                const srcMat = srcChild.material
+                const dstMat = child.material
+
+                if (!Array.isArray(srcMat) && !Array.isArray(dstMat)) {
+                    if (srcMat.map && !dstMat.map) dstMat.map = srcMat.map
+                    if (srcMat.normalMap && !dstMat.normalMap) dstMat.normalMap = srcMat.normalMap
+                    if (srcMat.roughnessMap && !dstMat.roughnessMap) dstMat.roughnessMap = srcMat.roughnessMap
+                    if (srcMat.metalnessMap && !dstMat.metalnessMap) dstMat.metalnessMap = srcMat.metalnessMap
+                    if (srcMat.emissiveMap && !dstMat.emissiveMap) dstMat.emissiveMap = srcMat.emissiveMap
+                }
+            }
+        })
+
+        return clone
     }
 
     update(delta) {
@@ -159,7 +213,7 @@ export default class Enemy {
         // Movimiento hacia objetivo
         const direction = new CANNON.Vec3(
             targetPos.x - enemyPos.x,
-            targetPos.y - enemyPos.y,
+            0, // No mover en Y: evitar que el enemigo vuele o se hunda
             targetPos.z - enemyPos.z
         )
 
@@ -167,13 +221,19 @@ export default class Enemy {
             direction.normalize()
             direction.scale(this.speed, direction)
             this.body.velocity.x = direction.x
-            this.body.velocity.y = direction.y
             this.body.velocity.z = direction.z
+            // Mantener velocidad Y para que la gravedad funcione si hay desniveles
         }
 
         // Sincronizar modelo visual (siempre visible)
         this.model.position.copy(this.body.position)
         this.model.visible = true
+
+        // Rotar el modelo hacia la dirección de movimiento
+        if (Math.abs(direction.x) > 0.01 || Math.abs(direction.z) > 0.01) {
+            const angle = Math.atan2(direction.x, direction.z)
+            this.model.rotation.y = angle
+        }
     }
 
     destroy() {
