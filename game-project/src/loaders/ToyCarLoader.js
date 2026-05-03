@@ -180,6 +180,8 @@ export default class ToyCarLoader {
             'cube', 'coin_structure',
             // Agua (física especial plana)
             'pond', 'rio', 'river', 'water',
+            // Nivel 3
+            'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto'
         ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -189,8 +191,8 @@ export default class ToyCarLoader {
 
         // Patrones de objetos INVISIBLES (no agregar a escena ni física)
         const INVISIBLE_PATTERNS = [
-            'spawn_circle', 'helper', 'trigger',
-            'spawn', 'respawn', 'patrol', 'debug', 'target'
+            'spawn_circle', 'spawn_circle_lev1', 'helper', 'trigger',
+            'spawn', 'respawn', 'patrol', 'enemy_path', 'debug', 'target'
         ]
         const DECORATION_PATTERNS = [
             'apple', 'flower', 'mushroom', 'fogata',
@@ -206,6 +208,13 @@ export default class ToyCarLoader {
                 return;
             }
 
+            const nameLower = block.name.toLowerCase();
+            const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
+            if (isInvisible) {
+                console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
+                return;
+            }
+
             const resourceKey = block.name;
             const glb = this.resources.items[resourceKey];
 
@@ -215,7 +224,6 @@ export default class ToyCarLoader {
             }
 
             const model = glb.scene.clone();
-            const nameLower = block.name.toLowerCase();
 
             //  MARCAR modelo como perteneciente al nivel
             model.userData.levelObject = true;
@@ -226,13 +234,6 @@ export default class ToyCarLoader {
                     child.parent.remove(child);
                 }
             });
-
-            // Objetos invisibles: NO agregar a la escena
-            const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
-            if (isInvisible) {
-                console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
-                return;
-            }
 
             //  Manejo de carteles: aplicar textura a meshes
             this._applyTextureToMeshes(
@@ -322,7 +323,7 @@ export default class ToyCarLoader {
             }
 
             // Camino — colisionador muy delgado para que la Sphere ruede encima sin trabarse
-            if (nameLower.includes('camino')) {
+            if (nameLower.includes('camino') || nameLower.includes('main_path')) {
                 halfY = 0.04                        // casi plano
                 bodyCenter.y = block.y + 0.04      // al ras del suelo
             }

@@ -7,7 +7,6 @@ import BlockPrefab from './BlockPrefab.js'
 import Enemy from './Enemy.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
-import Fox from './Fox.js'
 import LevelManager from './LevelManager.js'
 import Robot from './Robot.js'
 import Sound from './Sound.js'
@@ -51,7 +50,6 @@ export default class World {
             await this.loader.loadFromAPI()
             this.refreshLevelProgress(1)
 
-            this.fox = new Fox(this.experience)
             this.robot = new Robot(this.experience)
 
             // Buscar spawn en los bloques cargados inicialmente
@@ -60,11 +58,22 @@ export default class World {
                 this.resetRobotPosition(spawnPoint);
             }
 
-            // Enemigos multiples: plantilla y spawn lejos del jugador
-            this.enemyTemplate = new THREE.Mesh(
+            // Enemigos multiples: seleccionar modelo según el nivel
+            let enemyModel = null
+            
+            if (this.levelManager.currentLevel === 3) {
+                // Usar modelo del nivel 3
+                enemyModel = this.resources.items.enemy_ghost_skull_lev3?.scene
+            } else {
+                // Fallback: usar ghostskull genérico
+                enemyModel = this.resources.items.ghostskull?.scene
+            }
+            
+            this.enemyTemplate = enemyModel || new THREE.Mesh(
                 new THREE.BoxGeometry(1, 1, 1),
                 new THREE.MeshStandardMaterial({ color: 0xff0000 })
             )
+            
             // Solo crear enemigos si el nivel actual lo permite
             if (this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
                 const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '3', 10)
@@ -98,94 +107,89 @@ export default class World {
         })
     }
 
-    // Crear varios enemigos en posiciones alejadas del jugador para evitar atascos iniciales
-    spawnEnemies(count = 3) {
+    // Crear enemigos
+    spawnEnemies(count = 1) {
         if (!this.robot?.body?.position) return
-        const playerPos = this.robot.body.position
-        const minRadius = 25
-        const maxRadius = 40
 
         // Limpia anteriores si existen
         if (this.enemies?.length) {
             this.enemies.forEach(e => e?.destroy?.())
             this.enemies = []
         }
+        
+        const patrolPoints = this.enemyPatrol || [];
+        const chasePoints = this.ghostChasePoints || [];
+        const spawnPoints = this.enemySpawn || [];
 
-        for (let i = 0; i < count; i++) {
+        let spawnPosition = new THREE.Vector3(0, 1.5, 0);
+        
+        if (spawnPoints.length > 0) {
+            const sp = spawnPoints[0];
+            spawnPosition.set(sp.x, sp.y + 1.0, sp.z);
+        } else {
+            // Fallback random
+            const minRadius = 25
+            const maxRadius = 40
             const angle = Math.random() * Math.PI * 2
             const radius = minRadius + Math.random() * (maxRadius - minRadius)
-            const x = playerPos.x + Math.cos(angle) * radius
-            const z = playerPos.z + Math.sin(angle) * radius
-            const y = 1.5
-
-            const enemy = new Enemy({
-                scene: this.scene,
-                physicsWorld: this.experience.physics.world,
-                playerRef: this.robot,
-                model: this.enemyTemplate,
-                position: new THREE.Vector3(x, y, z),
-                experience: this.experience
-            })
-
-            // Pequeño delay para que no ataquen todos a la vez
-            enemy.delayActivation = 1.0 + i * 0.5
-            this.enemies.push(enemy)
+            spawnPosition.set(
+                this.robot.body.position.x + Math.cos(angle) * radius,
+                1.5,
+                this.robot.body.position.z + Math.sin(angle) * radius
+            );
         }
+
+        const enemy = new Enemy({
+            scene: this.scene,
+            physicsWorld: this.experience.physics.world,
+            playerRef: this.robot,
+            model: this.enemyTemplate,
+            position: spawnPosition,
+            experience: this.experience,
+            patrolPoints: patrolPoints,
+            chasePoints: chasePoints
+        })
+
+        // Activar de inmediato
+        enemy.delayActivation = 0
+        this.enemies.push(enemy)
     }
 
     toggleAudio() {
         this.ambientSound.toggle()
     }
 
+    triggerDefeat() {
+        if (this.defeatTriggered) return;
+        this.defeatTriggered = true;
+
+        if (window.userInteracted && this.loseSound) {
+            this.loseSound.play();
+        }
+
+        this.experience.modal.show({
+            icon: '💀',
+            message: '¡El enemigo te atrapó!\n¿Quieres intentarlo otra vez?',
+            buttons: [
+                {
+                    text: '🔁 Reintentar',
+                    onClick: () => this.experience.resetGameToFirstLevel()
+                },
+                {
+                    text: '❌ Salir',
+                    onClick: () => this.experience.resetGame()
+                }
+            ]
+        });
+    }
+
     update(delta) {
-        this.fox?.update()
         this.robot?.update()
         this.blockPrefab?.update()
 
         // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
         if (this.gameStarted && this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
             this.enemies?.forEach(e => e.update(delta))
-
-            // 💀 Verificar si algún enemigo atrapó al jugador
-            const distToClosest = this.enemies?.reduce((min, e) => {
-                if (!e?.body?.position || !this.robot?.body?.position) return min
-                const d = e.body.position.distanceTo(this.robot.body.position)
-                return Math.min(min, d)
-            }, Infinity) ?? Infinity
-
-            if (distToClosest < 1.0 && !this.defeatTriggered) {
-                this.defeatTriggered = true  // Previene múltiples disparos
-
-                if (window.userInteracted && this.loseSound) {
-                    this.loseSound.play()
-                }
-
-                const firstEnemy = this.enemies?.[0]
-                const enemyMesh = firstEnemy?.model || firstEnemy?.group
-                if (enemyMesh) {
-                    enemyMesh.scale.set(1.3, 1.3, 1.3)
-                    setTimeout(() => {
-                        enemyMesh.scale.set(1, 1, 1)
-                    }, 500)
-                }
-
-                this.experience.modal.show({
-                    icon: '💀',
-                    message: '¡El enemigo te atrapó!\n¿Quieres intentarlo otra vez?',
-                    buttons: [
-                        {
-                            text: '🔁 Reintentar',
-                            onClick: () => this.experience.resetGameToFirstLevel()
-                        },
-                        {
-                            text: '❌ Salir',
-                            onClick: () => this.experience.resetGame()
-                        }
-                    ]
-                })
-
-                return
-            }
         }
 
         if (this.thirdPersonCamera && this.experience.isThirdPerson && !this.experience.renderer.instance.xr.isPresenting) {
@@ -323,6 +327,27 @@ export default class World {
                     child.rotation.z += delta * child.userData.spin
                     child.scale.setScalar(1 + Math.sin(Date.now() * 0.003 + index) * 0.04)
                 }
+                if (child.userData?.isParticles) {
+                    const positions = child.geometry.attributes.position.array
+                    const velocities = child.userData.velocities
+                    for (let i = 0; i < velocities.length; i++) {
+                        const i3 = i * 3
+                        positions[i3 + 1] += velocities[i].y * delta
+                        
+                        // Rotación en el vórtice
+                        const x = positions[i3 + 0]
+                        const z = positions[i3 + 2]
+                        positions[i3 + 0] = x * Math.cos(velocities[i].spin * delta) - z * Math.sin(velocities[i].spin * delta)
+                        positions[i3 + 2] = x * Math.sin(velocities[i].spin * delta) + z * Math.cos(velocities[i].spin * delta)
+                        
+                        if (positions[i3 + 1] > 5) {
+                            positions[i3 + 1] = 0
+                            positions[i3 + 0] = (Math.random() - 0.5) * 4
+                            positions[i3 + 2] = (Math.random() - 0.5) * 4
+                        }
+                    }
+                    child.geometry.attributes.position.needsUpdate = true
+                }
             })
         }
 
@@ -401,6 +426,38 @@ export default class World {
         const pointLight = new THREE.PointLight(0x27f5d2, 4, 9)
         pointLight.position.set(0, 2.2, 0)
         group.add(pointLight)
+        
+        // --- Partículas del portal ---
+        const particleCount = 150
+        const particlesGeometry = new THREE.BufferGeometry()
+        const particlesPosition = new Float32Array(particleCount * 3)
+        const particlesVelocity = []
+
+        for (let i = 0; i < particleCount; i++) {
+            const i3 = i * 3
+            particlesPosition[i3 + 0] = (Math.random() - 0.5) * 4
+            particlesPosition[i3 + 1] = Math.random() * 5
+            particlesPosition[i3 + 2] = (Math.random() - 0.5) * 4
+            particlesVelocity.push({
+                y: 0.5 + Math.random() * 1.5,
+                spin: (Math.random() - 0.5) * 2
+            })
+        }
+
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3))
+        const particlesMaterial = new THREE.PointsMaterial({
+            color: 0x27f5d2,
+            size: 0.1,
+            transparent: true,
+            opacity: 0.8,
+            blending: THREE.AdditiveBlending,
+            depthWrite: false
+        })
+
+        const particles = new THREE.Points(particlesGeometry, particlesMaterial)
+        particles.userData.velocities = particlesVelocity
+        particles.userData.isParticles = true
+        group.add(particles)
 
         this.portalVortexGroup = group
         this.scene.add(group)
@@ -473,6 +530,10 @@ export default class World {
 
             let blocksArray = data.blocks ? data.blocks : (Array.isArray(data) ? data : []);
             let spawnPoint = this.getSpawnForLevel(level, blocksArray);
+            
+            // Guardar datos del nivel (incluye empties como rutas)
+            this.currentLevelData = data;
+            
             this.points = 0;
             this.robot.points = 0;
             this.finalPrizeActivated = false;
@@ -520,9 +581,54 @@ export default class World {
             console.log(`🎯 Total de monedas default para el nivel ${level}: ${this.totalDefaultCoins}`);
 
             this.resetRobotPosition(spawnPoint);
+            this.setupEnemiesForLevel(level);
             console.log(`✅ Nivel ${level} cargado con spawn en`, spawnPoint);
         } catch (error) {
             console.error('❌ Error cargando nivel:', error);
+        }
+    }
+
+    async setupEnemiesForLevel(level) {
+        if (level >= ENEMY_MIN_LEVEL) {
+            const enemiesCountEnv = parseInt(import.meta.env.VITE_ENEMIES_COUNT || '1', 10);
+            const enemiesCount = Number.isFinite(enemiesCountEnv) && enemiesCountEnv > 0 ? enemiesCountEnv : 1;
+            
+            // Cargar puntos de patrulla si existen
+            if (level === 3) {
+                // Intentar cargar del modelo exportado que tiene empties
+                try {
+                    const publicPath = (p) => {
+                        const base = import.meta.env.BASE_URL || '/';
+                        return `${base.replace(/\/$/, '')}/${p.replace(/^\//, '')}`;
+                    };
+                    
+                    const res = await fetch(publicPath('/models/toycar3/toy_car_blocks3.json'));
+                    const data = await res.json();
+                    
+                    if (data.enemyPatrol && Array.isArray(data.enemyPatrol)) {
+                        this.enemyPatrol = data.enemyPatrol.sort((a, b) => a.order - b.order);
+                        console.log(`✅ Cargados ${this.enemyPatrol.length} puntos de patrulla del ghost`);
+                    }
+                    if (data.ghostChasePoints && Array.isArray(data.ghostChasePoints)) {
+                        this.ghostChasePoints = data.ghostChasePoints.sort((a, b) => a.order - b.order);
+                        console.log(`✅ Cargados ${this.ghostChasePoints.length} puntos de persecucion del ghost`);
+                    }
+                    if (data.enemySpawn && Array.isArray(data.enemySpawn)) {
+                        this.enemySpawn = data.enemySpawn;
+                        console.log(`✅ Cargado spawn point del ghost`);
+                    }
+                } catch (err) {
+                    console.warn('Error cargando chase/patrol points:', err);
+                }
+            }
+            
+            this.spawnEnemies(enemiesCount);
+            return;
+        }
+
+        if (this.enemies?.length) {
+            this.enemies.forEach(enemy => enemy?.destroy?.());
+            this.enemies = [];
         }
     }
 
@@ -655,10 +761,13 @@ export default class World {
         const spawnBlock = blocksArray.find(b => {
             if (!b.name) return false;
             const name = b.name.toLowerCase();
-            return name.includes('spawn_circle') ||
+            return !name.includes('enemy') && (
+                name.includes('spawn_circle') ||
                 name.includes('player_spawn') ||
                 name.includes('spawn') ||
-                name.includes('respawn');
+                name.includes('respawn') ||
+                name.includes('inicio')
+            );
         });
 
         if (spawnBlock) {
