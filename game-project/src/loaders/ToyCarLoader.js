@@ -160,11 +160,27 @@ export default class ToyCarLoader {
 
         // Patrones que SI deben tener colision fisica (superficies caminables)
         const PHYSICS_PATTERNS = [
-            'plat', 'platform', 'plataforma', 'puente', 'bridge',
-            'plane', 'track', 'floor', 'ramp', 'stair', 'step',
-            'tree', 'arbol', 'mountain', 'montana', 'rock', 'roca',
-            'rio', 'river', 'water', 'agua', 'pond'
-        ];
+            // Caminos lev1
+            'camino',
+            // Puentes lev1
+            'puente',
+            // Montañas lev1 (paredes naturales)
+            'mountain',
+            // Rocas lev1 y lev2
+            'rock', 'bigrock', 'low_poly_cuboid_rock', 'portal_roca',
+            // Árboles lev1 y lev2
+            'tree', 'simple_tree',
+            // Troncos caídos lev1
+            'tronco',
+            // Pistas y caminos lev2
+            'track', 'plane',
+            // Edificios lev2
+            'building', 'hangar', 'mansion', 'silo',
+            // Plataformas/bloques lev2
+            'cube', 'coin_structure',
+            // Agua (física especial plana)
+            'pond', 'rio', 'river', 'water',
+        ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
         const OBSTACLE_PATTERNS = [
@@ -173,9 +189,16 @@ export default class ToyCarLoader {
 
         // Patrones de objetos INVISIBLES (no agregar a escena ni física)
         const INVISIBLE_PATTERNS = [
-            'helper', 'trigger', 'spawn', 'respawn', 
-            'patrol', 'debug', 'target', 'spawn_circle_lev1'
-        ];
+            'spawn_circle', 'helper', 'trigger',
+            'spawn', 'respawn', 'patrol', 'debug', 'target'
+        ]
+        const DECORATION_PATTERNS = [
+            'apple', 'flower', 'mushroom', 'fogata',
+            'banco', 'cartel', 'chimney', 'cilinder',
+            'cylinder', 'pipe', 'rocket', 'fox_inicio',
+            'portal_final', 'portal_roca_0', 'portal_roca_3',
+            'camino'
+        ]
 
         blocks.forEach(block => {
             if (!block.name) {
@@ -264,9 +287,10 @@ export default class ToyCarLoader {
             this.scene.add(model);
 
             // Determinar si este objeto debe tener fisica
-            const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p));
-            const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p));
-            const shouldHavePhysics = hasPhysicsPattern || isObstacleForced;
+            const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p))
+            const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p))
+            const isDecoration = DECORATION_PATTERNS.some(p => nameLower.includes(p))
+            const shouldHavePhysics = (hasPhysicsPattern || isObstacleForced) && !isDecoration
             const isWaterSurface = ['rio', 'river', 'water', 'agua', 'pond'].some(p => nameLower.includes(p));
 
             if (!shouldHavePhysics) {
@@ -289,11 +313,26 @@ export default class ToyCarLoader {
 
             // Los arboles tienen copa muy ancha. Si usamos todo el bounding box,
             // el jugador queda flotando o choca con hojas invisibles.
+            // Árbol — solo el tronco, ignorar copa
             if (nameLower.includes('tree') || nameLower.includes('arbol')) {
-                halfX = Math.max(Math.min(size.x * 0.12, 0.7), 0.25);
-                halfZ = Math.max(Math.min(size.z * 0.12, 0.7), 0.25);
-                halfY = Math.max(Math.min(size.y * 0.35, 2.5), 0.8);
-                bodyCenter.y = center.y - size.y * 0.22;
+                halfX = Math.max(Math.min(size.x * 0.12, 0.7), 0.25)
+                halfZ = Math.max(Math.min(size.z * 0.12, 0.7), 0.25)
+                halfY = Math.max(Math.min(size.y * 0.35, 2.5), 0.8)
+                bodyCenter.y = center.y - size.y * 0.22
+            }
+
+            // Camino — colisionador muy delgado para que la Sphere ruede encima sin trabarse
+            if (nameLower.includes('camino')) {
+                halfY = 0.04                        // casi plano
+                bodyCenter.y = block.y + 0.04      // al ras del suelo
+            }
+
+            // Tronco — altura completa para OBLIGAR a saltar
+            if (nameLower.includes('tronco')) {
+                halfX = Math.max(size.x / 2, 0.3)
+                halfY = Math.max(size.y / 2, 0.25)
+                halfZ = Math.max(size.z / 2, 0.3)
+                bodyCenter.y = center.y
             }
 
             if (isWaterSurface) {
@@ -308,13 +347,15 @@ export default class ToyCarLoader {
                 type: CANNON.Body.STATIC,
                 shape: shape,
                 position: new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z),
-                material: isWaterSurface ? this.physics.defaultMaterial : this.physics.obstacleMaterial
+                material: isWaterSurface ? this.physics.defaultMaterial : this.physics.obstacleMaterial,
+                linearDamping: 0.9,
+                angularDamping: 1.0
             });
 
             body.velocity.setZero();
             body.angularVelocity.setZero();
             body.fixedRotation = true;
-
+            body.updateMassProperties()
             // Marcar cuerpo fisico
             body.userData = { levelObject: true };
             model.userData.physicsBody = body;

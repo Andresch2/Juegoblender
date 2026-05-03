@@ -27,9 +27,9 @@ export default [
         "path": "/models/Fox/glTF/Fox.gltf"
     },
     {
-        "name": "robotModel",
+        "name": "playerModel",
         "type": "gltfModel",
-        "path": "/models/Robot/Robot.glb"
+        "path": "/models/characters/Adventurer.glb"
     },
     {
         "name": "apple_1_lev1",
