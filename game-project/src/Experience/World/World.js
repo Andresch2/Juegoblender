@@ -582,6 +582,10 @@ export default class World {
         } catch (error) {
             console.error('❌ Error cargando nivel:', error);
         }
+        if (this.thirdPersonCamera) {
+            this.thirdPersonCamera.setModo(level === 2 ? 'cerca' : 'lejos')
+        }
+
     }
 
     async setupEnemiesForLevel(level) {

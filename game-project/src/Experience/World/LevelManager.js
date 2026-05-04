@@ -1,7 +1,7 @@
 // Spawn configurable por nivel (provisional, ajustar coordenadas según mapa)
 const LEVEL_SPAWNS = {
     1: { x: 0, y: 2, z: 0 },
-    2: { x: 0, y: 2, z: 0 },
+    2: { x: -59.408, y: 59.24, z: 0.957543 },
     3: { x: 0, y: 2, z: 0 },
     4: { x: 0, y: 2, z: 0 },
     5: { x: 0, y: 2, z: 0 }
