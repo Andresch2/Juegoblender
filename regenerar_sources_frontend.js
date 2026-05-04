@@ -3,13 +3,7 @@ const path = require('path');
 
 const PROJECT_ROOT = __dirname;
 
-const modelsDir = path.join(
-  PROJECT_ROOT,
-  'game-project',
-  'public',
-  'models',
-  'toycar'
-);
+const modelFolders = ['toycar', 'toycar2', 'toycar3', 'Enemy'];
 
 const outputPath = path.join(
   PROJECT_ROOT,
@@ -18,11 +12,6 @@ const outputPath = path.join(
   'Experience',
   'sources.js'
 );
-
-if (!fs.existsSync(modelsDir)) {
-  console.error('No existe la carpeta de modelos:', modelsDir);
-  process.exit(1);
-}
 
 const baseSources = [
   {
@@ -59,15 +48,30 @@ const baseSources = [
   }
 ];
 
-const glbSources = fs
-  .readdirSync(modelsDir)
-  .filter(file => file.toLowerCase().endsWith('.glb'))
-  .sort((a, b) => a.localeCompare(b))
-  .map(file => ({
-    name: path.basename(file, '.glb').toLowerCase(),
-    type: 'gltfModel',
-    path: `/models/toycar/${file}`
-  }));
+const glbSources = modelFolders.flatMap((folder) => {
+  const modelsDir = path.join(
+    PROJECT_ROOT,
+    'game-project',
+    'public',
+    'models',
+    folder
+  );
+
+  if (!fs.existsSync(modelsDir)) {
+    console.warn('Carpeta de modelos no encontrada, ignorada:', modelsDir);
+    return [];
+  }
+
+  return fs
+    .readdirSync(modelsDir)
+    .filter(file => file.toLowerCase().endsWith('.glb'))
+    .sort((a, b) => a.localeCompare(b))
+    .map(file => ({
+      name: path.basename(file, '.glb').toLowerCase(),
+      type: 'gltfModel',
+      path: `/models/${folder}/${file}`
+    }));
+});
 
 const finalSources = [...baseSources, ...glbSources];
 

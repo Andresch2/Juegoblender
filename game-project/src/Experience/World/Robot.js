@@ -29,7 +29,7 @@ export default class Robot {
     setModel() {
         // SkeletonUtils.clone para evitar conflictos si hay varios personajes
         this.model = SkeletonUtils.clone(this.resources.items.playerModel.scene)
-        this.model.scale.set(0.8, 0.8, 0.8)
+        this.model.scale.set(1.0, 1.0, 1.0)
         this.model.position.set(0, -0.3, 0)  // bajar para que no flote
 
         this.group = new THREE.Group()
@@ -201,7 +201,7 @@ export default class Robot {
         const turnSpeed = 2.5
         let isMoving = false
 
-        // Rotación
+
         if (keys.left) {
             this.group.rotation.y += turnSpeed * delta
             this.body.quaternion.setFromEuler(0, this.group.rotation.y, 0)
@@ -245,12 +245,9 @@ export default class Robot {
             this.body.velocity.z *= 0.75
         }
 
-        // Limitar velocidad vertical — evita el lanzamiento al pisar bordes
-        if (this.body.velocity.y > 3) this.body.velocity.y = 3
-
         // Salto
         if (keys.space && this.isGrounded()) {
-            this.body.velocity.y = 5
+            this.body.velocity.y = 6.5
             this.animation.play('jump')
             return
         }
@@ -285,6 +282,10 @@ export default class Robot {
         this.animation.actions.current = this.animation.actions.death
 
         this.walkSound.stop()
+        
+        if (this.experience.world?.triggerDefeat) {
+            this.experience.world.triggerDefeat()
+        }
 
         if (this.body && this.physics.world.bodies.includes(this.body)) {
             this.physics.world.removeBody(this.body)
@@ -293,6 +294,8 @@ export default class Robot {
 
         this.group.position.y -= 0.5
         this.group.rotation.x = -Math.PI / 2
+        
+        console.log(' Robot ha muerto')
     }
 
     revive() {

@@ -1,0 +1,3006 @@
+{
+    "level": 3,
+    "floorCorrection": 0.076250821352005,
+    "meshes": [
+        {
+            "name": "doors_roundarch_l_lev3",
+            "type": "mesh",
+            "x": 90.36952209472656,
+            "y": 0.1463916301727295,
+            "z": -25.574214935302734,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "doors_roundarch_r_lev3",
+            "type": "mesh",
+            "x": 95.06289672851562,
+            "y": 0.1463916301727295,
+            "z": -25.574214935302734,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "main_path_0_lev3",
+            "type": "mesh",
+            "x": -90.98483276367188,
+            "y": 0.25247716903686523,
+            "z": 34.34193801879883,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "main_path_1_lev3",
+            "type": "mesh",
+            "x": -90.98483276367188,
+            "y": 0.25247716903686523,
+            "z": 28.867446899414062,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_inicio_texto_lev3",
+            "type": "mesh",
+            "x": -84.94825744628906,
+            "y": 5.079357832670212,
+            "z": 29.069385528564453,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_inicio_lev3",
+            "type": "mesh",
+            "x": -86.95989990234375,
+            "y": 2.6659173667430878,
+            "z": 28.877777099609375,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_south_0_lev3",
+            "type": "mesh",
+            "x": -103.5575942993164,
+            "y": 3.101532906293869,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_south_1_lev3",
+            "type": "mesh",
+            "x": -98.52849578857422,
+            "y": 3.109167069196701,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_south_4_lev3",
+            "type": "mesh",
+            "x": -83.44117736816406,
+            "y": 3.0998835265636444,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_south_5_lev3",
+            "type": "mesh",
+            "x": -78.41207885742188,
+            "y": 3.1384248435497284,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_0_lev3",
+            "type": "mesh",
+            "x": -103.5575942993164,
+            "y": 3.1219758689403534,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_1_lev3",
+            "type": "mesh",
+            "x": -98.52849578857422,
+            "y": 3.108387917280197,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_2_lev3",
+            "type": "mesh",
+            "x": -93.49938201904297,
+            "y": 3.1476583182811737,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_3_lev3",
+            "type": "mesh",
+            "x": -88.47028350830078,
+            "y": 3.157265156507492,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_4_lev3",
+            "type": "mesh",
+            "x": -83.44117736816406,
+            "y": 3.138912171125412,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_north_5_lev3",
+            "type": "mesh",
+            "x": -78.41207885742188,
+            "y": 3.1097831428050995,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_0_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.125413864850998,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_1_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.1131448447704315,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_2_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.1452698409557343,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_3_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.144551247358322,
+            "z": 4.232236385345459,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_4_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.136364907026291,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_west_5_lev3",
+            "type": "mesh",
+            "x": -106.07215118408203,
+            "y": 3.1364526450634003,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_east_0_lev3",
+            "type": "mesh",
+            "x": -75.89752960205078,
+            "y": 3.137921303510666,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_east_1_lev3",
+            "type": "mesh",
+            "x": -75.89752960205078,
+            "y": 3.1152381598949432,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_east_4_lev3",
+            "type": "mesh",
+            "x": -75.89752960205078,
+            "y": 3.12120720744133,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_wall_east_5_lev3",
+            "type": "mesh",
+            "x": -75.89752960205078,
+            "y": 3.1065644919872284,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_arch_lev3",
+            "type": "mesh",
+            "x": -90.98483276367188,
+            "y": 0.1464395523071289,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_col_1_lev3",
+            "type": "mesh",
+            "x": -103.5575942993164,
+            "y": 0.13466548919677734,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_col_2_lev3",
+            "type": "mesh",
+            "x": -78.41207885742188,
+            "y": 0.1346447467803955,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_barrel_lev3",
+            "type": "mesh",
+            "x": -101.04304504394531,
+            "y": 0.13824915885925293,
+            "z": 12.443971633911133,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_crate_lev3",
+            "type": "mesh",
+            "x": -80.92662811279297,
+            "y": 0.14490461349487305,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_skull_lev3",
+            "type": "mesh",
+            "x": -98.52849578857422,
+            "y": 0.1941242218017578,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_entrada_-40_5_-2_7_lev3",
+            "type": "mesh",
+            "x": -102.30032348632812,
+            "y": 2.26809760928154,
+            "z": 19.834535598754883,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_entrada_-31_5_-2_7_lev3",
+            "type": "mesh",
+            "x": -79.66934967041016,
+            "y": 2.26809760928154,
+            "z": 19.834535598754883,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_entrada_-40_5_6_5_lev3",
+            "type": "mesh",
+            "x": -102.30032348632812,
+            "y": 2.26809760928154,
+            "z": -5.348123550415039,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_entrada_-31_5_6_5_lev3",
+            "type": "mesh",
+            "x": -79.66934967041016,
+            "y": 2.26809760928154,
+            "z": -5.348123550415039,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_bricks_1_lev3",
+            "type": "mesh",
+            "x": -101.04304504394531,
+            "y": 0.18398118019104004,
+            "z": -5.348123550415039,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "entrada_bricks_2_lev3",
+            "type": "mesh",
+            "x": -80.92662811279297,
+            "y": 0.18398118019104004,
+            "z": -4.526949882507324,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_entrada_plaza_left_0_lev3",
+            "type": "mesh",
+            "x": -73.38297271728516,
+            "y": 3.1487159430980682,
+            "z": -5.348123550415039,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_entrada_plaza_left_1_lev3",
+            "type": "mesh",
+            "x": -68.35386657714844,
+            "y": 3.1564473807811737,
+            "z": -5.348123550415039,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_entrada_plaza_right_0_lev3",
+            "type": "mesh",
+            "x": -73.38297271728516,
+            "y": 3.1153373420238495,
+            "z": 8.338104248046875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_entrada_plaza_right_1_lev3",
+            "type": "mesh",
+            "x": -68.35386657714844,
+            "y": 3.102741688489914,
+            "z": 8.338104248046875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_plaza_texto_lev3",
+            "type": "mesh",
+            "x": -30.227046966552734,
+            "y": 4.86337348818779,
+            "z": 6.682118892669678,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_plaza_lev3",
+            "type": "mesh",
+            "x": -30.06819725036621,
+            "y": 2.783060997724533,
+            "z": 4.9120774269104,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_0_lev3",
+            "type": "mesh",
+            "x": -63.324771881103516,
+            "y": 3.107394188642502,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_1_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 3.114350289106369,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_2_lev3",
+            "type": "mesh",
+            "x": -53.26655960083008,
+            "y": 3.103732079267502,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_3_lev3",
+            "type": "mesh",
+            "x": -48.23745346069336,
+            "y": 3.1164922416210175,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_4_lev3",
+            "type": "mesh",
+            "x": -43.208351135253906,
+            "y": 3.1272973716259003,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_5_lev3",
+            "type": "mesh",
+            "x": -38.17924499511719,
+            "y": 3.141774147748947,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_6_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 3.1184220016002655,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_south_7_lev3",
+            "type": "mesh",
+            "x": -28.12104606628418,
+            "y": 3.1100678145885468,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_0_lev3",
+            "type": "mesh",
+            "x": -63.324771881103516,
+            "y": 3.1432943046092987,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_1_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 3.1350850760936737,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_2_lev3",
+            "type": "mesh",
+            "x": -53.26655960083008,
+            "y": 3.1353821456432343,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_5_lev3",
+            "type": "mesh",
+            "x": -38.17924499511719,
+            "y": 3.151399105787277,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_6_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 3.1239714324474335,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_north_7_lev3",
+            "type": "mesh",
+            "x": -28.12104606628418,
+            "y": 3.146334618330002,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_0_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.108164757490158,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_1_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.107389897108078,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_2_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.107423275709152,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_5_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.13747975230217,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_6_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.1285161674022675,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_7_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.10568043589592,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_0_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.148337334394455,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_1_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.1010222136974335,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_2_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.136904686689377,
+            "z": 9.367660522460938,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_5_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.1455006301403046,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_6_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.0984940230846405,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_east_7_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.148987740278244,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_1_lev3",
+            "type": "mesh",
+            "x": -60.81022262573242,
+            "y": 0.13492584228515625,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_2_lev3",
+            "type": "mesh",
+            "x": -30.635595321655273,
+            "y": 0.13490557670593262,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_3_lev3",
+            "type": "mesh",
+            "x": -60.81022262573242,
+            "y": 0.13490557670593262,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_4_lev3",
+            "type": "mesh",
+            "x": -30.635595321655273,
+            "y": 0.13492584228515625,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_5_lev3",
+            "type": "mesh",
+            "x": -55.78111267089844,
+            "y": 0.13492584228515625,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_column_6_lev3",
+            "type": "mesh",
+            "x": -35.664695739746094,
+            "y": 0.13490557670593262,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_horse_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 1.9132785499095917,
+            "z": -13.559860229492188,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_table_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 0.15363025665283203,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_cart_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 0.2507438659667969,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_barrel_1_lev3",
+            "type": "mesh",
+            "x": -60.81022262573242,
+            "y": 0.13824915885925293,
+            "z": -3.43205189704895,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_barrel_2_lev3",
+            "type": "mesh",
+            "x": -30.635595321655273,
+            "y": 0.13824915885925293,
+            "z": -3.43205189704895,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_crate_1_lev3",
+            "type": "mesh",
+            "x": -55.78111267089844,
+            "y": 0.14490461349487305,
+            "z": 18.465913772583008,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_crate_2_lev3",
+            "type": "mesh",
+            "x": -35.664695739746094,
+            "y": 0.14490461349487305,
+            "z": 18.465913772583008,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_skull_1_lev3",
+            "type": "mesh",
+            "x": -50.752010345458984,
+            "y": 0.1941242218017578,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_cobweb_1_lev3",
+            "type": "mesh",
+            "x": -64.58203887939453,
+            "y": 5.18544265627861,
+            "z": -19.034351348876953,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_cobweb_2_lev3",
+            "type": "mesh",
+            "x": -26.86376953125,
+            "y": 5.18544265627861,
+            "z": -19.034351348876953,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_plaza_-24_5_-2_5_lev3",
+            "type": "mesh",
+            "x": -62.0674934387207,
+            "y": 2.26809760928154,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_plaza_-11_5_-2_5_lev3",
+            "type": "mesh",
+            "x": -29.37832260131836,
+            "y": 2.26809760928154,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_plaza_-24_5_10_5_lev3",
+            "type": "mesh",
+            "x": -62.0674934387207,
+            "y": 2.26809760928154,
+            "z": -16.297107696533203,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_plaza_-11_5_10_5_lev3",
+            "type": "mesh",
+            "x": -29.37832260131836,
+            "y": 2.26809760928154,
+            "z": -16.297107696533203,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_bricks_1_lev3",
+            "type": "mesh",
+            "x": -60.81022262573242,
+            "y": 0.18398118019104004,
+            "z": -18.48690414428711,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_bricks_2_lev3",
+            "type": "mesh",
+            "x": -30.635595321655273,
+            "y": 0.18398118019104004,
+            "z": 21.476882934570312,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_bricks_3_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 0.17980456352233887,
+            "z": -21.49787139892578,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_left_0_lev3",
+            "type": "mesh",
+            "x": -23.091943740844727,
+            "y": 3.134350746870041,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_left_1_lev3",
+            "type": "mesh",
+            "x": -18.062841415405273,
+            "y": 3.1409797370433807,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_left_2_lev3",
+            "type": "mesh",
+            "x": -13.033736228942871,
+            "y": 3.137609452009201,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_left_3_lev3",
+            "type": "mesh",
+            "x": -8.004632949829102,
+            "y": 3.1398057639598846,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_right_0_lev3",
+            "type": "mesh",
+            "x": -23.091943740844727,
+            "y": 3.1500329673290253,
+            "z": 5.600858211517334,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_right_1_lev3",
+            "type": "mesh",
+            "x": -18.062841415405273,
+            "y": 3.1085252463817596,
+            "z": 5.600858211517334,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_right_2_lev3",
+            "type": "mesh",
+            "x": -13.033736228942871,
+            "y": 3.1020922362804413,
+            "z": 5.600858211517334,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_plaza_chamber_right_3_lev3",
+            "type": "mesh",
+            "x": -8.004632949829102,
+            "y": 3.1061868369579315,
+            "z": 5.600858211517334,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_cripta_texto_lev3",
+            "type": "mesh",
+            "x": -51.24015426635742,
+            "y": 1.8267565667629242,
+            "z": -29.51559066772461,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_0_lev3",
+            "type": "mesh",
+            "x": -63.324771881103516,
+            "y": 3.155171364545822,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_1_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 3.1398877799510956,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_2_lev3",
+            "type": "mesh",
+            "x": -53.26655960083008,
+            "y": 3.1285614669322968,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_5_lev3",
+            "type": "mesh",
+            "x": -38.17924499511719,
+            "y": 3.149337738752365,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_6_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 3.142377346754074,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_south_7_lev3",
+            "type": "mesh",
+            "x": -28.12104606628418,
+            "y": 3.118528813123703,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_0_lev3",
+            "type": "mesh",
+            "x": -63.324771881103516,
+            "y": 3.132201164960861,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_1_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 3.149701088666916,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_2_lev3",
+            "type": "mesh",
+            "x": -53.26655960083008,
+            "y": 3.108173817396164,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_3_lev3",
+            "type": "mesh",
+            "x": -48.23745346069336,
+            "y": 3.126918762922287,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_4_lev3",
+            "type": "mesh",
+            "x": -43.208351135253906,
+            "y": 3.12709042429924,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_5_lev3",
+            "type": "mesh",
+            "x": -38.17924499511719,
+            "y": 3.117735356092453,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_6_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 3.1182040870189667,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_north_7_lev3",
+            "type": "mesh",
+            "x": -28.12104606628418,
+            "y": 3.10887810587883,
+            "z": -64.19890594482422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_west_0_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.153330296278,
+            "z": -34.089202880859375,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_west_1_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.1105818450450897,
+            "z": -39.56369400024414,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_west_3_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.1150741279125214,
+            "z": -50.51267623901367,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_west_4_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.1476483047008514,
+            "z": -55.98716735839844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_west_5_lev3",
+            "type": "mesh",
+            "x": -65.83931732177734,
+            "y": 3.1483783423900604,
+            "z": -61.4616584777832,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_0_lev3",
+            "type": "mesh",
+            "x": -25.76498794555664,
+            "y": 3.2065734565258026,
+            "z": -25.631528854370117,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_1_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.107488602399826,
+            "z": -39.56369400024414,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_3_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.1225824058055878,
+            "z": -51.998355865478516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_4_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.1543698012828827,
+            "z": -55.98716735839844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_5_lev3",
+            "type": "mesh",
+            "x": -25.606494903564453,
+            "y": 3.1540741622447968,
+            "z": -61.4616584777832,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_arch_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 0.14643287658691406,
+            "z": -31.351957321166992,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bars_1_lev3",
+            "type": "mesh",
+            "x": -65.65729522705078,
+            "y": 0.1495671272277832,
+            "z": -45.038185119628906,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bars_2_lev3",
+            "type": "mesh",
+            "x": -25.79853630065918,
+            "y": 0.0,
+            "z": -46.669677734375,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_safe_zone_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 0.21269488334655762,
+            "z": -50.51267623901367,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_table_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 0.15363025665283203,
+            "z": -42.30093765258789,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_barrel_lev3",
+            "type": "mesh",
+            "x": -33.150142669677734,
+            "y": 0.13824915885925293,
+            "z": -42.30093765258789,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_crate_lev3",
+            "type": "mesh",
+            "x": -58.295658111572266,
+            "y": 0.14490461349487305,
+            "z": -58.72441101074219,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_skull_1_lev3",
+            "type": "mesh",
+            "x": -35.664695739746094,
+            "y": 0.1941242218017578,
+            "z": -58.72441101074219,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_skull_2_lev3",
+            "type": "mesh",
+            "x": -55.78111267089844,
+            "y": 0.1941242218017578,
+            "z": -36.826446533203125,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_cobweb_1_lev3",
+            "type": "mesh",
+            "x": -64.58203887939453,
+            "y": 4.920229643583298,
+            "z": -62.830284118652344,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_cobweb_2_lev3",
+            "type": "mesh",
+            "x": -26.86376953125,
+            "y": 4.920229643583298,
+            "z": -62.830284118652344,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_crypt_-24_5_17_5_lev3",
+            "type": "mesh",
+            "x": -62.0674934387207,
+            "y": 2.26809760928154,
+            "z": -35.45782470703125,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_crypt_-11_5_17_5_lev3",
+            "type": "mesh",
+            "x": -29.37832260131836,
+            "y": 2.26809760928154,
+            "z": -35.45782470703125,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_crypt_-24_5_26_5_lev3",
+            "type": "mesh",
+            "x": -62.0674934387207,
+            "y": 2.26809760928154,
+            "z": -60.09303665161133,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_crypt_-11_5_26_5_lev3",
+            "type": "mesh",
+            "x": -29.37832260131836,
+            "y": 2.26809760928154,
+            "z": -60.09303665161133,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bricks_1_lev3",
+            "type": "mesh",
+            "x": -60.81022262573242,
+            "y": 0.18398118019104004,
+            "z": -62.00911331176758,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bricks_2_lev3",
+            "type": "mesh",
+            "x": -30.635595321655273,
+            "y": 0.18398118019104004,
+            "z": -61.4616584777832,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bricks_3_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 0.17771649360656738,
+            "z": -35.18410110473633,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_peligro_texto_lev3",
+            "type": "mesh",
+            "x": -2.975529670715332,
+            "y": 5.079357832670212,
+            "z": -4.645589828491211,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_0_lev3",
+            "type": "mesh",
+            "x": -2.975529670715332,
+            "y": 3.109399765729904,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_1_lev3",
+            "type": "mesh",
+            "x": 2.0535731315612793,
+            "y": 3.119479149580002,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_2_lev3",
+            "type": "mesh",
+            "x": 7.082675933837891,
+            "y": 3.1228475272655487,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_3_lev3",
+            "type": "mesh",
+            "x": 12.111780166625977,
+            "y": 3.124151200056076,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_4_lev3",
+            "type": "mesh",
+            "x": 17.140880584716797,
+            "y": 3.1093253791332245,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_5_lev3",
+            "type": "mesh",
+            "x": 22.16998291015625,
+            "y": 3.1214027106761932,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_6_lev3",
+            "type": "mesh",
+            "x": 27.199087142944336,
+            "y": 3.1004895865917206,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_7_lev3",
+            "type": "mesh",
+            "x": 32.22819519042969,
+            "y": 3.100868672132492,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_8_lev3",
+            "type": "mesh",
+            "x": 37.25729751586914,
+            "y": 3.1066631972789764,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_south_9_lev3",
+            "type": "mesh",
+            "x": 42.286399841308594,
+            "y": 3.1377134025096893,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_0_lev3",
+            "type": "mesh",
+            "x": -2.975529670715332,
+            "y": 3.104415386915207,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_1_lev3",
+            "type": "mesh",
+            "x": 2.0535731315612793,
+            "y": 3.147722691297531,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_2_lev3",
+            "type": "mesh",
+            "x": 7.082675933837891,
+            "y": 3.153011292219162,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_3_lev3",
+            "type": "mesh",
+            "x": 12.111780166625977,
+            "y": 3.141512840986252,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_4_lev3",
+            "type": "mesh",
+            "x": 17.140880584716797,
+            "y": 3.1061181724071503,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_5_lev3",
+            "type": "mesh",
+            "x": 22.16998291015625,
+            "y": 3.0994281470775604,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_6_lev3",
+            "type": "mesh",
+            "x": 27.199087142944336,
+            "y": 3.117312878370285,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_7_lev3",
+            "type": "mesh",
+            "x": 32.22819519042969,
+            "y": 3.1396956145763397,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_8_lev3",
+            "type": "mesh",
+            "x": 37.25729751586914,
+            "y": 3.12818905711174,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_north_9_lev3",
+            "type": "mesh",
+            "x": 42.286399841308594,
+            "y": 3.140301674604416,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_0_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.1041354835033417,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_1_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.126463383436203,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_2_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.1252278983592987,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_6_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.1261543929576874,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_7_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.1241798102855682,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_west_8_lev3",
+            "type": "mesh",
+            "x": -5.490080833435059,
+            "y": 3.1254977881908417,
+            "z": -23.140220642089844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_0_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.1356849372386932,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_1_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.10289666056633,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_2_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.150158852338791,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_6_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.1161050498485565,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_7_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.131494492292404,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_wall_east_8_lev3",
+            "type": "mesh",
+            "x": 44.80095291137695,
+            "y": 3.1063813865184784,
+            "z": -23.140220642089844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_1_lev3",
+            "type": "mesh",
+            "x": -0.46097809076309204,
+            "y": 0.1353168487548828,
+            "z": 17.9184627532959,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_2_lev3",
+            "type": "mesh",
+            "x": 39.771846771240234,
+            "y": 0.13529729843139648,
+            "z": 17.9184627532959,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_3_lev3",
+            "type": "mesh",
+            "x": -0.46097809076309204,
+            "y": 0.13529729843139648,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_4_lev3",
+            "type": "mesh",
+            "x": 39.771846771240234,
+            "y": 0.1353168487548828,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_5_lev3",
+            "type": "mesh",
+            "x": 7.082675933837891,
+            "y": 0.1353168487548828,
+            "z": 12.443971633911133,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_6_lev3",
+            "type": "mesh",
+            "x": 32.22819519042969,
+            "y": 0.13529729843139648,
+            "z": 12.443971633911133,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_7_lev3",
+            "type": "mesh",
+            "x": 7.082675933837891,
+            "y": 0.13529729843139648,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_col_8_lev3",
+            "type": "mesh",
+            "x": 32.22819519042969,
+            "y": 0.1353168487548828,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "ghost_danger_zone_lev3",
+            "type": "mesh",
+            "x": 19.655433654785156,
+            "y": 0.21269488334655762,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_cart_lev3",
+            "type": "mesh",
+            "x": 9.597228050231934,
+            "y": 0.24813508987426758,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_crate_lev3",
+            "type": "mesh",
+            "x": 29.713642120361328,
+            "y": 0.14490461349487305,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_barrel_1_lev3",
+            "type": "mesh",
+            "x": 34.74274444580078,
+            "y": 0.13824915885925293,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_barrel_2_lev3",
+            "type": "mesh",
+            "x": 4.568124771118164,
+            "y": 0.13824915885925293,
+            "z": -10.822614669799805,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_skull_1_lev3",
+            "type": "mesh",
+            "x": 0.7962976694107056,
+            "y": 0.1941242218017578,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_skull_2_lev3",
+            "type": "mesh",
+            "x": 38.51457214355469,
+            "y": 0.1941242218017578,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_cobweb_1_lev3",
+            "type": "mesh",
+            "x": -4.232805252075195,
+            "y": 5.18544265627861,
+            "z": -24.50884437561035,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_cobweb_2_lev3",
+            "type": "mesh",
+            "x": 43.54367446899414,
+            "y": 5.18544265627861,
+            "z": -24.50884437561035,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_0_-2_5_lev3",
+            "type": "mesh",
+            "x": -0.46097809076309204,
+            "y": 2.26809760928154,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_16_-2_5_lev3",
+            "type": "mesh",
+            "x": 39.771846771240234,
+            "y": 2.26809760928154,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_0_12_5_lev3",
+            "type": "mesh",
+            "x": -0.46097809076309204,
+            "y": 2.26809760928154,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_16_12_5_lev3",
+            "type": "mesh",
+            "x": 39.771846771240234,
+            "y": 2.26809760928154,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_4_12_5_lev3",
+            "type": "mesh",
+            "x": 9.597228050231934,
+            "y": 2.26809760928154,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chamber_12_12_5_lev3",
+            "type": "mesh",
+            "x": 29.713642120361328,
+            "y": 2.26809760928154,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_spikes_1_lev3",
+            "type": "mesh",
+            "x": 4.316669464111328,
+            "y": 0.9950740039348602,
+            "z": 4.232236385345459,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_spikes_2_lev3",
+            "type": "mesh",
+            "x": 29.46218490600586,
+            "y": 0.9950740039348602,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_bricks_1_lev3",
+            "type": "mesh",
+            "x": -0.46097809076309204,
+            "y": 0.18398118019104004,
+            "z": -23.687667846679688,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_bricks_2_lev3",
+            "type": "mesh",
+            "x": 39.771846771240234,
+            "y": 0.18398118019104004,
+            "z": -23.687667846679688,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chamber_bricks_3_lev3",
+            "type": "mesh",
+            "x": 19.655433654785156,
+            "y": 0.18398118019104004,
+            "z": 21.20315933227539,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_left_0_lev3",
+            "type": "mesh",
+            "x": 47.31550216674805,
+            "y": 3.1025294959545135,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_left_1_lev3",
+            "type": "mesh",
+            "x": 52.344608306884766,
+            "y": 3.1187314689159393,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_left_2_lev3",
+            "type": "mesh",
+            "x": 57.37370681762695,
+            "y": 3.1335539519786835,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_left_3_lev3",
+            "type": "mesh",
+            "x": 62.40280532836914,
+            "y": 3.111213654279709,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_left_4_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 3.1329388320446014,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_right_0_lev3",
+            "type": "mesh",
+            "x": 47.31550216674805,
+            "y": 3.1025457084178925,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_right_1_lev3",
+            "type": "mesh",
+            "x": 52.344608306884766,
+            "y": 3.1023750007152557,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_right_2_lev3",
+            "type": "mesh",
+            "x": 57.37370681762695,
+            "y": 3.1096987426280975,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_right_3_lev3",
+            "type": "mesh",
+            "x": 62.40280532836914,
+            "y": 3.119048088788986,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "corridor_chase_right_4_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 3.1251029670238495,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_corre_texto_lev3",
+            "type": "mesh",
+            "x": 40.69112014770508,
+            "y": 5.079357832670212,
+            "z": 13.086448669433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_corre_lev3",
+            "type": "mesh",
+            "x": 40.882747650146484,
+            "y": 2.6659173667430878,
+            "z": 10.89820671081543,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_crate_1_lev3",
+            "type": "mesh",
+            "x": 49.830055236816406,
+            "y": 0.14490461349487305,
+            "z": 4.232236385345459,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_barrel_1_lev3",
+            "type": "mesh",
+            "x": 56.116432189941406,
+            "y": 0.13824915885925293,
+            "z": -7.264194488525391,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_cart_1_lev3",
+            "type": "mesh",
+            "x": 63.66008758544922,
+            "y": 0.2403087615966797,
+            "z": 4.232236385345459,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_crate_2_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 0.14490461349487305,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_skull_1_lev3",
+            "type": "mesh",
+            "x": 47.31550216674805,
+            "y": 0.1941242218017578,
+            "z": -8.085369110107422,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_skull_2_lev3",
+            "type": "mesh",
+            "x": 64.9173583984375,
+            "y": 0.1941242218017578,
+            "z": 5.600858211517334,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_cobweb_1_lev3",
+            "type": "mesh",
+            "x": 51.08733367919922,
+            "y": 3.8543514907360077,
+            "z": -9.142318725585938,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_cobweb_2_lev3",
+            "type": "mesh",
+            "x": 66.17462921142578,
+            "y": 5.18544265627861,
+            "z": -10.001440048217773,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_spikes_1_lev3",
+            "type": "mesh",
+            "x": 49.57859802246094,
+            "y": 0.9950740039348602,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_spikes_2_lev3",
+            "type": "mesh",
+            "x": 59.63679885864258,
+            "y": 0.9950740039348602,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chase_19_2_lev3",
+            "type": "mesh",
+            "x": 47.31550216674805,
+            "y": 2.26809760928154,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chase_19_8_lev3",
+            "type": "mesh",
+            "x": 47.31550216674805,
+            "y": 2.26809760928154,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chase_27_2_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 2.26809760928154,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_chase_27_8_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 2.26809760928154,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_bricks_1_lev3",
+            "type": "mesh",
+            "x": 49.830055236816406,
+            "y": 0.18398118019104004,
+            "z": -10.822614669799805,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "chase_bricks_2_lev3",
+            "type": "mesh",
+            "x": 67.43191528320312,
+            "y": 0.18398118019104004,
+            "z": 8.338104248046875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_portal_texto_lev3",
+            "type": "mesh",
+            "x": 91.29106903076172,
+            "y": 5.079357832670212,
+            "z": 14.219978332519531,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "cartel_portal_lev3",
+            "type": "mesh",
+            "x": 91.85214233398438,
+            "y": 2.6659173667430878,
+            "z": 12.108369827270508,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_0_lev3",
+            "type": "mesh",
+            "x": 72.46101379394531,
+            "y": 3.1219920814037323,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_1_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 3.1305966079235077,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_2_lev3",
+            "type": "mesh",
+            "x": 82.51921844482422,
+            "y": 3.1067237555980682,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_3_lev3",
+            "type": "mesh",
+            "x": 87.5483169555664,
+            "y": 3.144088238477707,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_4_lev3",
+            "type": "mesh",
+            "x": 92.57743072509766,
+            "y": 3.1487025916576385,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_5_lev3",
+            "type": "mesh",
+            "x": 97.60652923583984,
+            "y": 3.1541537940502167,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_6_lev3",
+            "type": "mesh",
+            "x": 102.63563537597656,
+            "y": 3.111183136701584,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_7_lev3",
+            "type": "mesh",
+            "x": 107.66474151611328,
+            "y": 3.110290974378586,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_south_8_lev3",
+            "type": "mesh",
+            "x": 112.69384002685547,
+            "y": 3.140266388654709,
+            "z": 23.392955780029297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_0_lev3",
+            "type": "mesh",
+            "x": 72.46101379394531,
+            "y": 3.1520099341869354,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_1_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 3.1002592742443085,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_2_lev3",
+            "type": "mesh",
+            "x": 82.51921844482422,
+            "y": 3.1253289878368378,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_3_lev3",
+            "type": "mesh",
+            "x": 87.5483169555664,
+            "y": 3.1152743995189667,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_5_lev3",
+            "type": "mesh",
+            "x": 97.60652923583984,
+            "y": 3.104124993085861,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_6_lev3",
+            "type": "mesh",
+            "x": 102.63563537597656,
+            "y": 3.10924431681633,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_7_lev3",
+            "type": "mesh",
+            "x": 107.66474151611328,
+            "y": 3.1561650931835175,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_north_8_lev3",
+            "type": "mesh",
+            "x": 112.69384002685547,
+            "y": 3.139067620038986,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_0_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.1098890006542206,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_1_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.152175396680832,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_2_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.15589901804924,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_6_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.1506724059581757,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_7_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.1154951751232147,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_west_8_lev3",
+            "type": "mesh",
+            "x": 69.94646453857422,
+            "y": 3.1527118384838104,
+            "z": -23.140220642089844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_0_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1445970237255096,
+            "z": 20.65570831298828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_1_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1086444556713104,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_2_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1199755370616913,
+            "z": 9.70672607421875,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_3_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1477379500865936,
+            "z": 4.232236385345459,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_4_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.110951393842697,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_5_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1471676528453827,
+            "z": -6.7167463302612305,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_6_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1470703780651093,
+            "z": -12.19123649597168,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_7_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.144144982099533,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_wall_east_8_lev3",
+            "type": "mesh",
+            "x": 115.20838928222656,
+            "y": 3.1248302161693573,
+            "z": -23.140220642089844,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_arch_lev3",
+            "type": "mesh",
+            "x": 92.57743072509766,
+            "y": 0.1464395523071289,
+            "z": -25.877464294433594,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_final_l3_lev3",
+            "type": "mesh",
+            "x": 92.57743072509766,
+            "y": 5.715868681669235,
+            "z": 1.4949908256530762,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_safe_zone_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 0.21269488334655762,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_horse_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 1.9132785499095917,
+            "z": 16.54983901977539,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_skull_1_lev3",
+            "type": "mesh",
+            "x": 85.03376770019531,
+            "y": 0.1941242218017578,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_skull_2_lev3",
+            "type": "mesh",
+            "x": 107.66474151611328,
+            "y": 0.1941242218017578,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_crate_1_lev3",
+            "type": "mesh",
+            "x": 105.15018463134766,
+            "y": 0.14490461349487305,
+            "z": -9.453990936279297,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_barrel_1_lev3",
+            "type": "mesh",
+            "x": 110.17929077148438,
+            "y": 0.13824915885925293,
+            "z": 6.969481945037842,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_cobweb_1_lev3",
+            "type": "mesh",
+            "x": 71.2037353515625,
+            "y": 5.18544265627861,
+            "z": -24.50884437561035,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "final_cobweb_2_lev3",
+            "type": "mesh",
+            "x": 113.95111846923828,
+            "y": 5.18544265627861,
+            "z": -24.50884437561035,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_portal_30_-2_lev3",
+            "type": "mesh",
+            "x": 74.97557067871094,
+            "y": 2.26809760928154,
+            "z": 17.9184627532959,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_portal_44_-2_lev3",
+            "type": "mesh",
+            "x": 110.17929077148438,
+            "y": 2.26809760928154,
+            "z": 17.9184627532959,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_portal_30_12_lev3",
+            "type": "mesh",
+            "x": 74.97557067871094,
+            "y": 2.26809760928154,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "torch_portal_44_12_lev3",
+            "type": "mesh",
+            "x": 110.17929077148438,
+            "y": 2.26809760928154,
+            "z": -20.402973175048828,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_bricks_1_lev3",
+            "type": "mesh",
+            "x": 87.5483169555664,
+            "y": 0.18398118019104004,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_bricks_2_lev3",
+            "type": "mesh",
+            "x": 105.15018463134766,
+            "y": 0.18398118019104004,
+            "z": -21.771596908569336,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_bricks_3_lev3",
+            "type": "mesh",
+            "x": 107.66474151611328,
+            "y": 0.18398118019104004,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "portal_bricks_4_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 0.18398118019104004,
+            "z": 19.287086486816406,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_1_lev3",
+            "type": "mesh",
+            "x": -90.98483276367188,
+            "y": 0.863508552312851,
+            "z": 15.181217193603516,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_2_lev3",
+            "type": "mesh",
+            "x": -85.95572662353516,
+            "y": 0.13922208547592163,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_3_lev3",
+            "type": "mesh",
+            "x": -55.59580993652344,
+            "y": 0.8943736255168915,
+            "z": 20.349443435668945,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_4_lev3",
+            "type": "mesh",
+            "x": -45.722904205322266,
+            "y": 0.9013247191905975,
+            "z": -14.928483963012695,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_5_lev3",
+            "type": "mesh",
+            "x": -60.64594650268555,
+            "y": 0.37257811427116394,
+            "z": -42.30093765258789,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_6_lev3",
+            "type": "mesh",
+            "x": -31.913755416870117,
+            "y": 0.6386131942272186,
+            "z": -42.30093765258789,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_7_lev3",
+            "type": "mesh",
+            "x": 2.0535731315612793,
+            "y": 2.1420209109783173,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_8_lev3",
+            "type": "mesh",
+            "x": 12.111780166625977,
+            "y": 0.1943661868572235,
+            "z": -17.665729522705078,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_9_lev3",
+            "type": "mesh",
+            "x": 27.199087142944336,
+            "y": 0.7899079024791718,
+            "z": 15.118042945861816,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_10_lev3",
+            "type": "mesh",
+            "x": 55.39591979980469,
+            "y": 0.6553604304790497,
+            "z": -1.2422552108764648,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_11_lev3",
+            "type": "mesh",
+            "x": 77.49011993408203,
+            "y": 1.2230009734630585,
+            "z": 1.4949908256530762,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "coin_l3_12_lev3",
+            "type": "mesh",
+            "x": 100.2605209350586,
+            "y": 0.5966754257678986,
+            "z": -17.708948135375977,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "plaza_wall_west_2_001_lev3",
+            "type": "mesh",
+            "x": -75.96879577636719,
+            "y": 3.01998707652092,
+            "z": 9.459932327270508,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_bars_1_001_lev3",
+            "type": "mesh",
+            "x": -65.72423553466797,
+            "y": 0.0043010711669921875,
+            "z": -25.917640686035156,
+            "level": 3,
+            "role": "default"
+        },
+        {
+            "name": "crypt_wall_east_0_001_lev3",
+            "type": "mesh",
+            "x": -25.874847412109375,
+            "y": 3.083370178937912,
+            "z": -33.498992919921875,
+            "level": 3,
+            "role": "default"
+        }
+    ],
+    "empties": [
+        {
+            "name": "enemy_detection_center",
+            "type": "enemyDetection",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_1",
+            "type": "enemyPatrol",
+            "x": 9.597228050231934,
+            "y": 0.1463916301727295,
+            "z": 9.70672607421875,
+            "order": 1,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_2",
+            "type": "enemyPatrol",
+            "x": 29.713642120361328,
+            "y": 0.1463916301727295,
+            "z": 9.70672607421875,
+            "order": 2,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_3",
+            "type": "enemyPatrol",
+            "x": 29.713642120361328,
+            "y": 0.1463916301727295,
+            "z": -14.928483963012695,
+            "order": 3,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_4",
+            "type": "enemyPatrol",
+            "x": 9.597228050231934,
+            "y": 0.1463916301727295,
+            "z": -14.928483963012695,
+            "order": 4,
+            "level": 3
+        },
+        {
+            "name": "enemy_spawn_ghost_skull",
+            "type": "enemySpawn",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_1",
+            "type": "ghostChasePoint",
+            "x": 44.80095291137695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 1,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_2",
+            "type": "ghostChasePoint",
+            "x": 57.37370681762695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 2,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_3",
+            "type": "ghostChasePoint",
+            "x": 69.94646453857422,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 3,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_4",
+            "type": "ghostChasePoint",
+            "x": 92.57743072509766,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 4,
+            "level": 3
+        },
+        {
+            "name": "trigger_cripta_secreta",
+            "type": "triggerCripta",
+            "x": -45.722904205322266,
+            "y": 0.1463916301727295,
+            "z": -47.775428771972656,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_entrada",
+            "type": "triggerEntrada",
+            "x": -90.98483276367188,
+            "y": 0.1463916301727295,
+            "z": 6.969481945037842,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_ghost_skull",
+            "type": "triggerGhostSkull",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_persecucion",
+            "type": "triggerPersecucion",
+            "x": 57.37370681762695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_plaza",
+            "type": "triggerPlaza",
+            "x": -45.722904205322266,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_portal",
+            "type": "triggerPortal",
+            "x": 92.57743072509766,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 0,
+            "level": 3
+        }
+    ],
+    "enemySpawn": [
+        {
+            "name": "enemy_spawn_ghost_skull",
+            "type": "enemySpawn",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        }
+    ],
+    "enemyDetection": [
+        {
+            "name": "enemy_detection_center",
+            "type": "enemyDetection",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        }
+    ],
+    "enemyPatrol": [
+        {
+            "name": "enemy_patrol_1",
+            "type": "enemyPatrol",
+            "x": 9.597228050231934,
+            "y": 0.1463916301727295,
+            "z": 9.70672607421875,
+            "order": 1,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_2",
+            "type": "enemyPatrol",
+            "x": 29.713642120361328,
+            "y": 0.1463916301727295,
+            "z": 9.70672607421875,
+            "order": 2,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_3",
+            "type": "enemyPatrol",
+            "x": 29.713642120361328,
+            "y": 0.1463916301727295,
+            "z": -14.928483963012695,
+            "order": 3,
+            "level": 3
+        },
+        {
+            "name": "enemy_patrol_4",
+            "type": "enemyPatrol",
+            "x": 9.597228050231934,
+            "y": 0.1463916301727295,
+            "z": -14.928483963012695,
+            "order": 4,
+            "level": 3
+        }
+    ],
+    "ghostChasePoints": [
+        {
+            "name": "ghost_chase_point_1",
+            "type": "ghostChasePoint",
+            "x": 44.80095291137695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 1,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_2",
+            "type": "ghostChasePoint",
+            "x": 57.37370681762695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 2,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_3",
+            "type": "ghostChasePoint",
+            "x": 69.94646453857422,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 3,
+            "level": 3
+        },
+        {
+            "name": "ghost_chase_point_4",
+            "type": "ghostChasePoint",
+            "x": 92.57743072509766,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 4,
+            "level": 3
+        }
+    ],
+    "triggers": [
+        {
+            "name": "trigger_cripta_secreta",
+            "type": "triggerCripta",
+            "x": -45.722904205322266,
+            "y": 0.1463916301727295,
+            "z": -47.775428771972656,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_entrada",
+            "type": "triggerEntrada",
+            "x": -90.98483276367188,
+            "y": 0.1463916301727295,
+            "z": 6.969481945037842,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_ghost_skull",
+            "type": "triggerGhostSkull",
+            "x": 19.655433654785156,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_persecucion",
+            "type": "triggerPersecucion",
+            "x": 57.37370681762695,
+            "y": 0.1463916301727295,
+            "z": -1.2422552108764648,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_plaza",
+            "type": "triggerPlaza",
+            "x": -45.722904205322266,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 0,
+            "level": 3
+        },
+        {
+            "name": "trigger_portal",
+            "type": "triggerPortal",
+            "x": 92.57743072509766,
+            "y": 0.1463916301727295,
+            "z": 1.4949908256530762,
+            "order": 0,
+            "level": 3
+        }
+    ]
+}

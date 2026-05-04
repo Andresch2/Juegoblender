@@ -181,6 +181,9 @@ export default class ToyCarLoader {
             'mesh3_model',
             // Agua
             'pond', 'rio', 'river', 'water',
+            // Nivel 3 - Cripta/Mazmorra
+            'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto',
+            'chamber_', 'chase_', 'crypt_', 'final_', 'portal_'
         ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -190,8 +193,8 @@ export default class ToyCarLoader {
 
         // Patrones de objetos INVISIBLES (no agregar a escena ni física)
         const INVISIBLE_PATTERNS = [
-            'spawn_circle', 'helper', 'trigger',
-            'spawn', 'respawn', 'patrol', 'debug', 'target'
+            'spawn_circle', 'spawn_circle_lev1', 'helper', 'trigger',
+            'spawn', 'respawn', 'patrol', 'enemy_path', 'debug', 'target'
         ]
         const DECORATION_PATTERNS = [
             'apple', 'flower', 'mushroom', 'fogata',
@@ -200,12 +203,24 @@ export default class ToyCarLoader {
             'portal_final', 'portal_roca_0', 'portal_roca_3',
             'camino',
             'fox_mesh', 'elmtree',   // árboles decorativos del lev2
-            'inicio_nivel2'
+            'inicio_nivel2',
+            // Nivel 3 decoraciones
+            'barrel', 'crate', 'skull', 'cobweb', 'cart',
+            'bricks', 'torch', 'horse', 'table', 'spikes',
+            'safe_zone', 'arch', 'column', 'col_', 'bars',
+            'danger_zone', 'ghost_danger', 'enemy_ghost'
         ]
 
         blocks.forEach(block => {
             if (!block.name) {
                 console.warn('Bloque sin nombre:', block);
+                return;
+            }
+
+            const nameLower = block.name.toLowerCase();
+            const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
+            if (isInvisible) {
+                console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
                 return;
             }
 
@@ -218,7 +233,6 @@ export default class ToyCarLoader {
             }
 
             const model = glb.scene.clone();
-            const nameLower = block.name.toLowerCase();
 
             //  MARCAR modelo como perteneciente al nivel
             model.userData.levelObject = true;
@@ -229,13 +243,6 @@ export default class ToyCarLoader {
                     child.parent.remove(child);
                 }
             });
-
-            // Objetos invisibles: NO agregar a la escena
-            const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
-            if (isInvisible) {
-                console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
-                return;
-            }
 
             //  Manejo de carteles: aplicar textura a meshes
             this._applyTextureToMeshes(
@@ -293,7 +300,8 @@ export default class ToyCarLoader {
             const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p))
             const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p))
             const isDecoration = DECORATION_PATTERNS.some(p => nameLower.includes(p))
-            const shouldHavePhysics = (hasPhysicsPattern || isObstacleForced) && !isDecoration
+            const isPrecise = Array.isArray(precisePhysicsModels) && precisePhysicsModels.includes(block.name);
+            const shouldHavePhysics = isPrecise || ((hasPhysicsPattern || isObstacleForced) && !isDecoration)
             const isWaterSurface = ['rio', 'river', 'water', 'agua', 'pond'].some(p => nameLower.includes(p));
 
             if (!shouldHavePhysics) {
@@ -325,7 +333,7 @@ export default class ToyCarLoader {
             }
 
             // Camino — colisionador muy delgado para que la Sphere ruede encima sin trabarse
-            if (nameLower.includes('camino')) {
+            if (nameLower.includes('camino') || nameLower.includes('main_path')) {
                 halfY = 0.04                        // casi plano
                 bodyCenter.y = block.y + 0.04      // al ras del suelo
             }
@@ -343,13 +351,27 @@ export default class ToyCarLoader {
                 bodyCenter.y = block.y - 0.03;
             }
 
-            const shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
+            let shape;
+            let finalBodyPos = new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z);
+
+            if (isPrecise) {
+                shape = createTrimeshShapeFromModel(model);
+                if (shape) {
+                    // Los vértices del Trimesh ya están en coordenadas de mundo, 
+                    // así que el cuerpo debe estar en el origen (0,0,0)
+                    finalBodyPos = new CANNON.Vec3(0, 0, 0);
+                }
+            }
+
+            if (!shape) {
+                shape = new CANNON.Box(new CANNON.Vec3(halfX, halfY, halfZ));
+            }
 
             const body = new CANNON.Body({
                 mass: 0,
                 type: CANNON.Body.STATIC,
                 shape: shape,
-                position: new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z),
+                position: finalBodyPos,
                 material: isWaterSurface ? this.physics.defaultMaterial : this.physics.obstacleMaterial,
                 linearDamping: 0.9,
                 angularDamping: 1.0
