@@ -160,25 +160,26 @@ export default class ToyCarLoader {
 
         // Patrones que SI deben tener colision fisica (superficies caminables)
         const PHYSICS_PATTERNS = [
-            // Caminos lev1
-            'camino',
-            // Puentes lev1
+            // Caminos lev1 (sin física - el floor los sostiene)
+            // 'camino',  ← comentado intencionalmente
+            // Puentes
             'puente',
-            // Montañas lev1 (paredes naturales)
-            'mountain',
-            // Rocas lev1 y lev2
-            'rock', 'bigrock', 'low_poly_cuboid_rock', 'portal_roca',
-            // Árboles lev1 y lev2
-            'tree', 'simple_tree',
-            // Troncos caídos lev1
-            'tronco',
-            // Pistas y caminos lev2
+            // Montañas y rocas
+            'mountain', 'rock', 'bigrock', 'low_poly_cuboid_rock', 'portal_roca',
+            // Árboles y troncos
+            'tree', 'simple_tree', 'tronco', 'elmtree',
+            // Pistas lev2
             'track', 'plane',
             // Edificios lev2
             'building', 'hangar', 'mansion', 'silo',
-            // Plataformas/bloques lev2
+            // Bloques lev2
             'cube', 'coin_structure',
-            // Agua (física especial plana)
+            // *** PAREDES DEL LABERINTO lev2 ***
+            'pared_laberinto',
+            'mesh1_model',
+            'mesh2_model',
+            'mesh3_model',
+            // Agua
             'pond', 'rio', 'river', 'water',
         ]
 
@@ -197,7 +198,9 @@ export default class ToyCarLoader {
             'banco', 'cartel', 'chimney', 'cilinder',
             'cylinder', 'pipe', 'rocket', 'fox_inicio',
             'portal_final', 'portal_roca_0', 'portal_roca_3',
-            'camino'
+            'camino',
+            'fox_mesh', 'elmtree',   // árboles decorativos del lev2
+            'inicio_nivel2'
         ]
 
         blocks.forEach(block => {

@@ -1737,21 +1737,6 @@ export default [
         "path": "/models/toycar2/inicio_nivel2_lev1_lev2.glb"
     },
     {
-        "name": "mesh1_model_lev1_lev2",
-        "type": "gltfModel",
-        "path": "/models/toycar2/mesh1_model_lev1_lev2.glb"
-    },
-    {
-        "name": "mesh2_model_lev1_lev2",
-        "type": "gltfModel",
-        "path": "/models/toycar2/mesh2_model_lev1_lev2.glb"
-    },
-    {
-        "name": "mesh3_model_lev1_lev2",
-        "type": "gltfModel",
-        "path": "/models/toycar2/mesh3_model_lev1_lev2.glb"
-    },
-    {
         "name": "pared_laberinto.001_lev1_lev2",
         "type": "gltfModel",
         "path": "/models/toycar2/pared_laberinto.001_lev1_lev2.glb"
