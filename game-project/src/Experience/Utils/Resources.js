@@ -8,8 +8,12 @@ export default class Resources extends EventEmitter {
 
         this.sources = sources
         this.items = {}
+        this.errors = []
         this.toLoad = this.sources.length
         this.loaded = 0
+        this.queue = [...this.sources]
+        this.activeLoads = 0
+        this.maxConcurrentLoads = 12
 
         this.setLoaders()
         this.startLoading()
@@ -23,59 +27,66 @@ export default class Resources extends EventEmitter {
     }
 
     startLoading() {
-        for (const source of this.sources) {
-            //console.log(`⏳ Cargando recurso: ${source.name} desde ${source.path}`);
+        if (this.toLoad === 0) {
+            window.dispatchEvent(new CustomEvent('resource-complete'))
+            this.trigger('ready')
+            return
+        }
 
-            if (source.type === 'gltfModel') {
-                this.loaders.gltfLoader.load(
-                    source.path,
-                    (file) => {
-                        this.sourceLoaded(source, file)
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(`❌ Error al cargar modelo ${source.name} desde ${source.path}`)
-                        console.error(error)
-                    }
-                )
-            } else if (source.type === 'texture') {
-                this.loaders.textureLoader.load(
-                    source.path,
-                    (file) => {
-                        this.sourceLoaded(source, file)
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(`❌ Error al cargar textura ${source.name} desde ${source.path}`)
-                        console.error(error)
-                    }
-                )
-            } else if (source.type === 'cubeTexture') {
-                this.loaders.cubeTextureLoader.load(
-                    source.path,
-                    (file) => {
-                        this.sourceLoaded(source, file)
-                    },
-                    undefined,
-                    (error) => {
-                        console.error(`❌ Error al cargar cubemap ${source.name} desde ${source.path}`)
-                        console.error(error)
-                    }
-                )
-            }
+        this.loadNextBatch()
+    }
+
+    loadNextBatch() {
+        while (this.activeLoads < this.maxConcurrentLoads && this.queue.length > 0) {
+            const source = this.queue.shift()
+            this.activeLoads++
+            this.loadSource(source)
+        }
+    }
+
+    loadSource(source) {
+        const onLoad = (file) => this.sourceLoaded(source, file)
+        const onError = (error) => this.sourceFailed(source, error)
+
+        if (source.type === 'gltfModel') {
+            this.loaders.gltfLoader.load(source.path, onLoad, undefined, onError)
+        } else if (source.type === 'texture') {
+            this.loaders.textureLoader.load(source.path, onLoad, undefined, onError)
+        } else if (source.type === 'cubeTexture') {
+            this.loaders.cubeTextureLoader.load(source.path, onLoad, undefined, onError)
+        } else {
+            onError(new Error(`Tipo de recurso no soportado: ${source.type}`))
         }
     }
 
     sourceLoaded(source, file) {
         this.items[source.name] = file
+        this.finishSource()
+    }
+
+    sourceFailed(source, error) {
+        this.errors.push({ source, error })
+        console.error(`Error al cargar recurso ${source.name} desde ${source.path}`, error)
+        window.dispatchEvent(new CustomEvent('resource-error', { detail: { source, error } }))
+        this.finishSource()
+    }
+
+    finishSource() {
         this.loaded++
+        this.activeLoads = Math.max(0, this.activeLoads - 1)
 
         const percent = Math.floor((this.loaded / this.toLoad) * 100)
         window.dispatchEvent(new CustomEvent('resource-progress', { detail: percent }))
 
         if (this.loaded === this.toLoad) {
+            if (this.errors.length > 0) {
+                console.warn(`Recursos cargados con ${this.errors.length} error(es). El juego continuara sin esos assets.`)
+            }
+
             window.dispatchEvent(new CustomEvent('resource-complete'))
             this.trigger('ready')
+        } else {
+            this.loadNextBatch()
         }
     }
 }

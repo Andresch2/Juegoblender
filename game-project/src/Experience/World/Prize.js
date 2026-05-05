@@ -11,6 +11,8 @@ export default class Prize {
         this.pivot.position.copy(position)
         this.pivot.userData.interactivo = true
         this.pivot.userData.collected = false
+        this.pivot.userData.levelObject = true
+        this.pivot.userData.prizeObject = true
 
 
         //  Clonar el modelo
@@ -55,5 +57,24 @@ export default class Prize {
             child.userData.collected = true
         })
         this.scene.remove(this.pivot)
+    }
+
+    destroy() {
+        if (!this.pivot) return
+
+        this.pivot.traverse((child) => {
+            if (child.geometry) child.geometry.dispose()
+            if (child.material) {
+                if (Array.isArray(child.material)) {
+                    child.material.forEach((mat) => mat.dispose?.())
+                } else {
+                    child.material.dispose?.()
+                }
+            }
+        })
+
+        this.scene.remove(this.pivot)
+        this.pivot = null
+        this.model = null
     }
 }

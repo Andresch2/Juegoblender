@@ -169,7 +169,7 @@ export default class World {
         });
     }
 
-    update(delta) {
+    async update(delta) {
         this.robot?.update()
         this.blockPrefab?.update()
 
@@ -276,7 +276,8 @@ export default class World {
             const dz = portalPos.z - pos.z;
             const horizontalDist = Math.sqrt(dx * dx + dz * dz);
 
-            if (horizontalDist < 2.5 && moved) {
+            const portalRadius = this.levelManager.currentLevel === 4 ? 5.0 : 2.5;
+            if (horizontalDist < portalRadius) {
                 this.points = -999; // hack para evitar triggers repetidos
 
                 const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize");
@@ -289,7 +290,22 @@ export default class World {
                 }
 
                 if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
-                    this.levelManager.nextLevel()
+                    const changedLevel = await this.levelManager.nextLevel()
+                    if (!changedLevel) {
+                        this.experience.modal.show({
+                            icon: '🚀',
+                            message: 'Nivel 5 pendiente por exportar.\nLa nave ya esta lista para llevarte alli.',
+                            buttons: [
+                                {
+                                    text: 'Continuar',
+                                    onClick: () => { }
+                                }
+                            ]
+                        })
+                        this.points = pointsTarget
+                        this.robot.points = pointsTarget
+                        return
+                    }
                     this.points = 0
                     this.robot.points = 0
                 } else {
@@ -326,10 +342,11 @@ export default class World {
                         positions[i3 + 0] = x * Math.cos(velocities[i].spin * delta) - z * Math.sin(velocities[i].spin * delta)
                         positions[i3 + 2] = x * Math.sin(velocities[i].spin * delta) + z * Math.cos(velocities[i].spin * delta)
 
-                        if (positions[i3 + 1] > 5) {
+                        const isLevel4Portal = this.levelManager?.currentLevel === 4
+                        if (positions[i3 + 1] > (isLevel4Portal ? 7 : 5)) {
                             positions[i3 + 1] = 0
-                            positions[i3 + 0] = (Math.random() - 0.5) * 4
-                            positions[i3 + 2] = (Math.random() - 0.5) * 4
+                            positions[i3 + 0] = (Math.random() - 0.5) * (isLevel4Portal ? 7 : 4)
+                            positions[i3 + 2] = (Math.random() - 0.5) * (isLevel4Portal ? 7 : 4)
                         }
                     }
                     child.geometry.attributes.position.needsUpdate = true
@@ -377,16 +394,20 @@ export default class World {
         group.position.copy(position)
 
         const isLevel3 = this.levelManager?.currentLevel === 3
+        const isLevel4 = this.levelManager?.currentLevel === 4
 
         // Colores base del portal: Tonalidad fantasma para nivel 3, cyan/amarillo para nivel 1
-        const ringColors = isLevel3
-            ? [0x9d4edd, 0xff0055, 0x480ca8] // Morado, fucsia, azul oscuro
-            : [0x27f5d2, 0xffd166, 0xffffff] // Cyan, amarillo, blanco
+        const ringColors = isLevel4
+            ? [0xff7a18, 0x2dd4ff, 0xffffff]
+            : isLevel3
+                ? [0x9d4edd, 0xff0055, 0x480ca8] // Morado, fucsia, azul oscuro
+                : [0x27f5d2, 0xffd166, 0xffffff] // Cyan, amarillo, blanco
 
-        const mainColor = isLevel3 ? 0x9d4edd : 0x27f5d2
+        const mainColor = isLevel4 ? 0xff7a18 : (isLevel3 ? 0x9d4edd : 0x27f5d2)
+        const radiusScale = isLevel4 ? 1.65 : 1
 
         for (let i = 0; i < 3; i++) {
-            const geometry = new THREE.TorusGeometry(1.1 + i * 0.35, 0.035, 8, 80)
+            const geometry = new THREE.TorusGeometry((1.1 + i * 0.35) * radiusScale, 0.035 * radiusScale, 8, 80)
             const material = new THREE.MeshBasicMaterial({
                 color: ringColors[i],
                 transparent: true,
@@ -396,7 +417,7 @@ export default class World {
             const ring = new THREE.Mesh(geometry, material)
             ring.rotation.x = Math.PI / 2
             ring.rotation.z = i * 0.75
-            ring.position.y = 1.05 + i * 0.35
+            ring.position.y = (isLevel4 ? 1.5 : 1.05) + i * 0.35
             ring.userData.spin = i % 2 === 0 ? 1.4 : -1.1
             group.add(ring)
         }
@@ -410,30 +431,30 @@ export default class World {
         })
 
         for (let i = 0; i < 5; i++) {
-            const geometry = new THREE.ConeGeometry(0.08, 3.2, 5, 1, true)
+            const geometry = new THREE.ConeGeometry(0.08 * radiusScale, 3.2 * radiusScale, 5, 1, true)
             const beam = new THREE.Mesh(geometry, spiralMaterial.clone())
-            beam.position.y = 1.9
+            beam.position.y = isLevel4 ? 2.5 : 1.9
             beam.rotation.x = Math.PI / 2
             beam.rotation.z = (i * Math.PI * 2) / 5
             beam.userData.spin = 0.9 + i * 0.12
             group.add(beam)
         }
 
-        const pointLight = new THREE.PointLight(mainColor, 4, 9)
-        pointLight.position.set(0, 2.2, 0)
+        const pointLight = new THREE.PointLight(mainColor, isLevel4 ? 6 : 4, isLevel4 ? 14 : 9)
+        pointLight.position.set(0, isLevel4 ? 3.0 : 2.2, 0)
         group.add(pointLight)
 
         // --- Partículas del portal ---
-        const particleCount = 150
+        const particleCount = isLevel4 ? 260 : 150
         const particlesGeometry = new THREE.BufferGeometry()
         const particlesPosition = new Float32Array(particleCount * 3)
         const particlesVelocity = []
 
         for (let i = 0; i < particleCount; i++) {
             const i3 = i * 3
-            particlesPosition[i3 + 0] = (Math.random() - 0.5) * 4
-            particlesPosition[i3 + 1] = Math.random() * 5
-            particlesPosition[i3 + 2] = (Math.random() - 0.5) * 4
+            particlesPosition[i3 + 0] = (Math.random() - 0.5) * (isLevel4 ? 7 : 4)
+            particlesPosition[i3 + 1] = Math.random() * (isLevel4 ? 7 : 5)
+            particlesPosition[i3 + 2] = (Math.random() - 0.5) * (isLevel4 ? 7 : 4)
             particlesVelocity.push({
                 y: 0.5 + Math.random() * 1.5,
                 spin: (Math.random() - 0.5) * 2
@@ -443,7 +464,7 @@ export default class World {
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3))
         const particlesMaterial = new THREE.PointsMaterial({
             color: mainColor,
-            size: 0.1,
+            size: isLevel4 ? 0.14 : 0.1,
             transparent: true,
             opacity: 0.8,
             blending: THREE.AdditiveBlending,
@@ -498,13 +519,27 @@ export default class World {
                     throw new Error(`Respuesta no-JSON desde API (${apiUrl}): ${preview}`);
                 }
                 data = await res.json();
+                if (Array.isArray(data)) {
+                    data = {
+                        blocks: data,
+                        spawnPoint: this.levelManager.getSpawnPoint(level)
+                    };
+                }
                 console.log(`📦 Datos del nivel ${level} cargados desde API`);
             } catch (error) {
                 console.warn(`⚠️ No se pudo conectar con el backend. Usando datos locales para nivel ${level}...`);
 
 
-                const localUrl = publicPath('data/toy_car_blocks.json');
-                const localRes = await fetch(localUrl);
+                const levelLocalUrl = publicPath(`data/toy_car_blocks${level}.json`);
+                const fallbackLocalUrl = publicPath('data/toy_car_blocks.json');
+                let localUrl = levelLocalUrl;
+                let localRes = await fetch(localUrl);
+
+                if (!localRes.ok) {
+                    localUrl = fallbackLocalUrl;
+                    localRes = await fetch(localUrl);
+                }
+
                 if (!localRes.ok) {
                     const preview = (await localRes.text()).slice(0, 120);
                     throw new Error(`No se pudo cargar ${localUrl} (HTTP ${localRes.status}). Vista previa: ${preview}`);
@@ -518,6 +553,10 @@ export default class World {
 
                 const filteredBlocks = allBlocks.filter(b => b.level === level);
 
+                if (filteredBlocks.length === 0) {
+                    throw new Error(`No hay bloques locales para el nivel ${level}.`);
+                }
+
                 data = {
                     blocks: filteredBlocks,
                     spawnPoint: this.levelManager.getSpawnPoint(level)
@@ -525,10 +564,14 @@ export default class World {
             }
 
             let blocksArray = data.blocks ? data.blocks : (Array.isArray(data) ? data : []);
+            if (blocksArray.length === 0) {
+                throw new Error(`No hay bloques para el nivel ${level}. Revisa backend, Mongo o los JSON locales.`);
+            }
             let spawnPoint = this.getSpawnForLevel(level, blocksArray);
 
             // Guardar datos del nivel (incluye empties como rutas)
             this.currentLevelData = data;
+            this.loader.loadedBlocks = blocksArray;
 
             this.points = 0;
             this.robot.points = 0;
@@ -536,7 +579,7 @@ export default class World {
             this.experience.menu?.setLevel?.(level);
             this.experience.menu.setStatus?.(`🎖️ Puntos: ${this.points}`);
 
-            if (data.blocks) {
+            if (blocksArray.length > 0) {
                 // Intentar cargar configuración de física precisa (Trimesh)
                 let preciseModels = [];
                 try {
@@ -562,7 +605,7 @@ export default class World {
                 }
 
                 // Procesar bloques con la configuración obtenida
-                this.loader._processBlocks(data.blocks, preciseModels);
+                await this.loader._processBlocks(blocksArray, preciseModels);
             } else {
                 await this.loader.loadFromURL(apiUrl);
             }
@@ -740,19 +783,7 @@ export default class World {
         }
 
         if (this.loader && this.loader.prizes.length > 0) {
-            this.loader.prizes.forEach(prize => {
-                if (prize.model) {
-                    this.scene.remove(prize.model);
-                    if (prize.model.geometry) prize.model.geometry.dispose();
-                    if (prize.model.material) {
-                        if (Array.isArray(prize.model.material)) {
-                            prize.model.material.forEach(mat => mat.dispose());
-                        } else {
-                            prize.model.material.dispose();
-                        }
-                    }
-                }
-            });
+            this.loader.prizes.forEach(prize => prize?.destroy?.());
             this.loader.prizes = [];
             console.log('🎯 Premios del nivel anterior eliminados correctamente.');
         }
@@ -827,6 +858,16 @@ export default class World {
     getPortalForLevel(level, blocksArray) {
         if (!blocksArray || blocksArray.length === 0) return null;
 
+        if (level === 4) {
+            const shipBlock = blocksArray.find(b => b.name === 'd_sh_spaceship_raetheredp_lev4');
+            if (shipBlock) {
+                const pos = new THREE.Vector3(shipBlock.x, shipBlock.y + 2.2, shipBlock.z);
+                console.log("[PORTAL] Nave usada:", shipBlock.name);
+                console.log("[PORTAL] Posicion final:", pos);
+                return pos;
+            }
+        }
+
         // Prioridad 1: Buscar el aro real (portal_final)
         let portalBlock = blocksArray.find(b => b.name && b.name.toLowerCase().includes('portal_final'));
 
@@ -857,6 +898,15 @@ export default class World {
         return null;
     }
 
+    forceActivatePortal() {
+        const target = this.getCurrentPointsTarget()
+        this.points = target
+        if (this.robot) this.robot.points = target
+        this.experience.menu?.setPoints?.(target, target)
+        this.finalPrizeActivated = false
+        console.log('[PORTAL] Activacion forzada. Espera el siguiente frame.')
+    }
+
     resetRobotPosition(spawn) {
         if (!spawn) {
             spawn = this.levelManager ? this.levelManager.getSpawnPoint(this.levelManager.currentLevel) : { x: 0, y: 2, z: 0 };
@@ -875,7 +925,7 @@ export default class World {
     async _processLocalBlocks(blocks) {
         const preciseRes = await fetch('/config/precisePhysicsModels.json');
         const preciseModels = await preciseRes.json();
-        this.loader._processBlocks(blocks, preciseModels);
+        await this.loader._processBlocks(blocks, preciseModels);
 
         this.loader.prizes.forEach(p => {
             if (p.model) p.model.visible = (p.role !== 'finalPrize');

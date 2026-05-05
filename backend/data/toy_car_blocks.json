@@ -1520,26 +1520,10 @@
         "role": "default"
     },
     {
-        "name": "mesh1_model_lev1_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "level": 2,
-        "role": "default"
-    },
-    {
-        "name": "mesh2_model_lev1_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
-        "level": 2,
-        "role": "default"
-    },
-    {
         "name": "mesh3_model_lev1_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": 8.001550674438477,
+        "y": 0.01468050479888916,
+        "z": -8.084539413452148,
         "level": 2,
         "role": "default"
     },
@@ -1625,43 +1609,43 @@
     },
     {
         "name": "coin_1_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": 86.11494445800781,
+        "y": 0.35107851028442383,
+        "z": -131.72415161132812,
         "level": 2,
         "role": "default"
     },
     {
         "name": "coin_2_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": -16.680662155151367,
+        "y": 0.35107851028442383,
+        "z": -73.25667572021484,
         "level": 2,
         "role": "default"
     },
     {
         "name": "coin_3_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": -48.01873779296875,
+        "y": 0.35107851028442383,
+        "z": -8.084539413452148,
         "level": 2,
         "role": "default"
     },
     {
         "name": "coin_4_lev2",
-        "x": 96.51319122314453,
-        "y": 0.030730128288269043,
-        "z": -40.25263595581055,
+        "x": 120.42762756347656,
+        "y": -1.8371737003326416,
+        "z": -39.837547302246094,
         "level": 2,
         "role": "default"
     },
     {
         "name": "coin_final_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": -13.563497543334961,
+        "y": 0.35107851028442383,
+        "z": 70.5080795288086,
         "level": 2,
-        "role": "finalPrize"
+        "role": "default"
     },
     {
         "name": "pared_laberinto.161_lev1.001_lev2",
@@ -4305,9 +4289,9 @@
     },
     {
         "name": "portal_final_lev2",
-        "x": 0,
-        "y": 0,
-        "z": 0,
+        "x": 7.459770202636719,
+        "y": -0.16778355836868286,
+        "z": -7.117074489593506,
         "level": 2,
         "role": "default"
     },
@@ -6709,6 +6693,5414 @@
         "y": 3.083370178937912,
         "z": -33.498992919921875,
         "level": 3,
+        "role": "default"
+    },
+    {
+        "name": "w4_formation_rock_lev4",
+        "x": -17.671,
+        "y": 0,
+        "z": 35.157,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w5_formation_rock_lev4",
+        "x": -11.273,
+        "y": 0,
+        "z": 36.376,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w6_formation_rock_lev4",
+        "x": -5.399,
+        "y": 0,
+        "z": 37.434,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w17_formation_rock_lev4",
+        "x": -34.51,
+        "y": 0,
+        "z": 32.706,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w18_formation_rock_lev4",
+        "x": -30.531,
+        "y": 0,
+        "z": 34.372,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w19_formation_rock_lev4",
+        "x": -25.669,
+        "y": 0,
+        "z": 34.328,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w20_formation_rock_lev4",
+        "x": -20.992,
+        "y": 0,
+        "z": 34.919,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w24_formation_rock_lev4",
+        "x": -0.403,
+        "y": 0,
+        "z": 35.611,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w25_formation_rock_lev4",
+        "x": 3.308,
+        "y": 0,
+        "z": 34.409,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w26_formation_rock_lev4",
+        "x": 6.633,
+        "y": 0,
+        "z": 33.136,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w27_formation_rock_lev4",
+        "x": 14.008,
+        "y": 0,
+        "z": 33.365,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w28_formation_rock_lev4",
+        "x": 17.845,
+        "y": 0,
+        "z": 32.609,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w29_formation_rock_lev4",
+        "x": 22.059,
+        "y": 0,
+        "z": 32.525,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w30_formation_rock_lev4",
+        "x": 28.526,
+        "y": 0,
+        "z": 33.616,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w39_formation_rock_lev4",
+        "x": -11.545,
+        "y": 0,
+        "z": -43.308,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w41_formation_rock_lev4",
+        "x": -0.509,
+        "y": 0,
+        "z": -42.286,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w44_formation_rock_lev4",
+        "x": 14.665,
+        "y": 0,
+        "z": -42.243,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w45_formation_rock_lev4",
+        "x": 17.74,
+        "y": 0,
+        "z": -44.318,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w46_formation_rock_lev4",
+        "x": 22.998,
+        "y": 0,
+        "z": -44.149,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w47_formation_rock_lev4",
+        "x": 30.932,
+        "y": 0,
+        "z": -44.124,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w48_formation_rock_lev4",
+        "x": 36.007,
+        "y": 0,
+        "z": -43.312,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w51_formation_rock_lev4",
+        "x": -33.695,
+        "y": 0,
+        "z": -40.871,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w52_formation_rock_lev4",
+        "x": -30.44,
+        "y": 0,
+        "z": -39.688,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w53_formation_rock_lev4",
+        "x": -26.787,
+        "y": 0,
+        "z": -41.305,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w54_formation_rock_lev4",
+        "x": -21.72,
+        "y": 0,
+        "z": -40.875,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w55_formation_rock_lev4",
+        "x": -17.745,
+        "y": 0,
+        "z": -42.423,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w57_formation_rock_lev4",
+        "x": -6.805,
+        "y": 0,
+        "z": -42.167,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w58_formation_rock_lev4",
+        "x": -2.003,
+        "y": 0,
+        "z": -41.006,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w59_formation_rock_lev4",
+        "x": 3.133,
+        "y": 0,
+        "z": -40.81,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w60_formation_rock_lev4",
+        "x": 9.297,
+        "y": 0,
+        "z": -41.275,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w61_formation_rock_lev4",
+        "x": 13.068,
+        "y": 0,
+        "z": -41.378,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w64_formation_rock_lev4",
+        "x": 27.275,
+        "y": 0,
+        "z": -41.404,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w65_formation_rock_lev4",
+        "x": 35.21,
+        "y": 0,
+        "z": -40.709,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w68_formation_rock_lev4",
+        "x": -35.915,
+        "y": 0,
+        "z": 31.522,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w69_formation_rock_lev4",
+        "x": -35.638,
+        "y": 0,
+        "z": 24.89,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w70_formation_rock_lev4",
+        "x": -36.93,
+        "y": 0,
+        "z": 20.989,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w71_formation_rock_lev4",
+        "x": -37.424,
+        "y": 0,
+        "z": 18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w72_formation_rock_lev4",
+        "x": -37.227,
+        "y": 0,
+        "z": 11.959,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w73_formation_rock_lev4",
+        "x": -36.75,
+        "y": 0,
+        "z": 6.739,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w74_formation_rock_lev4",
+        "x": -36.828,
+        "y": 0,
+        "z": 0.67,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w75_formation_rock_lev4",
+        "x": -37.288,
+        "y": 0,
+        "z": -2.892,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w76_formation_rock_lev4",
+        "x": -36.282,
+        "y": 0,
+        "z": -8.831,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w77_formation_rock_lev4",
+        "x": -36.642,
+        "y": 0,
+        "z": -13.97,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w78_formation_rock_lev4",
+        "x": -36.057,
+        "y": 0,
+        "z": -21.903,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w83_formation_rock_lev4",
+        "x": -37.461,
+        "y": 0,
+        "z": 31.164,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w93_formation_rock_lev4",
+        "x": -35.833,
+        "y": 0,
+        "z": -17.296,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w95_formation_rock_lev4",
+        "x": -35.178,
+        "y": 0,
+        "z": -28.385,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w96_formation_rock_lev4",
+        "x": -34.526,
+        "y": 0,
+        "z": -32.827,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w97_formation_rock_lev4",
+        "x": -34.307,
+        "y": 0,
+        "z": -38.557,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w100_formation_rock_lev4",
+        "x": 37.832,
+        "y": 0,
+        "z": 21.814,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w101_formation_rock_lev4",
+        "x": 37.481,
+        "y": 0,
+        "z": 17.758,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w102_formation_rock_lev4",
+        "x": 37.407,
+        "y": 0,
+        "z": 12.6,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w103_formation_rock_lev4",
+        "x": 38.373,
+        "y": 0,
+        "z": 8.555,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w104_formation_rock_lev4",
+        "x": 37.575,
+        "y": 0,
+        "z": 3.696,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w106_formation_rock_lev4",
+        "x": 37.586,
+        "y": 0,
+        "z": -8.39,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w107_formation_rock_lev4",
+        "x": 38.237,
+        "y": 0,
+        "z": -12.691,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w108_formation_rock_lev4",
+        "x": 38.699,
+        "y": 0,
+        "z": -17.857,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w109_formation_rock_lev4",
+        "x": 37.609,
+        "y": 0,
+        "z": -22.712,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w110_formation_rock_lev4",
+        "x": 37.164,
+        "y": 0,
+        "z": -26.951,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w111_formation_rock_lev4",
+        "x": 37.892,
+        "y": 0,
+        "z": -34.012,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w112_formation_rock_lev4",
+        "x": 37.918,
+        "y": 0,
+        "z": -38.591,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w113_formation_rock_lev4",
+        "x": 34.812,
+        "y": 0,
+        "z": 31.85,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w114_formation_rock_lev4",
+        "x": 35.444,
+        "y": 0,
+        "z": 27.361,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w115_formation_rock_lev4",
+        "x": 36.798,
+        "y": 0,
+        "z": 21.047,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w119_formation_rock_lev4",
+        "x": 35.15,
+        "y": 0,
+        "z": 0.134,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w120_formation_rock_lev4",
+        "x": 35.225,
+        "y": 0,
+        "z": -1.578,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w124_formation_rock_lev4",
+        "x": 37.021,
+        "y": 0,
+        "z": -24.441,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w126_formation_rock_lev4",
+        "x": 36.538,
+        "y": 0,
+        "z": -33.751,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "w127_formation_rock_lev4",
+        "x": 35.294,
+        "y": 0,
+        "z": -36.658,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_bld_building_l_lev4",
+        "x": -17.906,
+        "y": -0.01,
+        "z": -18.009,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_ho1_house_open_lev4",
+        "x": -10,
+        "y": -0.41,
+        "z": -22,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_ho2_house_open_lev4",
+        "x": -24,
+        "y": -0.39,
+        "z": -12,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_hc1_house_cylinder_lev4",
+        "x": -16,
+        "y": -0.003,
+        "z": -12,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_hc2_house_cylinder_lev4",
+        "x": -26,
+        "y": -0.003,
+        "z": -22,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rd1_roof_radar_lev4",
+        "x": -17.941,
+        "y": 2.751,
+        "z": -20.06,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rd2_roof_radar_lev4",
+        "x": -10,
+        "y": 2.976,
+        "z": -22.076,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_an1_roof_antenna_lev4",
+        "x": -16,
+        "y": 2.933,
+        "z": -12,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_an2_roof_antenna_lev4",
+        "x": -26,
+        "y": 0.897,
+        "z": -22,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sl1_solarpanel_roof_lev4",
+        "x": -24.007,
+        "y": 1.64,
+        "z": -12.04,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sl2_solarpanel_roof_lev4",
+        "x": -9.988,
+        "y": 1.876,
+        "z": -22.034,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sp0_metalsupport_lev4",
+        "x": -19.998,
+        "y": -0.01,
+        "z": -14.985,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sp1_metalsupport_lev4",
+        "x": -16.008,
+        "y": -0.01,
+        "z": -15.987,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sp2_metalsupport_lev4",
+        "x": -21.991,
+        "y": -0.01,
+        "z": -17.988,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sp3_metalsupport_lev4",
+        "x": -12.014,
+        "y": -0.01,
+        "z": -17.993,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_sp4_metalsupport_lev4",
+        "x": -26.002,
+        "y": -0.01,
+        "z": -15.985,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_cn0_connector_lev4",
+        "x": -19.579,
+        "y": -0.816,
+        "z": -16.666,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_cn1_connector_lev4",
+        "x": -23.645,
+        "y": -0.816,
+        "z": -13.827,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_cn2_connector_lev4",
+        "x": -15.579,
+        "y": -0.816,
+        "z": -20.334,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_cn3_connector_lev4",
+        "x": -27.116,
+        "y": -0.816,
+        "z": -17.342,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rv_wheel_4.001_lev4",
+        "x": -26.26,
+        "y": 0.459,
+        "z": -12.247,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rv_wheel_5_lev4",
+        "x": -24.264,
+        "y": 0.459,
+        "z": -13.645,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rv_wheel_1.002_lev4",
+        "x": -25.74,
+        "y": 0.459,
+        "z": -15.753,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rv_wheel_4.002_lev4",
+        "x": -27.736,
+        "y": 0.459,
+        "z": -14.355,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_rv_rover_1_lev4",
+        "x": -26,
+        "y": 0.101,
+        "z": -14,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_bl_pickup_bullets_lev4",
+        "x": -15,
+        "y": 0.27,
+        "z": -13,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_pk_pickup_sphere_lev4",
+        "x": -20,
+        "y": 0.35,
+        "z": -11,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_at1_asteroids_mesh_lev4",
+        "x": -28.056,
+        "y": 0,
+        "z": -7.934,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_at2_asteroids_mesh_lev4",
+        "x": -8.076,
+        "y": 0,
+        "z": -23.98,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_ft1_tree_floating_3_lev4",
+        "x": -27.89,
+        "y": 5.001,
+        "z": -24.003,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_ft2_tree_floating_3_lev4",
+        "x": -8.002,
+        "y": 4.001,
+        "z": -18.099,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r1_0_rock_large_1_lev4",
+        "x": -23.282,
+        "y": 0.095,
+        "z": -11.284,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r1_1_rock_large_3_lev4",
+        "x": -25.031,
+        "y": 0.075,
+        "z": -10.561,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r1_2_rock_large_3_lev4",
+        "x": -22.699,
+        "y": 0.078,
+        "z": -11.431,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r1_3_rock_1_lev4",
+        "x": -22.677,
+        "y": 0.117,
+        "z": -12.499,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r1_4_rock_large_1_lev4",
+        "x": -24.085,
+        "y": 0.084,
+        "z": -11.764,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r2_0_rock_large_3_lev4",
+        "x": -10.014,
+        "y": 0.078,
+        "z": -23.504,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r2_1_rock_1_lev4",
+        "x": -8.536,
+        "y": 0.104,
+        "z": -20.171,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r2_2_rock_1_lev4",
+        "x": -8.14,
+        "y": 0.158,
+        "z": -22,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_r2_3_rock_1_lev4",
+        "x": -7.945,
+        "y": 0.11,
+        "z": -21.44,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_0_grass_2_lev4",
+        "x": -18.84,
+        "y": 0.013,
+        "z": -15.665,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_1_grass_3_lev4",
+        "x": -22.224,
+        "y": 0,
+        "z": -13.32,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_2_grass_1_lev4",
+        "x": -20.007,
+        "y": 0.009,
+        "z": -11.276,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_3_grass_1_lev4",
+        "x": -15.977,
+        "y": 0.007,
+        "z": -16.643,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_4_grass_1_lev4",
+        "x": -13.528,
+        "y": 0.008,
+        "z": -20.583,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_5_grass_2_lev4",
+        "x": -17.432,
+        "y": 0.013,
+        "z": -15.916,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_6_grass_2_lev4",
+        "x": -19.695,
+        "y": 0.011,
+        "z": -12.455,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_7_grass_2_lev4",
+        "x": -21.695,
+        "y": 0.013,
+        "z": -18.52,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_8_grass_2_lev4",
+        "x": -17.823,
+        "y": 0.012,
+        "z": -20.274,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g1_9_grass_1_lev4",
+        "x": -15.893,
+        "y": 0.008,
+        "z": -20.092,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_0_grass_3_lev4",
+        "x": -14.117,
+        "y": 0,
+        "z": -14.54,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_1_grass_2_lev4",
+        "x": -16.884,
+        "y": 0.012,
+        "z": -11.664,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_2_grass_3_lev4",
+        "x": -13.872,
+        "y": 0,
+        "z": -14.375,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_3_grass_1_lev4",
+        "x": -15.743,
+        "y": 0.01,
+        "z": -11.04,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_4_grass_2_lev4",
+        "x": -12.454,
+        "y": 0.011,
+        "z": -15.613,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_5_grass_3_lev4",
+        "x": -12.638,
+        "y": 0,
+        "z": -10.369,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "a_g2_6_grass_2_lev4",
+        "x": -16.38,
+        "y": 0.01,
+        "z": -11.377,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_ap1_lev4",
+        "x": -22.084,
+        "y": 0.9,
+        "z": -23.89,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_ap2_lev4",
+        "x": -20.584,
+        "y": 0.9,
+        "z": -23.89,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_atb_lev4",
+        "x": -21.334,
+        "y": 1.75,
+        "z": -23.89,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_atx_lev4",
+        "x": -21.334,
+        "y": 1.78,
+        "z": -23.81,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_b_lev4",
+        "x": -14,
+        "y": 0.02,
+        "z": 8,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_c0_lev4",
+        "x": -12,
+        "y": 0.1,
+        "z": 8,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_c1_lev4",
+        "x": -13.382,
+        "y": 0.1,
+        "z": 6.098,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_c2_lev4",
+        "x": -15.618,
+        "y": 0.1,
+        "z": 6.824,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_c3_lev4",
+        "x": -15.618,
+        "y": 0.1,
+        "z": 9.176,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_c4_lev4",
+        "x": -13.382,
+        "y": 0.1,
+        "z": 9.902,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_t0_tree_lava_2_lev4",
+        "x": -7.933,
+        "y": 0.001,
+        "z": 8.595,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_t1_tree_lava_2_lev4",
+        "x": -15.067,
+        "y": 0.001,
+        "z": 2.567,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_t2_tree_lava_2_lev4",
+        "x": -19.881,
+        "y": 0.001,
+        "z": 8.583,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv1_t3_tree_lava_2_lev4",
+        "x": -14.269,
+        "y": 0.001,
+        "z": 13.938,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_b_lev4",
+        "x": -6,
+        "y": 0.02,
+        "z": 18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_c0_lev4",
+        "x": -4.4,
+        "y": 0.1,
+        "z": 18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_c1_lev4",
+        "x": -5.506,
+        "y": 0.1,
+        "z": 16.478,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_c2_lev4",
+        "x": -7.294,
+        "y": 0.1,
+        "z": 17.06,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_c3_lev4",
+        "x": -7.294,
+        "y": 0.1,
+        "z": 18.94,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_c4_lev4",
+        "x": -5.506,
+        "y": 0.1,
+        "z": 19.522,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_t0_tree_lava_2_lev4",
+        "x": -0.907,
+        "y": 0.001,
+        "z": 16.958,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_t1_tree_lava_2_lev4",
+        "x": -5.878,
+        "y": 0.001,
+        "z": 12.5,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_t2_tree_lava_2_lev4",
+        "x": -10.629,
+        "y": 0.001,
+        "z": 17.005,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv2_t3_tree_lava_2_lev4",
+        "x": -5.309,
+        "y": 0.001,
+        "z": 23.24,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_b_lev4",
+        "x": -22,
+        "y": 0.02,
+        "z": 20,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_c0_lev4",
+        "x": -20.6,
+        "y": 0.1,
+        "z": 20,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_c1_lev4",
+        "x": -21.567,
+        "y": 0.1,
+        "z": 18.669,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_c2_lev4",
+        "x": -23.133,
+        "y": 0.1,
+        "z": 19.177,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_c3_lev4",
+        "x": -23.133,
+        "y": 0.1,
+        "z": 20.823,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_c4_lev4",
+        "x": -21.567,
+        "y": 0.1,
+        "z": 21.331,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_t0_tree_lava_2_lev4",
+        "x": -16.067,
+        "y": 0.001,
+        "z": 21.526,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_t1_tree_lava_2_lev4",
+        "x": -20.919,
+        "y": 0.001,
+        "z": 15.941,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_t2_tree_lava_2_lev4",
+        "x": -26.946,
+        "y": 0.001,
+        "z": 20.627,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv3_t3_tree_lava_2_lev4",
+        "x": -22.595,
+        "y": 0.001,
+        "z": 24.148,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_b_lev4",
+        "x": -10,
+        "y": 0.02,
+        "z": 4,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_c0_lev4",
+        "x": -8.9,
+        "y": 0.1,
+        "z": 4,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_c1_lev4",
+        "x": -9.66,
+        "y": 0.1,
+        "z": 2.954,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_c2_lev4",
+        "x": -10.89,
+        "y": 0.1,
+        "z": 3.353,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_c3_lev4",
+        "x": -10.89,
+        "y": 0.1,
+        "z": 4.647,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_c4_lev4",
+        "x": -9.66,
+        "y": 0.1,
+        "z": 5.046,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_t0_tree_lava_2_lev4",
+        "x": -5.701,
+        "y": 0.001,
+        "z": 4.358,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_t1_tree_lava_2_lev4",
+        "x": -11.332,
+        "y": 0.001,
+        "z": -0.342,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_t2_tree_lava_2_lev4",
+        "x": -13.44,
+        "y": 0.001,
+        "z": 3.012,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "lv4_t3_tree_lava_2_lev4",
+        "x": -9.35,
+        "y": 0.001,
+        "z": 8.067,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_at1_asteroids_mesh_lev4",
+        "x": -18.056,
+        "y": 0,
+        "z": 4.066,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_at2_asteroids_mesh_lev4",
+        "x": -4.079,
+        "y": 0,
+        "z": 11.993,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_at3_asteroids_mesh_lev4",
+        "x": -24.014,
+        "y": 0,
+        "z": 14.078,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_at4_asteroids_mesh_lev4",
+        "x": -8.055,
+        "y": 0,
+        "z": 24.046,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_ft1_tree_floating_3_lev4",
+        "x": -25.901,
+        "y": 5.001,
+        "z": 5.998,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_ft2_tree_floating_3_lev4",
+        "x": -2.936,
+        "y": 4.001,
+        "z": 17.932,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_0_rock_1_lev4",
+        "x": -17.091,
+        "y": 0.15,
+        "z": 5.656,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_1_rock_large_1_lev4",
+        "x": -18.955,
+        "y": 0.11,
+        "z": 6.377,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_2_rock_large_3_lev4",
+        "x": -18.679,
+        "y": 0.107,
+        "z": 7.485,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_3_rock_large_3_lev4",
+        "x": -18.505,
+        "y": 0.086,
+        "z": 6.428,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_4_rock_large_3_lev4",
+        "x": -15.286,
+        "y": 0.075,
+        "z": 4.173,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r1_5_rock_large_3_lev4",
+        "x": -17.079,
+        "y": 0.113,
+        "z": 3.548,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r2_0_rock_large_3_lev4",
+        "x": -8.399,
+        "y": 0.107,
+        "z": 14.876,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r2_1_rock_1_lev4",
+        "x": -7.038,
+        "y": 0.132,
+        "z": 13.938,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r2_2_rock_large_3_lev4",
+        "x": -6.028,
+        "y": 0.102,
+        "z": 14.63,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r2_3_rock_large_1_lev4",
+        "x": -6.397,
+        "y": 0.084,
+        "z": 14.802,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r2_4_rock_1_lev4",
+        "x": -10.347,
+        "y": 0.156,
+        "z": 15.21,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r3_0_rock_1_lev4",
+        "x": -24.593,
+        "y": 0.148,
+        "z": 20.235,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r3_1_rock_1_lev4",
+        "x": -24.364,
+        "y": 0.129,
+        "z": 20.664,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r3_2_rock_large_1_lev4",
+        "x": -23.217,
+        "y": 0.113,
+        "z": 23.487,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_r3_3_rock_1_lev4",
+        "x": -22.138,
+        "y": 0.111,
+        "z": 22.948,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g0_grass_1_lev4",
+        "x": -5.25,
+        "y": 0.009,
+        "z": 5.907,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g1_grass_1_lev4",
+        "x": -23.688,
+        "y": 0.008,
+        "z": 23.409,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g2_grass_1_lev4",
+        "x": -10.562,
+        "y": 0.009,
+        "z": 8.015,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g3_grass_1_lev4",
+        "x": -9.953,
+        "y": 0.008,
+        "z": 14.23,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g4_grass_1_lev4",
+        "x": -13.071,
+        "y": 0.009,
+        "z": 6.701,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g5_grass_1_lev4",
+        "x": -10.059,
+        "y": 0.007,
+        "z": 5.547,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g6_grass_1_lev4",
+        "x": -9.509,
+        "y": 0.01,
+        "z": 19.524,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g7_grass_1_lev4",
+        "x": -15.009,
+        "y": 0.008,
+        "z": 24.73,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g8_grass_1_lev4",
+        "x": -19.466,
+        "y": 0.009,
+        "z": 18.542,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g9_grass_1_lev4",
+        "x": -23.544,
+        "y": 0.007,
+        "z": 3.311,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g10_grass_1_lev4",
+        "x": -25.237,
+        "y": 0.007,
+        "z": 27.104,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g11_grass_1_lev4",
+        "x": -7.834,
+        "y": 0.006,
+        "z": 14.226,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g12_grass_1_lev4",
+        "x": -23.866,
+        "y": 0.007,
+        "z": 19.034,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "b_g13_grass_1_lev4",
+        "x": -24.78,
+        "y": 0.009,
+        "z": 22.162,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_bp1_lev4",
+        "x": -12.804,
+        "y": 0.9,
+        "z": 2,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_bp2_lev4",
+        "x": -9.789,
+        "y": 0.9,
+        "z": 2,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_btb_lev4",
+        "x": -11.281,
+        "y": 1.75,
+        "z": 2,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_btx_lev4",
+        "x": -11.382,
+        "y": 1.78,
+        "z": 2.08,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv1_wheel_4.001_lev4",
+        "x": 10.781,
+        "y": 0.459,
+        "z": -4.713,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv1_wheel_5_lev4",
+        "x": 13.219,
+        "y": 0.459,
+        "z": -4.713,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv1_wheel_1.002_lev4",
+        "x": 13.219,
+        "y": 0.459,
+        "z": -7.287,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv1_wheel_4.002_lev4",
+        "x": 10.781,
+        "y": 0.459,
+        "z": -7.287,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv1_rover_1_lev4",
+        "x": 12,
+        "y": 0.101,
+        "z": -6,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv2_wheel_4.001_lev4",
+        "x": 21.637,
+        "y": 0.436,
+        "z": -11.609,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv2_wheel_5_lev4",
+        "x": 20.48,
+        "y": 0.436,
+        "z": -13.614,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv2_wheel_1.002_lev4",
+        "x": 18.363,
+        "y": 0.436,
+        "z": -12.391,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv2_wheel_4.002_lev4",
+        "x": 19.52,
+        "y": 0.436,
+        "z": -10.386,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv2_rover_1_lev4",
+        "x": 20,
+        "y": 0.096,
+        "z": -12,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv3_wheel_4.001_lev4",
+        "x": 7.47,
+        "y": 0.482,
+        "z": -17.784,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv3_wheel_5_lev4",
+        "x": 6.19,
+        "y": 0.482,
+        "z": -15.567,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv3_wheel_1.002_lev4",
+        "x": 8.53,
+        "y": 0.482,
+        "z": -14.216,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv3_wheel_4.002_lev4",
+        "x": 9.81,
+        "y": 0.482,
+        "z": -16.433,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv3_rover_1_lev4",
+        "x": 8,
+        "y": 0.107,
+        "z": -16,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv4_wheel_4.001_lev4",
+        "x": 24.95,
+        "y": 0.413,
+        "z": -2.719,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv4_wheel_5_lev4",
+        "x": 25.331,
+        "y": 0.413,
+        "z": -4.879,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv4_wheel_1.002_lev4",
+        "x": 23.05,
+        "y": 0.413,
+        "z": -5.281,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv4_wheel_4.002_lev4",
+        "x": 22.669,
+        "y": 0.413,
+        "z": -3.121,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv4_rover_1_lev4",
+        "x": 24,
+        "y": 0.091,
+        "z": -4,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv5_wheel_4.001_lev4",
+        "x": 27.347,
+        "y": 0.39,
+        "z": -18.673,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv5_wheel_5_lev4",
+        "x": 25.401,
+        "y": 0.39,
+        "z": -19.382,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv5_wheel_1.002_lev4",
+        "x": 24.653,
+        "y": 0.39,
+        "z": -17.327,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv5_wheel_4.002_lev4",
+        "x": 26.599,
+        "y": 0.39,
+        "z": -16.618,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rv5_rover_1_lev4",
+        "x": 26,
+        "y": 0.086,
+        "z": -18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_ho_house_open_lev4",
+        "x": 16,
+        "y": -0.39,
+        "z": -20,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_hc_house_cylinder_lev4",
+        "x": 24,
+        "y": -0.003,
+        "z": -18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_bd_building_l_lev4",
+        "x": 26.515,
+        "y": -0.008,
+        "z": -8.386,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_rd_roof_radar_lev4",
+        "x": 16.019,
+        "y": 2.976,
+        "z": -20.073,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_an_roof_antenna_lev4",
+        "x": 24,
+        "y": 3.14,
+        "z": -18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sl_solarpanel_roof_lev4",
+        "x": 27.926,
+        "y": 0.44,
+        "z": -10.777,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp0_metalsupport_lev4",
+        "x": 13.993,
+        "y": -0.011,
+        "z": -7.985,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp1_metalsupport_lev4",
+        "x": 16.005,
+        "y": -0.01,
+        "z": -9.987,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp2_metalsupport_lev4",
+        "x": 17.986,
+        "y": -0.012,
+        "z": -5.99,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp3_metalsupport_lev4",
+        "x": 10.015,
+        "y": -0.011,
+        "z": -11.993,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp4_metalsupport_lev4",
+        "x": 19.999,
+        "y": -0.012,
+        "z": -13.982,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp5_metalsupport_lev4",
+        "x": 21.985,
+        "y": -0.01,
+        "z": -7.998,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp6_metalsupport_lev4",
+        "x": 25.998,
+        "y": -0.01,
+        "z": -5.985,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_sp7_metalsupport_lev4",
+        "x": 11.986,
+        "y": -0.01,
+        "z": -17.994,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn0_connector_lev4",
+        "x": 14.379,
+        "y": -0.877,
+        "z": -8.641,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn1_connector_lev4",
+        "x": 16.378,
+        "y": -0.808,
+        "z": -7.226,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn2_connector_lev4",
+        "x": 20.662,
+        "y": -0.826,
+        "z": -12.415,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn3_connector_lev4",
+        "x": 10.488,
+        "y": -0.816,
+        "z": -11.43,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn4_connector_lev4",
+        "x": 21.168,
+        "y": -0.868,
+        "z": -8.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_cn5_connector_lev4",
+        "x": 23.571,
+        "y": -0.882,
+        "z": -8.896,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_bl1_pickup_bullets_lev4",
+        "x": 18,
+        "y": 0.27,
+        "z": -4,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_bl2_pickup_bullets_lev4",
+        "x": 10,
+        "y": 0.243,
+        "z": -6,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_pk_pickup_sphere_lev4",
+        "x": 26,
+        "y": 0.35,
+        "z": -14,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_at1_asteroids_mesh_lev4",
+        "x": 27.957,
+        "y": 0,
+        "z": -5.925,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_at2_asteroids_mesh_lev4",
+        "x": 7.926,
+        "y": 0,
+        "z": -21.973,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_ft1_tree_floating_3_lev4",
+        "x": 28.11,
+        "y": 5.001,
+        "z": -20.003,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_ft2_tree_floating_3_lev4",
+        "x": 6.068,
+        "y": 4.001,
+        "z": -24.072,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r1_0_rock_1_lev4",
+        "x": 21.954,
+        "y": 0.116,
+        "z": -18.491,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r1_1_rock_large_3_lev4",
+        "x": 18.597,
+        "y": 0.117,
+        "z": -17.267,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r1_2_rock_large_1_lev4",
+        "x": 21.87,
+        "y": 0.109,
+        "z": -15.546,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r1_3_rock_large_3_lev4",
+        "x": 18.956,
+        "y": 0.109,
+        "z": -20.601,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r1_4_rock_large_3_lev4",
+        "x": 20.274,
+        "y": 0.116,
+        "z": -17.138,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r2_0_rock_large_1_lev4",
+        "x": 28.892,
+        "y": 0.083,
+        "z": -13.784,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r2_1_rock_large_3_lev4",
+        "x": 27.116,
+        "y": 0.081,
+        "z": -14.761,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r2_2_rock_large_3_lev4",
+        "x": 28.622,
+        "y": 0.111,
+        "z": -15.599,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_r2_3_rock_large_1_lev4",
+        "x": 27.192,
+        "y": 0.101,
+        "z": -13.708,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_0_grass_3_lev4",
+        "x": 13.577,
+        "y": 0,
+        "z": -11.117,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_1_grass_3_lev4",
+        "x": 15.712,
+        "y": 0,
+        "z": -11.534,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_2_grass_3_lev4",
+        "x": 18.121,
+        "y": 0,
+        "z": -11.601,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_3_grass_3_lev4",
+        "x": 14.229,
+        "y": 0,
+        "z": -14.883,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_4_grass_2_lev4",
+        "x": 17.923,
+        "y": 0.01,
+        "z": -8.91,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_5_grass_2_lev4",
+        "x": 17.006,
+        "y": 0.013,
+        "z": -13.661,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_6_grass_3_lev4",
+        "x": 17.668,
+        "y": 0,
+        "z": -12.563,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_7_grass_2_lev4",
+        "x": 13.297,
+        "y": 0.013,
+        "z": -9.419,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_8_grass_1_lev4",
+        "x": 13.062,
+        "y": 0.009,
+        "z": -5.149,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g1_9_grass_1_lev4",
+        "x": 15.779,
+        "y": 0.008,
+        "z": -11.957,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_0_grass_2_lev4",
+        "x": 12.969,
+        "y": 0.013,
+        "z": -6.989,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_1_grass_3_lev4",
+        "x": 8.115,
+        "y": 0,
+        "z": -10.516,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_2_grass_2_lev4",
+        "x": 7.804,
+        "y": 0.011,
+        "z": -5.314,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_3_grass_1_lev4",
+        "x": 12.085,
+        "y": 0.008,
+        "z": -10.407,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_4_grass_2_lev4",
+        "x": 11.227,
+        "y": 0.012,
+        "z": -9.733,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_5_grass_2_lev4",
+        "x": 7.454,
+        "y": 0.012,
+        "z": -5.56,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "c_g2_6_grass_2_lev4",
+        "x": 11.04,
+        "y": 0.013,
+        "z": -7.727,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_cp1_lev4",
+        "x": 11.25,
+        "y": 0.9,
+        "z": -26,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_cp2_lev4",
+        "x": 12.75,
+        "y": 0.9,
+        "z": -26,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_ctb_lev4",
+        "x": 12,
+        "y": 1.75,
+        "z": -26,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_ctx_lev4",
+        "x": 12,
+        "y": 1.78,
+        "z": -25.92,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_sh_spaceship_raetheredp_lev4",
+        "x": 0,
+        "y": 0.259,
+        "z": -24.916,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_sl1_solarpanel_roof_lev4",
+        "x": -6.01,
+        "y": -2.36,
+        "z": -21.039,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_sl2_solarpanel_roof_lev4",
+        "x": 6.014,
+        "y": -2.36,
+        "z": -21.038,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rd_roof_radar_lev4",
+        "x": -2.941,
+        "y": -2.249,
+        "z": -27.06,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_sp1_metalsupport_lev4",
+        "x": -8.01,
+        "y": -0.01,
+        "z": -21.989,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_sp2_metalsupport_lev4",
+        "x": 7.999,
+        "y": -0.01,
+        "z": -21.985,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_cn1_connector_lev4",
+        "x": -5.546,
+        "y": -0.771,
+        "z": -24.685,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_cn2_connector_lev4",
+        "x": 4.454,
+        "y": -0.771,
+        "z": -25.315,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_at1_asteroids_mesh_lev4",
+        "x": 4.959,
+        "y": 5,
+        "z": -29.959,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_at2_asteroids_mesh_lev4",
+        "x": -6.05,
+        "y": 6,
+        "z": -27.996,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_at3_asteroids_mesh_lev4",
+        "x": 2.985,
+        "y": 4,
+        "z": -19.96,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_at4_asteroids_mesh_lev4",
+        "x": -4.051,
+        "y": 7,
+        "z": -31.981,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs0_metalsupport_lev4",
+        "x": 7.995,
+        "y": -0.009,
+        "z": -23.987,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs1_metalsupport_lev4",
+        "x": 5.663,
+        "y": -0.011,
+        "z": -29.641,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs2_metalsupport_lev4",
+        "x": 0.013,
+        "y": -0.01,
+        "z": -31.994,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs3_metalsupport_lev4",
+        "x": -5.643,
+        "y": -0.01,
+        "z": -29.662,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs4_metalsupport_lev4",
+        "x": -7.994,
+        "y": -0.01,
+        "z": -24.013,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs5_metalsupport_lev4",
+        "x": -5.663,
+        "y": -0.011,
+        "z": -18.358,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs6_metalsupport_lev4",
+        "x": -0.013,
+        "y": -0.009,
+        "z": -16.005,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rs7_metalsupport_lev4",
+        "x": 5.641,
+        "y": -0.012,
+        "z": -18.337,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc0_connector_lev4",
+        "x": 4.446,
+        "y": -0.866,
+        "z": -24.85,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc1_connector_lev4",
+        "x": 1.469,
+        "y": -0.827,
+        "z": -28.303,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc2_connector_lev4",
+        "x": -2.977,
+        "y": -0.845,
+        "z": -27.424,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc3_connector_lev4",
+        "x": -4.485,
+        "y": -0.765,
+        "z": -23.076,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc4_connector_lev4",
+        "x": -3.018,
+        "y": -0.745,
+        "z": -19.64,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_rc5_connector_lev4",
+        "x": 2.936,
+        "y": -0.895,
+        "z": -20.574,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_ft1_tree_floating_3_lev4",
+        "x": -9.89,
+        "y": 5.001,
+        "z": -24.003,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_ft2_tree_floating_3_lev4",
+        "x": 9.901,
+        "y": 4.001,
+        "z": -23.998,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_ft3_tree_floating_3_lev4",
+        "x": -0.003,
+        "y": 6.001,
+        "z": -32.104,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r1_0_rock_large_1_lev4",
+        "x": -7.093,
+        "y": 0.081,
+        "z": -19.63,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r1_1_rock_large_3_lev4",
+        "x": -7.19,
+        "y": 0.088,
+        "z": -21.444,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r1_2_rock_large_1_lev4",
+        "x": -6.59,
+        "y": 0.084,
+        "z": -21.315,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r1_3_rock_large_3_lev4",
+        "x": -9.311,
+        "y": 0.099,
+        "z": -21.454,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r1_4_rock_large_1_lev4",
+        "x": -9.725,
+        "y": 0.082,
+        "z": -18.944,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r2_0_rock_1_lev4",
+        "x": 9.505,
+        "y": 0.134,
+        "z": -18.605,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r2_1_rock_1_lev4",
+        "x": 6.393,
+        "y": 0.118,
+        "z": -18.263,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r2_2_rock_large_3_lev4",
+        "x": 7.659,
+        "y": 0.113,
+        "z": -17.99,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r2_3_rock_large_1_lev4",
+        "x": 7.599,
+        "y": 0.108,
+        "z": -20.45,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r2_4_rock_1_lev4",
+        "x": 7.771,
+        "y": 0.104,
+        "z": -19.26,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r3_0_rock_large_3_lev4",
+        "x": -5.955,
+        "y": 0.097,
+        "z": -27.698,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r3_1_rock_1_lev4",
+        "x": -6.199,
+        "y": 0.14,
+        "z": -26.582,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r3_2_rock_1_lev4",
+        "x": -7.485,
+        "y": 0.108,
+        "z": -29.266,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r3_3_rock_1_lev4",
+        "x": -6.637,
+        "y": 0.104,
+        "z": -28.57,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r4_0_rock_large_1_lev4",
+        "x": 6.311,
+        "y": 0.083,
+        "z": -29.136,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r4_1_rock_1_lev4",
+        "x": 7.447,
+        "y": 0.147,
+        "z": -26.947,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r4_2_rock_large_1_lev4",
+        "x": 6.831,
+        "y": 0.108,
+        "z": -28.656,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_r4_3_rock_1_lev4",
+        "x": 6.823,
+        "y": 0.126,
+        "z": -28.199,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_0_grass_1_lev4",
+        "x": 3.305,
+        "y": 0.008,
+        "z": -16.45,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_1_grass_3_lev4",
+        "x": -5.038,
+        "y": 0,
+        "z": -25.453,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_2_grass_1_lev4",
+        "x": -0.271,
+        "y": 0.009,
+        "z": -14.252,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_3_grass_3_lev4",
+        "x": -3.131,
+        "y": 0,
+        "z": -14.593,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_4_grass_1_lev4",
+        "x": -2.486,
+        "y": 0.009,
+        "z": -14.362,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_5_grass_1_lev4",
+        "x": 4.068,
+        "y": 0.008,
+        "z": -20.101,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_6_grass_2_lev4",
+        "x": 1.515,
+        "y": 0.012,
+        "z": -13.973,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_7_grass_3_lev4",
+        "x": 5.034,
+        "y": 0,
+        "z": -14.891,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_8_grass_3_lev4",
+        "x": 1.752,
+        "y": 0,
+        "z": -18.24,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g1_9_grass_3_lev4",
+        "x": 5.843,
+        "y": 0,
+        "z": -14.606,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_0_grass_1_lev4",
+        "x": 1.008,
+        "y": 0.008,
+        "z": -25.726,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_1_grass_3_lev4",
+        "x": 0.801,
+        "y": 0,
+        "z": -25.488,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_2_grass_3_lev4",
+        "x": -3.395,
+        "y": 0,
+        "z": -24.328,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_3_grass_1_lev4",
+        "x": 0.238,
+        "y": 0.007,
+        "z": -27.916,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_4_grass_3_lev4",
+        "x": 0.82,
+        "y": 0,
+        "z": -24.427,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_5_grass_3_lev4",
+        "x": 0.497,
+        "y": 0,
+        "z": -29.483,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_6_grass_3_lev4",
+        "x": -0.475,
+        "y": 0,
+        "z": -30.312,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "d_g2_7_grass_3_lev4",
+        "x": 2.767,
+        "y": 0,
+        "z": -28.339,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_dp1_lev4",
+        "x": -0.75,
+        "y": 0.9,
+        "z": -16,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_dp2_lev4",
+        "x": 0.75,
+        "y": 0.9,
+        "z": -16,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_dtb_lev4",
+        "x": 0,
+        "y": 1.75,
+        "z": -16,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_dtx_lev4",
+        "x": 0,
+        "y": 1.78,
+        "z": -15.92,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r1_0_rock_1_lev4",
+        "x": -4.812,
+        "y": 0.107,
+        "z": -3.449,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r1_1_rock_1_lev4",
+        "x": -6.335,
+        "y": 0.13,
+        "z": -3.885,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r1_2_rock_1_lev4",
+        "x": -6.637,
+        "y": 0.111,
+        "z": -4.853,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r1_3_rock_1_lev4",
+        "x": -6.028,
+        "y": 0.135,
+        "z": -4.856,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r1_4_rock_large_3_lev4",
+        "x": -4.816,
+        "y": 0.101,
+        "z": -2.001,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r2_0_rock_1_lev4",
+        "x": 6.141,
+        "y": 0.149,
+        "z": -0.78,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r2_1_rock_1_lev4",
+        "x": 1.778,
+        "y": 0.153,
+        "z": -0.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r2_2_rock_large_1_lev4",
+        "x": 1.724,
+        "y": 0.079,
+        "z": -0.569,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r2_3_rock_large_3_lev4",
+        "x": 2.654,
+        "y": 0.091,
+        "z": -2.085,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r2_4_rock_large_3_lev4",
+        "x": 2.009,
+        "y": 0.106,
+        "z": -1.378,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r3_0_rock_large_3_lev4",
+        "x": -3.222,
+        "y": 0.108,
+        "z": -9.112,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r3_1_rock_large_1_lev4",
+        "x": -3.741,
+        "y": 0.073,
+        "z": -8.543,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r3_2_rock_large_3_lev4",
+        "x": -0.671,
+        "y": 0.102,
+        "z": -9.18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r3_3_rock_large_3_lev4",
+        "x": -3.38,
+        "y": 0.099,
+        "z": -11.037,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r4_0_rock_1_lev4",
+        "x": -2.761,
+        "y": 0.14,
+        "z": 3.487,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r4_1_rock_1_lev4",
+        "x": -2.395,
+        "y": 0.151,
+        "z": 2.626,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r4_2_rock_large_3_lev4",
+        "x": -1.994,
+        "y": 0.113,
+        "z": 2.566,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r4_3_rock_1_lev4",
+        "x": -1.468,
+        "y": 0.136,
+        "z": 3.062,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r5_0_rock_large_1_lev4",
+        "x": 6.504,
+        "y": 0.087,
+        "z": 0.721,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r5_1_rock_1_lev4",
+        "x": 7.59,
+        "y": 0.148,
+        "z": 1.464,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r5_2_rock_1_lev4",
+        "x": 6.605,
+        "y": 0.102,
+        "z": -0.164,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_r5_3_rock_1_lev4",
+        "x": 5.611,
+        "y": 0.126,
+        "z": 2.691,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_0_grass_2_lev4",
+        "x": -6.895,
+        "y": 0.012,
+        "z": -4.949,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_1_grass_3_lev4",
+        "x": -3.016,
+        "y": 0,
+        "z": -0.194,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_2_grass_1_lev4",
+        "x": -3.481,
+        "y": 0.008,
+        "z": -0.562,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_3_grass_2_lev4",
+        "x": -3.422,
+        "y": 0.01,
+        "z": -8.071,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_4_grass_1_lev4",
+        "x": 2.082,
+        "y": 0.009,
+        "z": -9.502,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_5_grass_2_lev4",
+        "x": -0.592,
+        "y": 0.011,
+        "z": -0.656,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_6_grass_2_lev4",
+        "x": 5.214,
+        "y": 0.011,
+        "z": -6.694,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_7_grass_2_lev4",
+        "x": -3.359,
+        "y": 0.012,
+        "z": -9.209,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_8_grass_2_lev4",
+        "x": 1.624,
+        "y": 0.012,
+        "z": -8.626,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_9_grass_2_lev4",
+        "x": 1.471,
+        "y": 0.013,
+        "z": -7.192,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_10_grass_1_lev4",
+        "x": -5.144,
+        "y": 0.009,
+        "z": -3.383,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_11_grass_1_lev4",
+        "x": -2.885,
+        "y": 0.009,
+        "z": 3.807,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_12_grass_2_lev4",
+        "x": 0.09,
+        "y": 0.013,
+        "z": -6.611,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g1_13_grass_3_lev4",
+        "x": 0.423,
+        "y": 0,
+        "z": -2.136,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_0_grass_2_lev4",
+        "x": -8.948,
+        "y": 0.011,
+        "z": -6.947,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_1_grass_1_lev4",
+        "x": -2.062,
+        "y": 0.009,
+        "z": -6.651,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_2_grass_2_lev4",
+        "x": -7.6,
+        "y": 0.012,
+        "z": -10.803,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_3_grass_2_lev4",
+        "x": -6.381,
+        "y": 0.011,
+        "z": -9.299,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_4_grass_2_lev4",
+        "x": -6.695,
+        "y": 0.012,
+        "z": -8.201,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_5_grass_3_lev4",
+        "x": -8.356,
+        "y": 0,
+        "z": -8.729,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_6_grass_2_lev4",
+        "x": -1.996,
+        "y": 0.012,
+        "z": -8.379,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_g2_7_grass_3_lev4",
+        "x": -1.393,
+        "y": 0,
+        "z": -7.541,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_rv_wheel_4.001_lev4",
+        "x": 2.355,
+        "y": 0.459,
+        "z": 2.736,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_rv_wheel_5_lev4",
+        "x": 3.753,
+        "y": 0.459,
+        "z": 0.74,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_rv_wheel_1.002_lev4",
+        "x": 1.645,
+        "y": 0.459,
+        "z": -0.736,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_rv_wheel_4.002_lev4",
+        "x": 0.247,
+        "y": 0.459,
+        "z": 1.26,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_rv_rover_1_lev4",
+        "x": 2,
+        "y": 0.101,
+        "z": 1,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_pk_pickup_sphere_lev4",
+        "x": -3,
+        "y": 0.35,
+        "z": -5,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_bl_pickup_bullets_lev4",
+        "x": 4,
+        "y": 0.27,
+        "z": 3,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_at1_asteroids_mesh_lev4",
+        "x": -5.041,
+        "y": 0,
+        "z": 1.059,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "cn_at2_asteroids_mesh_lev4",
+        "x": 5.933,
+        "y": 0,
+        "z": -5.982,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at0_asteroids_mesh_lev4",
+        "x": 11.923,
+        "y": 0,
+        "z": 8.065,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at1_asteroids_mesh_lev4",
+        "x": 17.907,
+        "y": 0,
+        "z": 16,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at2_asteroids_mesh_lev4",
+        "x": 7.985,
+        "y": 0,
+        "z": 22.085,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at3_asteroids_mesh_lev4",
+        "x": 25.932,
+        "y": 0,
+        "z": 26.028,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at4_asteroids_mesh_lev4",
+        "x": 15.973,
+        "y": 0,
+        "z": 28.074,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_at5_asteroids_mesh_lev4",
+        "x": 21.943,
+        "y": 0,
+        "z": 12.068,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_0_rock_large_3_lev4",
+        "x": 12.196,
+        "y": 0.105,
+        "z": 8.456,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_1_rock_large_3_lev4",
+        "x": 11.473,
+        "y": 0.1,
+        "z": 6.643,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_2_rock_large_1_lev4",
+        "x": 10.585,
+        "y": 0.114,
+        "z": 5.424,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_3_rock_1_lev4",
+        "x": 10.84,
+        "y": 0.144,
+        "z": 6.922,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_4_rock_1_lev4",
+        "x": 13.047,
+        "y": 0.139,
+        "z": 9.231,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r1_5_rock_1_lev4",
+        "x": 10.302,
+        "y": 0.11,
+        "z": 8.084,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r2_0_rock_large_3_lev4",
+        "x": 18.523,
+        "y": 0.088,
+        "z": 19.643,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r2_1_rock_1_lev4",
+        "x": 15.696,
+        "y": 0.154,
+        "z": 20.289,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r2_2_rock_large_3_lev4",
+        "x": 17.174,
+        "y": 0.113,
+        "z": 15.617,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r2_3_rock_1_lev4",
+        "x": 17.607,
+        "y": 0.136,
+        "z": 20.117,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r2_4_rock_1_lev4",
+        "x": 15.92,
+        "y": 0.138,
+        "z": 19.18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r3_0_rock_1_lev4",
+        "x": 7.729,
+        "y": 0.12,
+        "z": 25.084,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r3_1_rock_1_lev4",
+        "x": 10.092,
+        "y": 0.157,
+        "z": 21.64,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r3_2_rock_large_1_lev4",
+        "x": 10.098,
+        "y": 0.073,
+        "z": 23.458,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r3_3_rock_large_1_lev4",
+        "x": 10.402,
+        "y": 0.077,
+        "z": 24.636,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r3_4_rock_1_lev4",
+        "x": 7.983,
+        "y": 0.136,
+        "z": 22.766,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r4_0_rock_large_1_lev4",
+        "x": 25.501,
+        "y": 0.083,
+        "z": 13.802,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r4_1_rock_1_lev4",
+        "x": 23.18,
+        "y": 0.144,
+        "z": 13.418,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r4_2_rock_1_lev4",
+        "x": 23.521,
+        "y": 0.127,
+        "z": 13.937,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_r4_3_rock_1_lev4",
+        "x": 22.494,
+        "y": 0.136,
+        "z": 12.861,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_0_grass_3_lev4",
+        "x": 13.059,
+        "y": 0,
+        "z": 7.135,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_1_grass_3_lev4",
+        "x": 12.195,
+        "y": 0,
+        "z": 12.428,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_2_grass_2_lev4",
+        "x": 15.36,
+        "y": 0.012,
+        "z": 11.938,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_3_grass_1_lev4",
+        "x": 15.203,
+        "y": 0.009,
+        "z": 8.862,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_4_grass_3_lev4",
+        "x": 16.206,
+        "y": 0,
+        "z": 10.073,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_5_grass_2_lev4",
+        "x": 19.243,
+        "y": 0.013,
+        "z": 10.088,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_6_grass_1_lev4",
+        "x": 19.739,
+        "y": 0.009,
+        "z": 13.239,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g1_7_grass_2_lev4",
+        "x": 13.882,
+        "y": 0.013,
+        "z": 10.305,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_0_grass_2_lev4",
+        "x": 6.991,
+        "y": 0.01,
+        "z": 21.105,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_1_grass_2_lev4",
+        "x": 11.607,
+        "y": 0.013,
+        "z": 18.259,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_2_grass_2_lev4",
+        "x": 9.702,
+        "y": 0.013,
+        "z": 20.244,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_3_grass_1_lev4",
+        "x": 9.033,
+        "y": 0.008,
+        "z": 22.478,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_4_grass_1_lev4",
+        "x": 12.112,
+        "y": 0.008,
+        "z": 19.577,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_g2_5_grass_3_lev4",
+        "x": 12.455,
+        "y": 0,
+        "z": 18.483,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_rv_wheel_4.001_lev4",
+        "x": 15.609,
+        "y": 0.436,
+        "z": 7.637,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_rv_wheel_5_lev4",
+        "x": 17.614,
+        "y": 0.436,
+        "z": 6.48,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_rv_wheel_1.002_lev4",
+        "x": 16.391,
+        "y": 0.436,
+        "z": 4.363,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_rv_wheel_4.002_lev4",
+        "x": 14.386,
+        "y": 0.436,
+        "z": 5.52,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_rv_rover_1_lev4",
+        "x": 16,
+        "y": 0.096,
+        "z": 6,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_ft1_tree_floating_3_lev4",
+        "x": 26.099,
+        "y": 5.001,
+        "z": 7.998,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_ft2_tree_floating_3_lev4",
+        "x": 7.998,
+        "y": 4.001,
+        "z": 25.907,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "se_pk_pickup_sphere_lev4",
+        "x": 22,
+        "y": 0.35,
+        "z": 20,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "player_spawn_circle_lev4",
+        "x": -18,
+        "y": 0.02,
+        "z": 28,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r1_0_rock_large_3_lev4",
+        "x": -16.483,
+        "y": 0.097,
+        "z": 24.01,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r1_1_rock_1_lev4",
+        "x": -18.688,
+        "y": 0.101,
+        "z": 26.399,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r1_2_rock_1_lev4",
+        "x": -17.384,
+        "y": 0.138,
+        "z": 24.774,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r1_3_rock_large_1_lev4",
+        "x": -19.872,
+        "y": 0.078,
+        "z": 24.299,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r1_4_rock_large_3_lev4",
+        "x": -18.578,
+        "y": 0.107,
+        "z": 26.054,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r2_0_rock_large_3_lev4",
+        "x": -22.709,
+        "y": 0.076,
+        "z": 24.966,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r2_1_rock_1_lev4",
+        "x": -23.425,
+        "y": 0.109,
+        "z": 27.102,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r2_2_rock_large_3_lev4",
+        "x": -24.394,
+        "y": 0.092,
+        "z": 24.146,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r2_3_rock_1_lev4",
+        "x": -24.84,
+        "y": 0.136,
+        "z": 24.831,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r3_0_rock_large_3_lev4",
+        "x": -12.847,
+        "y": 0.091,
+        "z": 25.125,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r3_1_rock_large_3_lev4",
+        "x": -10.606,
+        "y": 0.11,
+        "z": 25.269,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r3_2_rock_large_1_lev4",
+        "x": -12.785,
+        "y": 0.116,
+        "z": 26.671,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_r3_3_rock_large_1_lev4",
+        "x": -12.808,
+        "y": 0.076,
+        "z": 25.955,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_sp1_metalsupport_lev4",
+        "x": -22.006,
+        "y": -0.01,
+        "z": 22.014,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_sp2_metalsupport_lev4",
+        "x": -13.994,
+        "y": -0.01,
+        "z": 22.014,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_cn_connector_lev4",
+        "x": -18.645,
+        "y": -0.816,
+        "z": 21.173,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_ho_house_open_lev4",
+        "x": -22,
+        "y": -0.349,
+        "z": 30,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_bl_pickup_bullets_lev4",
+        "x": -16,
+        "y": 0.27,
+        "z": 25,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_at_asteroids_mesh_lev4",
+        "x": -26.051,
+        "y": 0,
+        "z": 30.06,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_0_grass_2_lev4",
+        "x": -18.58,
+        "y": 0.011,
+        "z": 24.716,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_1_grass_2_lev4",
+        "x": -16.649,
+        "y": 0.012,
+        "z": 27.354,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_2_grass_3_lev4",
+        "x": -16.247,
+        "y": 0,
+        "z": 27.18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_3_grass_3_lev4",
+        "x": -21.77,
+        "y": 0,
+        "z": 26.093,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_4_grass_3_lev4",
+        "x": -20.611,
+        "y": 0,
+        "z": 24.367,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_5_grass_1_lev4",
+        "x": -16.168,
+        "y": 0.009,
+        "z": 26.072,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_6_grass_2_lev4",
+        "x": -19.319,
+        "y": 0.013,
+        "z": 26.101,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "sp_g_7_grass_2_lev4",
+        "x": -17.944,
+        "y": 0.013,
+        "z": 28.594,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_spp1_lev4",
+        "x": -17.25,
+        "y": 0.9,
+        "z": 33.024,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_spp2_lev4",
+        "x": -18.749,
+        "y": 0.9,
+        "z": 33.056,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_sptb_lev4",
+        "x": -18,
+        "y": 1.75,
+        "z": 33.04,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "crt_sptx_lev4",
+        "x": -18.001,
+        "y": 1.78,
+        "z": 32.96,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1167641645_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1707873932_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1907831520_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group666895494_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1098147410_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group282412729_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group139908371_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1506934965_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1753656922_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group549386394_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1621723427_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group332686008_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1203591074_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1138436095_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group505957385_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group279303741_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group2056735301_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1015039822_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group276692338_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1437890092_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group790332696_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group654761556_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1852607879_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group2057329393_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group2143627782_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1564631837_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group925645544_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group734772326_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1934812181_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group2060591166_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1167954657_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1042580755_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1572698854_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group104451256_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1188494358_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1217407763_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group828877529_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1423311402_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group762855551_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1514672780_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1310595050_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1369611446_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group450518597_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group745840913_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group42438703_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group503988050_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1602554113_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group887420200_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1440063915_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group247475039_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group456781955_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group724382726_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1277767469_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group954316612_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group989277149_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group797940765_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1808813520_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group255140077_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group524469484_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group279101508_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1596727529_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group2129567275_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group373555577_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group314405485_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group991616414_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1896148415_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1481515652_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group781958242_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1830018461_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1307457211_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group638132290_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1181203045_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group157177855_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1453338879_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group282641779_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1884950168_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group657325723_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1943308988_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group530823911_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1585682906_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group986243464_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group456711604_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1614853819_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group332540088_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1163682321_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1921399779_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group584895319_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group1679735649_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_base_group11481041_lev4",
+        "x": -17.864,
+        "y": 0.852,
+        "z": -13.899,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1167641645_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1707873932_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1907831520_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group666895494_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1098147410_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group282412729_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group139908371_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1506934965_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1753656922_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group549386394_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1621723427_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group332686008_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1203591074_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1138436095_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group505957385_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group279303741_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group2056735301_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1015039822_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group276692338_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1437890092_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group790332696_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group654761556_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1852607879_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group2057329393_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group2143627782_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1564631837_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group925645544_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group734772326_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1934812181_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group2060591166_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1167954657_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1042580755_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1572698854_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group104451256_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1188494358_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1217407763_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group828877529_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1423311402_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group762855551_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1514672780_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1310595050_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1369611446_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group450518597_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group745840913_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group42438703_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group503988050_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1602554113_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group887420200_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1440063915_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group247475039_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group456781955_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group724382726_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1277767469_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group954316612_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group989277149_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group797940765_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1808813520_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group255140077_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group524469484_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group279101508_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1596727529_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group2129567275_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group373555577_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group314405485_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group991616414_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1896148415_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1481515652_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group781958242_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1830018461_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1307457211_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group638132290_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1181203045_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group157177855_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1453338879_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group282641779_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1884950168_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group657325723_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1943308988_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group530823911_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1585682906_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group986243464_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group456711604_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1614853819_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group332540088_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1163682321_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1921399779_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group584895319_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group1679735649_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "astronaut_spawn_group11481041_lev4",
+        "x": -19.837,
+        "y": 0.852,
+        "z": 26.049,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "coin_1_coin_lev4",
+        "x": -14.02,
+        "y": 0.483,
+        "z": -18,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "coin_2_coin_lev4",
+        "x": -12,
+        "y": 1.186,
+        "z": 14,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "coin_3_coin_lev4",
+        "x": 15.458,
+        "y": 0.169,
+        "z": -9.905,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "coin_4_coin_lev4",
+        "x": -0.877,
+        "y": 0.751,
+        "z": -2,
+        "level": 4,
+        "role": "default"
+    },
+    {
+        "name": "coin_5_coin_lev4",
+        "x": 0,
+        "y": 0.674,
+        "z": -20.287,
+        "level": 4,
         "role": "default"
     }
 ]

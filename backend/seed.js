@@ -1,23 +1,47 @@
 require('dotenv').config()
+const fs = require('fs')
+const path = require('path')
 const mongoose = require('mongoose')
 const Block = require('./models/Block')
 
-const positions = [
-    { x: 3.97, y: 0.5, z: 1.93 },
-    { x: -0.25, y: 0.5, z: -2.79 },
+const DATA_FILES = [
+    'toy_car_blocks1.json',
+    'toy_car_blocks2.json',
+    'toy_car_blocks3.json',
+    'toy_car_blocks4.json'
 ]
+
+function readBlocks() {
+    return DATA_FILES.flatMap((fileName) => {
+        const filePath = path.join(__dirname, 'data', fileName)
+        const blocks = JSON.parse(fs.readFileSync(filePath, 'utf8'))
+
+        if (!Array.isArray(blocks)) {
+            throw new Error(`${fileName} debe contener un arreglo de bloques`)
+        }
+
+        return blocks
+    })
+}
 
 async function seedDatabase() {
     try {
+        const blocks = readBlocks()
+
         await mongoose.connect(process.env.MONGO_URI)
 
-        await Block.deleteMany() // (opcional) limpia la colección
-        await Block.insertMany(positions)
+        await Block.deleteMany({})
+        await Block.insertMany(blocks)
 
-        console.log('📦 Datos insertados correctamente en MongoDB')
+        const counts = blocks.reduce((acc, block) => {
+            acc[block.level] = (acc[block.level] || 0) + 1
+            return acc
+        }, {})
+
+        console.log('Datos sincronizados en MongoDB:', counts)
         process.exit()
     } catch (err) {
-        console.error('❌ Error al insertar datos:', err)
+        console.error('Error al sincronizar datos:', err)
         process.exit(1)
     }
 }

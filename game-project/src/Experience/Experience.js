@@ -132,6 +132,7 @@ export default class Experience {
 
     // Mundo
     this.world = new World(this)
+    this.installConsoleHelpers()
 
     // Flag tercera persona
     this.isThirdPerson = false
@@ -199,6 +200,20 @@ export default class Experience {
 
       console.log('🟢 Vista global restaurada')
     }
+  }
+
+  installConsoleHelpers() {
+    window.goToLevel = (level) => window.experience?.goToLevel?.(level)
+    window.nextLevel = () => window.experience?.world?.levelManager?.nextLevel?.()
+    window.currentLevel = () => window.experience?.world?.levelManager?.currentLevel
+    window.restartLevel = () => window.experience?.world?.levelManager?.resetLevel?.()
+    window.activatePortal = () => window.experience?.world?.forceActivatePortal?.()
+
+    console.info('[LEVEL] Comandos de prueba: goToLevel(1), goToLevel(2), goToLevel(3), goToLevel(4), nextLevel(), currentLevel(), restartLevel(), activatePortal()')
+  }
+
+  goToLevel(level) {
+    return this.world?.levelManager?.goToLevel(level)
   }
 
   startLoop() {

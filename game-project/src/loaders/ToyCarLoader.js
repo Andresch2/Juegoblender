@@ -11,6 +11,7 @@ export default class ToyCarLoader {
         this.physics = this.experience.physics;
         this.prizes = [];
         this.loadedBlocks = [];
+        this.missingModels = new Set();
     }
 
     _applyTextureToMeshes(root, imagePath, matcher, options = {}) {
@@ -110,18 +111,20 @@ export default class ToyCarLoader {
             let blocks = [];
 
             try {
-                const apiUrl = import.meta.env.VITE_API_URL + '/api/blocks';
+                const backendUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+                const apiUrl = `${backendUrl}/api/blocks?level=1`;
                 const res = await fetch(apiUrl);
 
                 if (!res.ok) throw new Error('Conexión fallida');
 
                 const apiBlocks = await res.json();
                 blocks = this._dedupeBlocks(apiBlocks.filter(b => b.level === 1));
+                if (blocks.length === 0) throw new Error('API sin bloques para nivel 1');
                 console.log('Datos cargados desde la API (nivel 1):', blocks.length);
                 //console.log('🧩 Lista de bloques:', blocks.map(b => b.name))
             } catch (apiError) {
                 console.warn('No se pudo conectar con la API. Cargando desde archivo local...');
-                const localRes = await fetch('/data/toy_car_blocks.json');
+                const localRes = await fetch('/data/toy_car_blocks1.json');
                 const allBlocks = await localRes.json();
 
                 // 🔍 Filtrar solo nivel 1
@@ -131,7 +134,7 @@ export default class ToyCarLoader {
             }
 
             this.loadedBlocks = blocks;
-            this._processBlocks(blocks, precisePhysicsModels);
+            await this._processBlocks(blocks, precisePhysicsModels);
         } catch (err) {
             console.error('Error al cargar bloques o lista Trimesh:', err);
         }
@@ -149,13 +152,37 @@ export default class ToyCarLoader {
             console.log(`📦 Bloques cargados (${blocks.length}) desde ${apiUrl}`);
 
             this.loadedBlocks = blocks;
-            this._processBlocks(blocks, precisePhysicsModels);
+            await this._processBlocks(blocks, precisePhysicsModels);
         } catch (err) {
             console.error('Error al cargar bloques desde URL:', err);
         }
     }
 
-    _processBlocks(blocks, precisePhysicsModels) {
+    async _getResourceForBlock(block) {
+        const resourceKey = block.name;
+        let glb = this.resources.items[resourceKey];
+
+        if (glb) return glb;
+
+        const source = this.resources.sources?.find((item) => item.name === resourceKey);
+        const fallbackPath = `/models/toycar${block.level}/${resourceKey}.glb`;
+        const modelPath = source?.path || fallbackPath;
+
+        try {
+            glb = await this.resources.loaders.gltfLoader.loadAsync(modelPath);
+            this.resources.items[resourceKey] = glb;
+            console.info(`Modelo cargado bajo demanda: ${resourceKey}`);
+            return glb;
+        } catch (error) {
+            if (!this.missingModels.has(resourceKey)) {
+                this.missingModels.add(resourceKey);
+                console.warn(`Modelo no encontrado: ${resourceKey}`, error);
+            }
+            return null;
+        }
+    }
+
+    async _processBlocks(blocks, precisePhysicsModels) {
         blocks = this._dedupeBlocks(blocks);
 
         // Patrones que SI deben tener colision fisica (superficies caminables)
@@ -183,7 +210,10 @@ export default class ToyCarLoader {
             'pond', 'rio', 'river', 'water',
             // Nivel 3 - Cripta/Mazmorra
             'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto',
-            'chamber_', 'chase_', 'crypt_', 'final_', 'portal_'
+            'chamber_', 'chase_', 'crypt_', 'final_', 'portal_',
+            // Nivel 4 - Espacial
+            'formation_rock', 'asteroids_mesh', 'connector', 'metalsupport',
+            'spaceship', 'building', 'house_', 'lv1_', 'lv2_', 'lv3_', 'lv4_', 'crt_'
         ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -208,28 +238,29 @@ export default class ToyCarLoader {
             'barrel', 'crate', 'skull', 'cobweb', 'cart',
             'bricks', 'torch', 'horse', 'table', 'spikes',
             'safe_zone', 'arch', 'column', 'col_', 'bars',
-            'danger_zone', 'ghost_danger', 'enemy_ghost'
+            'danger_zone', 'ghost_danger', 'enemy_ghost',
+            // Nivel 4 decoraciones
+            'grass', 'pickup', 'antenna', 'radar', 'solarpanel',
+            'wheel', 'rover', 'astronaut', 'tree_floating', 'tree_lava'
         ]
 
-        blocks.forEach(block => {
+        for (const block of blocks) {
             if (!block.name) {
                 console.warn('Bloque sin nombre:', block);
-                return;
+                continue;
             }
 
             const nameLower = block.name.toLowerCase();
             const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
             if (isInvisible) {
                 console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
-                return;
+                continue;
             }
 
-            const resourceKey = block.name;
-            const glb = this.resources.items[resourceKey];
+            const glb = await this._getResourceForBlock(block);
 
             if (!glb) {
-                console.warn(`Modelo no encontrado: ${resourceKey}`);
-                return;
+                continue;
             }
 
             const model = glb.scene.clone();
@@ -290,7 +321,7 @@ export default class ToyCarLoader {
                 prize.model.userData.levelObject = true;
 
                 this.prizes.push(prize);
-                return;
+                continue;
             }
 
             // Agregar modelo visualmente a la escena
@@ -306,7 +337,7 @@ export default class ToyCarLoader {
 
             if (!shouldHavePhysics) {
                 // Decoracion: solo visual, sin CANNON.Body
-                return;
+                continue;
             }
 
             // Calcular bounding box real del modelo
@@ -386,7 +417,7 @@ export default class ToyCarLoader {
             model.userData.physicsBody = body;
             body.userData.linkedModel = model;
             this.physics.world.addBody(body);
-        });
+        }
     }
 
     _dedupeBlocks(blocks) {

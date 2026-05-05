@@ -11,11 +11,12 @@ function GameView() {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const experience = new Experience(canvasRef.current)
         const onProgress = (e) => setProgress(e.detail)
         const onComplete = () => setLoading(false)
         window.addEventListener('resource-progress', onProgress)
         window.addEventListener('resource-complete', onComplete)
+        new Experience(canvasRef.current)
+
         return () => {
             window.removeEventListener('resource-progress', onProgress)
             window.removeEventListener('resource-complete', onComplete)
