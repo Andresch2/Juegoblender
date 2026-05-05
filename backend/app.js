@@ -7,6 +7,10 @@ const blockRoutes = require('./routes/blockRoutes')
 
 const app = express()
 const port = process.env.PORT || 3001
+const passport = require('passport')
+require('./utils/auth')   // registra estrategias local y jwt
+
+const authRoutes = require('./routes/auth.router')
 
 app.use(cors())
 app.use(express.json())
@@ -22,6 +26,8 @@ app.get('/', (req, res) => {
 // Rutas
 //app.use('/blocks', blockRoutes)
 app.use('/api/blocks', blockRoutes)
+app.use(passport.initialize())
+app.use('/auth', authRoutes)
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {
