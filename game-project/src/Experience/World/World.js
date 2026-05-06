@@ -656,14 +656,14 @@ export default class World {
         let enemyModel = null
 
         if (level === 3) {
-            enemyModel = this.resources.items.enemy_ghost_skull_lev3?.scene
+            enemyModel = this.resources.items.ghostskull
             if (enemyModel) {
                 console.log('Usando modelo ghost skull del nivel 3')
             }
         }
 
         if (!enemyModel) {
-            enemyModel = this.resources.items.ghostskull?.scene
+            enemyModel = this.resources.items.ghostskull
             if (enemyModel) {
                 console.log('Usando modelo ghostskull genérico')
             }

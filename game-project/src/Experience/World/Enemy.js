@@ -1,4 +1,6 @@
 import * as CANNON from 'cannon-es'
+import * as THREE from 'three'
+import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils.js'
 import FinalPrizeParticles from '../Utils/FinalPrizeParticles.js'
 import Sound from './Sound.js'
 
@@ -8,34 +10,39 @@ export default class Enemy {
         this.scene = scene
         this.physicsWorld = physicsWorld
         this.playerRef = playerRef
-        this.baseSpeed = 1.0  //Control velocidad del enemigo
-        this.speed = this.baseSpeed
-        this.delayActivation = 0 // activo de inmediato en modo escritorio
+        this.modelResource = model
 
-        // Patrulla por puntos
+        this.baseSpeed = 1.0
+        this.chaseSpeed = 3.2
+        this.speed = this.baseSpeed
+        this.delayActivation = 0
+
         this.patrolPoints = patrolPoints || []
         this.chasePoints = chasePoints || []
         this.currentPatrolIndex = 0
         this.currentChaseIndex = 0
-        this.detectionRadius = 15 // distancia para detectar jugador
+        this.detectionRadius = 12
+        this.releaseRadius = 16
+        this.attackDistance = 1.8
+        this.visualYOffset = -3.2
         this.isChasing = false
 
-
-
-        // Sonido de proximidad en loop
         this.proximitySound = new Sound('/sounds/alert.ogg', {
             loop: true,
             volume: 0
         })
-        this._soundCooldown = 0
         this.proximitySound.play()
 
-        // Modelo visual - clonar profundamente con materiales
-        this.model = this._deepClone(model)
-        this.model.scale.set(1, 1, 1) // Escala 1:1 
+        this.model = new THREE.Group()
+        this.model.name = 'EnemyGhostSkull'
         this.model.position.copy(position)
 
-        // Asegurar que todos los materiales y meshes son visibles
+        this.visual = this._deepClone(model)
+        this.visual.name = 'EnemyGhostSkullVisual'
+        this.visual.scale.setScalar(1)
+        this.visual.position.y = this.visualYOffset
+        this.model.add(this.visual)
+
         this.model.visible = true
         this.model.traverse((child) => {
             if (child.isMesh) {
@@ -43,7 +50,7 @@ export default class Enemy {
                 child.frustumCulled = false
                 if (child.material) {
                     child.material.transparent = false
-                    child.material.opacity = 1.0
+                    child.material.opacity = 1
                     child.material.visible = true
                     child.material.needsUpdate = true
                 }
@@ -51,44 +58,43 @@ export default class Enemy {
         })
 
         this.scene.add(this.model)
+        this.setAnimation()
 
-        //  Material físico del enemigo
         const enemyMaterial = new CANNON.Material('enemyMaterial')
-        enemyMaterial.friction = 0.0
+        enemyMaterial.friction = 0
 
-        // Cuerpo físico
         const shape = new CANNON.Sphere(0.5)
         this.body = new CANNON.Body({
-            mass: 5,
+            mass: 0,
+            type: CANNON.Body.KINEMATIC,
             shape,
             material: enemyMaterial,
             position: new CANNON.Vec3(position.x, position.y, position.z),
-            linearDamping: 0.01
+            linearDamping: 0.01,
+            angularDamping: 1
         })
 
-        // Alinear altura con el robot en modo escritorio (evita que nunca colisionen por Y)
         if (this.playerRef?.body) {
             this.body.position.y = this.playerRef.body.position.y
             this.model.position.y = this.body.position.y
         }
 
-        this.body.sleepSpeedLimit = 0.0
+        this.hoverY = this.body.position.y
+        this.body.fixedRotation = true
+        this.body.sleepSpeedLimit = 0
         this.body.wakeUp()
+        this.body.updateMassProperties()
         this.physicsWorld.addBody(this.body)
 
-        // Asocia el cuerpo al modelo
         this.model.userData.physicsBody = this.body
 
-        // Colisión con robot
         this._onCollide = (event) => {
-            if (event.body === this.playerRef.body) {
+            if (event.body === this.playerRef?.body) {
                 if (typeof this.playerRef.die === 'function') {
                     this.playerRef.die()
                 }
 
-                if (this.proximitySound) {
-                    this.proximitySound.stop()
-                }
+                this.proximitySound?.stop()
 
                 if (this.model.parent) {
                     new FinalPrizeParticles({
@@ -105,29 +111,24 @@ export default class Enemy {
 
         this.body.addEventListener('collide', this._onCollide)
 
-        console.log(`👻 Enemigo creado en (${position.x.toFixed(1)}, ${position.y.toFixed(1)}, ${position.z.toFixed(1)}) con ${this.patrolPoints.length} puntos de patrulla y ${this.chasePoints.length} puntos de persecución`)
+        console.log(`Enemigo creado en (${position.x.toFixed(1)}, ${position.y.toFixed(1)}, ${position.z.toFixed(1)}) con ${this.patrolPoints.length} puntos de patrulla`)
     }
 
-    /**
-     * Clona profundamente un Object3D incluyendo materiales y geometrías
-     * para evitar que el clon sea invisible por compartir materiales.
-     */
     _deepClone(source) {
-        const clone = source.clone()
+        const sourceScene = source?.scene || source
+        const clone = cloneSkeleton(sourceScene)
 
         clone.traverse((child) => {
-            const srcChild = source.getObjectByName(child.name)
+            const srcChild = sourceScene.getObjectByName(child.name)
 
             if (child.isMesh && child.material) {
-                // Clonar material para evitar referencias compartidas
                 if (Array.isArray(child.material)) {
-                    child.material = child.material.map(m => m.clone())
+                    child.material = child.material.map((mat) => mat.clone())
                 } else {
                     child.material = child.material.clone()
                 }
             }
 
-            // Copiar maps/texturas del original si se perdieron
             if (child.isMesh && srcChild && srcChild.material) {
                 const srcMat = srcChild.material
                 const dstMat = child.material
@@ -145,7 +146,63 @@ export default class Enemy {
         return clone
     }
 
+    setAnimation() {
+        const animations = this.modelResource?.animations || []
+
+        this.animation = {
+            mixer: null,
+            actions: {},
+            current: null
+        }
+
+        if (!animations.length) {
+            console.warn('El modelo del enemigo no trae animaciones. Revisa /models/Enemy/GhostSkull.glb')
+            return
+        }
+
+        this.animation.mixer = new THREE.AnimationMixer(this.visual)
+
+        animations.forEach((clip) => {
+            this.animation.actions[clip.name] = this.animation.mixer.clipAction(clip)
+        })
+
+        this.animation.idleAction =
+            this.animation.actions['CharacterArmature|Flying_Idle'] ||
+            this.animation.actions['Flying_Idle'] ||
+            this.animation.actions[animations[0].name]
+
+        this.animation.flyAction =
+            this.animation.actions['CharacterArmature|Fast_Flying'] ||
+            this.animation.actions['Fast_Flying'] ||
+            this.animation.idleAction
+
+        this.animation.attackAction =
+            this.animation.actions['CharacterArmature|Headbutt'] ||
+            this.animation.actions['CharacterArmature|Punch'] ||
+            this.animation.idleAction
+
+        if (this.animation.idleAction) {
+            this.animation.current = this.animation.idleAction
+            this.animation.current.reset().fadeIn(0.2).play()
+        }
+    }
+
+    playAnimation(action, fade = 0.25) {
+        if (!action || action === this.animation?.current) return
+
+        const previous = this.animation.current
+        action.reset().fadeIn(fade).play()
+
+        if (previous) {
+            previous.fadeOut(fade)
+        }
+
+        this.animation.current = action
+    }
+
     update(delta) {
+        this.animation?.mixer?.update(delta)
+
         if (this.delayActivation > 0) {
             this.delayActivation -= delta
             return
@@ -153,87 +210,100 @@ export default class Enemy {
 
         if (!this.body || !this.playerRef?.body) return
 
-        const playerPos = new CANNON.Vec3(
-            this.playerRef.body.position.x,
-            this.playerRef.body.position.y,
-            this.playerRef.body.position.z
-        )
-
+        const playerPos = this.playerRef.body.position
         const enemyPos = this.body.position
-        const distanceToPlayer = enemyPos.distanceTo(playerPos)
+        const dxToPlayer = playerPos.x - enemyPos.x
+        const dzToPlayer = playerPos.z - enemyPos.z
+        const distanceToPlayer = Math.sqrt(dxToPlayer * dxToPlayer + dzToPlayer * dzToPlayer)
 
-        // Detectar si ve al jugador
-        this.isChasing = distanceToPlayer < this.detectionRadius
+        if (distanceToPlayer < this.attackDistance) {
+            this.stopMoving(this.animation?.attackAction || this.animation?.idleAction)
+            this.killPlayer()
+            return
+        }
+
+        if (this.isChasing) {
+            this.isChasing = distanceToPlayer < this.releaseRadius
+        } else {
+            this.isChasing = distanceToPlayer < this.detectionRadius
+        }
 
         let targetPos
 
         if (this.isChasing) {
-            // Seguir la ruta de persecución si existe, si no ir directo al jugador
-            if (this.chasePoints && this.chasePoints.length > 0) {
-                const currentPoint = this.chasePoints[this.currentChaseIndex]
-                targetPos = new CANNON.Vec3(currentPoint.x, currentPoint.y, currentPoint.z)
+            targetPos = playerPos
+            this.speed = this.chaseSpeed
+        } else if (this.patrolPoints.length > 0) {
+            const currentPoint = this.patrolPoints[this.currentPatrolIndex]
+            targetPos = new CANNON.Vec3(currentPoint.x, this.hoverY, currentPoint.z)
 
-                const distanceToPoint = enemyPos.distanceTo(targetPos)
-                if (distanceToPoint < 2) {
-                    this.currentChaseIndex = Math.min(this.currentChaseIndex + 1, this.chasePoints.length - 1)
-                }
-            } else {
-                targetPos = playerPos
-            }
-            this.speed = 2.5
-        } else {
-            // Seguir los puntos
-            if (this.patrolPoints.length > 0) {
-                const currentPoint = this.patrolPoints[this.currentPatrolIndex]
-                targetPos = new CANNON.Vec3(currentPoint.x, currentPoint.y, currentPoint.z)
+            const dxToPoint = targetPos.x - enemyPos.x
+            const dzToPoint = targetPos.z - enemyPos.z
+            const distanceToPoint = Math.sqrt(dxToPoint * dxToPoint + dzToPoint * dzToPoint)
 
-                // Si llego al punto, ir al siguiente
-                const distanceToPoint = enemyPos.distanceTo(targetPos)
-                if (distanceToPoint < 2) {
-                    this.currentPatrolIndex = (this.currentPatrolIndex + 1) % this.patrolPoints.length
-                }
-            } else {
-                // Sin puntos de patrulla: quedarse en lugar
-                this.body.velocity.set(0, 0, 0)
-                this.model.position.copy(this.body.position)
-                return
+            if (distanceToPoint < 1.8) {
+                this.currentPatrolIndex = (this.currentPatrolIndex + 1) % this.patrolPoints.length
             }
+
             this.speed = this.baseSpeed
+        } else {
+            this.stopMoving()
+            return
         }
 
-        // Volumen sonoro según cercanía
         const maxDistance = 10
         const clampedDistance = Math.min(distanceToPlayer, maxDistance)
         const proximityVolume = 1 - (clampedDistance / maxDistance)
+        this.proximitySound?.setVolume(proximityVolume * 0.8)
 
-        if (this.proximitySound) {
-            this.proximitySound.setVolume(proximityVolume * 0.8)
-        }
-
-        // Movimiento hacia objetivo
         const direction = new CANNON.Vec3(
             targetPos.x - enemyPos.x,
-            0, // No mover en Y: evitar que el enemigo vuele o se hunda
+            0,
             targetPos.z - enemyPos.z
         )
 
-        if (direction.length() > 0.5) {
+        if (direction.length() > 0.35) {
             direction.normalize()
             direction.scale(this.speed, direction)
             this.body.velocity.x = direction.x
+            this.body.velocity.y = 0
             this.body.velocity.z = direction.z
-            // Mantener velocidad Y para que la gravedad funcione si hay desniveles
+            this.body.position.y = this.hoverY
+            this.playAnimation(this.animation?.flyAction)
+        } else {
+            this.stopMoving(
+                distanceToPlayer < this.attackDistance
+                    ? this.animation?.attackAction || this.animation?.idleAction
+                    : this.animation?.idleAction
+            )
         }
 
-        // Sincronizar modelo visual (siempre visible)
         this.model.position.copy(this.body.position)
         this.model.visible = true
 
-        // Rotar el modelo hacia la dirección de movimiento
         if (Math.abs(direction.x) > 0.01 || Math.abs(direction.z) > 0.01) {
-            const angle = Math.atan2(direction.x, direction.z)
-            this.model.rotation.y = angle
+            this.model.rotation.y = Math.atan2(direction.x, direction.z)
         }
+    }
+
+    stopMoving(action = this.animation?.idleAction) {
+        if (!this.body) return
+
+        this.body.velocity.set(0, 0, 0)
+        this.body.position.y = this.hoverY
+        this.model.position.copy(this.body.position)
+        this.playAnimation(action)
+    }
+
+    killPlayer() {
+        if (this.hasKilledPlayer) return
+        this.hasKilledPlayer = true
+
+        if (typeof this.playerRef?.die === 'function') {
+            this.playerRef.die()
+        }
+
+        this.experience?.world?.triggerDefeat?.()
     }
 
     destroy() {
@@ -241,9 +311,8 @@ export default class Enemy {
             this.scene.remove(this.model)
         }
 
-        if (this.proximitySound) {
-            this.proximitySound.stop()
-        }
+        this.proximitySound?.stop()
+        this.animation?.mixer?.stopAllAction()
 
         if (this.body) {
             this.body.removeEventListener('collide', this._onCollide)
