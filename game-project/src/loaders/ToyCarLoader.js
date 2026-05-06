@@ -213,7 +213,10 @@ export default class ToyCarLoader {
             'chamber_', 'chase_', 'crypt_', 'final_', 'portal_',
             // Nivel 4 - Espacial
             'formation_rock', 'asteroids_mesh', 'connector', 'metalsupport',
-            'spaceship', 'building', 'house_', 'lv1_', 'lv2_', 'lv3_', 'lv4_', 'crt_'
+            'spaceship', 'building', 'house_', 'lv1_', 'lv2_', 'lv3_', 'lv4_', 'crt_',
+            // Nivel 5 - Ciudad final
+            'road', 'street', 'sidewalk', 'platform', 'bridge', 'wall_', 'bar_', 'barrier',
+            'fence', 'portal_base', 'portal_aro', 'tower', 'city', 'stairs', 'step'
         ]
 
         // Patrones FORZADOS a tener física (obstáculos intencionales)
@@ -241,7 +244,9 @@ export default class ToyCarLoader {
             'danger_zone', 'ghost_danger', 'enemy_ghost',
             // Nivel 4 decoraciones
             'grass', 'pickup', 'antenna', 'radar', 'solarpanel',
-            'wheel', 'rover', 'astronaut', 'tree_floating', 'tree_lava'
+            'wheel', 'rover', 'astronaut', 'tree_floating', 'tree_lava',
+            // Nivel 5 decoraciones
+            'lamp', 'sign', 'poster', 'trash', 'deco'
         ]
 
         for (const block of blocks) {

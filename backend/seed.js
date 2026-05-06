@@ -8,7 +8,8 @@ const DATA_FILES = [
     'toy_car_blocks1.json',
     'toy_car_blocks2.json',
     'toy_car_blocks3.json',
-    'toy_car_blocks4.json'
+    'toy_car_blocks4.json',
+    'toy_car_blocks5.json'
 ]
 
 function readBlocks() {
