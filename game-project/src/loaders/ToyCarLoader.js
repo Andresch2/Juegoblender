@@ -1,6 +1,6 @@
 import * as CANNON from 'cannon-es';
 import * as THREE from 'three';
-import { createBoxShapeFromModel, createTrimeshShapeFromModel } from '../Experience/Utils/PhysicsShapeFactory.js';
+import { createTrimeshShapeFromModel } from '../Experience/Utils/PhysicsShapeFactory.js';
 import Prize from '../Experience/World/Prize.js';
 
 export default class ToyCarLoader {
@@ -103,33 +103,87 @@ export default class ToyCarLoader {
         );
     }
 
-    async loadFromAPI() {
+    _publicPath(path) {
+        const base = import.meta.env.BASE_URL || '/';
+        return `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+    }
+
+    async _fetchJson(url, label) {
+        const res = await fetch(url);
+        if (!res.ok) {
+            throw new Error(`${label} no disponible (HTTP ${res.status})`);
+        }
+
+        const contentType = res.headers.get('content-type') || '';
+        if (!contentType.includes('application/json')) {
+            const preview = (await res.text()).slice(0, 120);
+            throw new Error(`${label} no devolvio JSON: ${preview}`);
+        }
+
+        return res.json();
+    }
+
+    async _loadPrecisePhysicsModels(level = 1) {
+        const levelUrl = this._publicPath(`config/precisePhysicsModels${level}.json`);
+        const generalUrl = this._publicPath('config/precisePhysicsModels.json');
+
         try {
-            const listRes = await fetch('/config/precisePhysicsModels.json');
-            const precisePhysicsModels = await listRes.json();
+            return await this._fetchJson(levelUrl, `Fisicas precisas nivel ${level}`);
+        } catch (levelError) {
+            console.warn(`No se encontro fisica precisa del nivel ${level}. Usando lista general...`);
+            return await this._fetchJson(generalUrl, 'Fisicas precisas generales');
+        }
+    }
+
+    async _loadLocalBlocks(level = 1) {
+        const levelUrl = this._publicPath(`data/toy_car_blocks${level}.json`);
+        const combinedUrl = this._publicPath('data/toy_car_blocks.json');
+
+        try {
+            const allBlocks = await this._fetchJson(combinedUrl, 'Bloques locales combinados');
+            return this._dedupeBlocks(allBlocks.filter(block => block.level === level));
+        } catch (combinedError) {
+            console.warn(`No se encontro data local combinada para nivel ${level}. Usando archivo separado...`);
+            const levelBlocks = await this._fetchJson(levelUrl, `Bloques locales nivel ${level}`);
+            return this._dedupeBlocks(levelBlocks.filter(block => block.level === level));
+        }
+    }
+
+    async _loadApiBlocks(level = 1) {
+        const backendUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
+        const apiUrl = `${backendUrl}/api/blocks?level=${level}`;
+        const apiData = await this._fetchJson(apiUrl, `API nivel ${level}`);
+        const apiBlocks = Array.isArray(apiData) ? apiData : (apiData.blocks || []);
+        return this._dedupeBlocks(apiBlocks.filter(block => block.level === level));
+    }
+
+    async loadFromAPI(level = 1) {
+        try {
+            const precisePhysicsModels = await this._loadPrecisePhysicsModels(level);
 
             let blocks = [];
 
             try {
                 const backendUrl = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
-                const apiUrl = `${backendUrl}/api/blocks?level=1`;
+                const apiUrl = `${backendUrl}/api/blocks?level=${level}`;
                 const res = await fetch(apiUrl);
 
                 if (!res.ok) throw new Error('Conexión fallida');
 
-                const apiBlocks = await res.json();
-                blocks = this._dedupeBlocks(apiBlocks.filter(b => b.level === 1));
-                if (blocks.length === 0) throw new Error('API sin bloques para nivel 1');
-                console.log('Datos cargados desde la API (nivel 1):', blocks.length);
+                const apiData = await res.json();
+                const apiBlocks = Array.isArray(apiData) ? apiData : (apiData.blocks || []);
+                blocks = this._dedupeBlocks(apiBlocks.filter(b => b.level === level));
+                if (blocks.length === 0) throw new Error(`API sin bloques para nivel ${level}`);
+                console.log(`Datos cargados desde la API (nivel ${level}):`, blocks.length);
                 //console.log('🧩 Lista de bloques:', blocks.map(b => b.name))
             } catch (apiError) {
-                console.warn('No se pudo conectar con la API. Cargando desde archivo local...');
-                const localRes = await fetch('/data/toy_car_blocks1.json');
-                const allBlocks = await localRes.json();
+                console.warn(`No se pudo conectar con la API. Cargando nivel ${level} desde public/data/toy_car_blocks.json...`);
+                const allBlocks = await this._fetchJson(this._publicPath('data/toy_car_blocks.json'), 'Bloques locales combinados');
 
-                // 🔍 Filtrar solo nivel 1
-                blocks = this._dedupeBlocks(allBlocks.filter(b => b.level === 1));
-                console.log(`Datos cargados desde archivo local (nivel 1): ${blocks.length}`);
+                // Filtrar el nivel solicitado desde el JSON combinado.
+                blocks = this._dedupeBlocks(allBlocks.filter(b => b.level === level));
+                if (blocks.length === 0) throw new Error(`Archivo local sin bloques para nivel ${level}`);
+                console.log(`Datos cargados desde archivo local (nivel ${level}): ${blocks.length}`);
 
             }
 

@@ -5,6 +5,7 @@ import FinalPrizeParticles from '../Utils/FinalPrizeParticles.js'
 import AmbientSound from './AmbientSound.js'
 import BlockPrefab from './BlockPrefab.js'
 import Enemy from './Enemy.js'
+import EnemyLarge from './EnemyLarge.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
 import LevelManager from './LevelManager.js'
@@ -139,6 +140,46 @@ export default class World {
         // Activar de inmediato
         enemy.delayActivation = 0
         this.enemies.push(enemy)
+    }
+
+    spawnLevel4Enemies() {
+        if (!this.robot?.body?.position || !this.enemyLargeTemplate) return
+
+        if (this.enemies?.length) {
+            this.enemies.forEach(e => e?.destroy?.())
+            this.enemies = []
+        }
+
+        const enemyConfigs = [
+            { x: -4, z: 14, patrol: [{ x: -10, z: 12 }, { x: 0, z: 7 }, { x: 6, z: 16 }] },
+            { x: 13, z: 4, patrol: [{ x: 9, z: -4 }, { x: 19, z: 0 }, { x: 17, z: 11 }] },
+            { x: -13, z: -8, patrol: [{ x: -18, z: -14 }, { x: -7, z: -18 }, { x: -4, z: -5 }] },
+            { x: 9, z: -18, patrol: [{ x: 2, z: -22 }, { x: 15, z: -25 }, { x: 18, z: -11 }] }
+        ]
+
+        enemyConfigs.forEach((config, index) => {
+            const position = new THREE.Vector3(config.x, 1.5, config.z)
+            const patrolPoints = config.patrol.map(point => ({
+                x: point.x,
+                y: 1.5,
+                z: point.z
+            }))
+
+            const enemy = new EnemyLarge({
+                scene: this.scene,
+                physicsWorld: this.experience.physics.world,
+                playerRef: this.robot,
+                model: this.enemyLargeTemplate,
+                position,
+                experience: this.experience,
+                patrolPoints
+            })
+
+            enemy.delayActivation = index * 0.4
+            this.enemies.push(enemy)
+        })
+
+        console.log(`Nivel 4: ${this.enemies.length} enemigos grandes creados`)
     }
 
     toggleAudio() {
@@ -530,13 +571,13 @@ export default class World {
                 console.warn(`⚠️ No se pudo conectar con el backend. Usando datos locales para nivel ${level}...`);
 
 
+                const combinedLocalUrl = publicPath('data/toy_car_blocks.json');
                 const levelLocalUrl = publicPath(`data/toy_car_blocks${level}.json`);
-                const fallbackLocalUrl = publicPath('data/toy_car_blocks.json');
-                let localUrl = levelLocalUrl;
+                let localUrl = combinedLocalUrl;
                 let localRes = await fetch(localUrl);
 
                 if (!localRes.ok) {
-                    localUrl = fallbackLocalUrl;
+                    localUrl = levelLocalUrl;
                     localRes = await fetch(localUrl);
                 }
 
@@ -643,6 +684,12 @@ export default class World {
             return;
         }
 
+        if (level === 4) {
+            this._updateEnemyTemplate(level)
+            this.spawnLevel4Enemies()
+            return
+        }
+
         if (this.enemies?.length) {
             this.enemies.forEach(enemy => enemy?.destroy?.());
             this.enemies = [];
@@ -654,11 +701,19 @@ export default class World {
      */
     _updateEnemyTemplate(level) {
         let enemyModel = null
+        this.enemyLargeTemplate = null
 
         if (level === 3) {
             enemyModel = this.resources.items.ghostskull
             if (enemyModel) {
                 console.log('Usando modelo ghost skull del nivel 3')
+            }
+        }
+
+        if (level === 4) {
+            this.enemyLargeTemplate = this.resources.items.enemyLarge
+            if (this.enemyLargeTemplate) {
+                console.log('Usando Enemy Large para el nivel 4')
             }
         }
 

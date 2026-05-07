@@ -4927,6 +4927,11 @@ export default [
         "path": "/models/Enemy/GhostSkull.glb"
     },
     {
+        "name": "enemyLarge",
+        "type": "gltfModel",
+        "path": "/models/Enemy/Enemy Large.glb"
+    },
+    {
         "name": "a_an1_roof_antenna_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/a_an1_roof_antenna_lev4.glb"
