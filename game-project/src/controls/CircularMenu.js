@@ -51,6 +51,9 @@ export default class CircularMenu {
       { icon: '🖥️', title: 'Pantalla Completa', onClick: onFullscreen },
       { icon: '🥽', title: 'Modo VR', onClick: () => this.vrIntegration.toggleVR() },
       { icon: '👨‍💻', title: 'Acerca de', onClick: () => this.showAboutModal() },
+      { icon: '🏅', title: 'Mis Partidas', onClick: () => { window.location.href = '/mis-partidas' } },
+      { icon: '👤', title: 'Mi Perfil', onClick: () => { window.location.href = '/perfil' } },
+      { icon: '📋', title: 'Catálogo de Niveles', onClick: () => { window.location.href = '/niveles' } },
       { icon: '❌', title: 'Cancelar Juego', onClick: onCancelGame }
     ]
 

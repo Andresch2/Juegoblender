@@ -4,7 +4,7 @@ const router = express.Router()
 const AuthService = require('../services/auth.service')
 
 const service = new AuthService()
-
+const GameSession = require('../models/GameSession')
 // POST /auth/register
 router.post('/register', async (req, res, next) => {
     try {
@@ -37,6 +37,41 @@ router.get('/profile/my-user',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
         res.json({ id: req.user._id, email: req.user.email, role: req.user.role })
+    }
+)
+// POST /auth/sessions — guardar partida (equivalente a POST /orders del profe)
+router.post('/sessions',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        try {
+            const { nivel, puntos, tiempo } = req.body
+            const sesion = new GameSession({
+                userId: req.user._id,
+                email:  req.user.email,
+                nivel,
+                puntos,
+                tiempo
+            })
+            await sesion.save()
+            res.status(201).json({ message: 'Partida guardada', sesion })
+        } catch (err) {
+            res.status(500).json({ message: 'Error al guardar partida', error: err.message })
+        }
+    }
+)
+
+// GET /auth/profile/my-sessions — mis partidas (equivalente a GET /profile/my-orders del profe)
+router.get('/profile/my-sessions',
+    passport.authenticate('jwt', { session: false }),
+    async (req, res) => {
+        try {
+            const sesiones = await GameSession
+                .find({ userId: req.user._id })
+                .sort({ fecha: -1 })
+            res.json(sesiones)
+        } catch (err) {
+            res.status(500).json({ message: 'Error al obtener partidas' })
+        }
     }
 )
 
