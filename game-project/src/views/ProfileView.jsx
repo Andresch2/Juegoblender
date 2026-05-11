@@ -47,13 +47,33 @@ export default function ProfileView() {
                 )}
 
                 <div style={styles.actions}>
+                    {/* Botón continuar desde nivel guardado */}
+                    {localStorage.getItem('savedLevel') && parseInt(localStorage.getItem('savedLevel')) > 1 && (
+                        <button
+                            onClick={() => {
+                                sessionStorage.setItem('continueFromLevel', localStorage.getItem('savedLevel'))
+                                navigate('/game')
+                            }}
+                            style={styles.btnContinue}
+                            aria-label={`Continuar desde nivel ${localStorage.getItem('savedLevel')}`}
+                        >
+                            ⏩ Continuar — Nivel {localStorage.getItem('savedLevel')}
+                        </button>
+                    )}
+
+                    {/* Botón iniciar desde nivel 1 */}
                     <button
-                        onClick={() => navigate('/game')}
+                        onClick={() => {
+                            localStorage.removeItem('savedLevel')
+                            sessionStorage.removeItem('continueFromLevel')
+                            navigate('/game')
+                        }}
                         style={styles.btnPlay}
-                        aria-label="Volver al juego"
+                        aria-label="Iniciar desde nivel 1"
                     >
-                        ▶ Volver al Juego
+                        🔄 Iniciar desde Nivel 1
                     </button>
+
                     <button
                         onClick={handleLogout}
                         style={styles.btnLogout}
@@ -68,18 +88,24 @@ export default function ProfileView() {
 }
 
 const styles = {
-    container: { minHeight:'100vh', display:'flex', alignItems:'center', justifyContent:'center', background:'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily:'sans-serif' },
-    card: { background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:16, padding:'40px 36px', width:'100%', maxWidth:420, backdropFilter:'blur(12px)' },
-    title: { color:'#fff', textAlign:'center', margin:'0 0 4px', fontSize:26 },
-    subtitle: { color:'#a5b4fc', textAlign:'center', margin:'0 0 28px', fontSize:18, fontWeight:400 },
-    info: { color:'#94a3b8', textAlign:'center' },
-    error: { color:'#f87171', textAlign:'center' },
-    data: { background:'rgba(255,255,255,0.05)', borderRadius:10, padding:'16px 20px', marginBottom:24 },
-    row: { display:'flex', justifyContent:'space-between', alignItems:'center', padding:'10px 0', borderBottom:'1px solid rgba(255,255,255,0.08)' },
-    label: { color:'#94a3b8', fontSize:14 },
-    value: { color:'#fff', fontSize:14, fontWeight:600 },
-    badge: { color:'#fff', fontSize:12, fontWeight:700, padding:'3px 10px', borderRadius:20 },
-    actions: { display:'flex', flexDirection:'column', gap:12 },
-    btnPlay: { padding:14, borderRadius:8, background:'linear-gradient(90deg,#6366f1,#8b5cf6)', color:'#fff', border:'none', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 },
-    btnLogout: { padding:14, borderRadius:8, background:'rgba(239,68,68,0.15)', border:'1px solid rgba(239,68,68,0.4)', color:'#f87171', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 }
+    container: { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily: 'sans-serif' },
+    card: { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 16, padding: '40px 36px', width: '100%', maxWidth: 420, backdropFilter: 'blur(12px)' },
+    title: { color: '#fff', textAlign: 'center', margin: '0 0 4px', fontSize: 26 },
+    subtitle: { color: '#a5b4fc', textAlign: 'center', margin: '0 0 28px', fontSize: 18, fontWeight: 400 },
+    info: { color: '#94a3b8', textAlign: 'center' },
+    error: { color: '#f87171', textAlign: 'center' },
+    data: { background: 'rgba(255,255,255,0.05)', borderRadius: 10, padding: '16px 20px', marginBottom: 24 },
+    row: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid rgba(255,255,255,0.08)' },
+    label: { color: '#94a3b8', fontSize: 14 },
+    value: { color: '#fff', fontSize: 14, fontWeight: 600 },
+    badge: { color: '#fff', fontSize: 12, fontWeight: 700, padding: '3px 10px', borderRadius: 20 },
+    actions: { display: 'flex', flexDirection: 'column', gap: 12 },
+    btnPlay: { padding: 14, borderRadius: 8, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)', color: '#fff', border: 'none', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 },
+    btnLogout: { padding: 14, borderRadius: 8, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)', color: '#f87171', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 },
+    btnContinue: { 
+    padding:14, borderRadius:8, 
+    background:'linear-gradient(90deg,#059669,#10b981)', 
+    color:'#fff', border:'none', fontSize:15, 
+    cursor:'pointer', fontWeight:600, minHeight:44 
+},
 }

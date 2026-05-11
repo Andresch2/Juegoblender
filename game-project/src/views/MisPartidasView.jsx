@@ -88,8 +88,19 @@ export default function MisPartidasView() {
                 )}
 
                 <div style={styles.navBtns}>
-                    <button onClick={() => navigate('/game')} style={styles.btnVolver}>
-                        ▶ Volver al Juego
+                    <button
+                        onClick={() => {
+                            const nivelGuardado = localStorage.getItem('savedLevel')
+                            if (nivelGuardado && parseInt(nivelGuardado) > 1) {
+                                sessionStorage.setItem('continueFromLevel', nivelGuardado)
+                            }
+                            navigate('/game')
+                        }}
+                        style={styles.btnVolver}
+                    >
+                        ▶ {localStorage.getItem('savedLevel') > 1
+                            ? `Continuar — Nivel ${localStorage.getItem('savedLevel')}`
+                            : 'Volver al Juego'}
                     </button>
                     <button onClick={() => { clearToken(); navigate('/login') }} style={styles.btnLogout}>
                         🚪 Cerrar Sesión
@@ -101,23 +112,23 @@ export default function MisPartidasView() {
 }
 
 const styles = {
-    container: { minHeight:'100vh', overflowY:'auto', background:'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily:'sans-serif', padding:'32px 16px' },
-    wrapper: { maxWidth:720, margin:'0 auto', paddingBottom:40 },
-    title: { color:'#fff', textAlign:'center', margin:'0 0 4px', fontSize:26 },
-    subtitle: { color:'#a5b4fc', textAlign:'center', margin:'0 0 24px', fontSize:20, fontWeight:400 },
-    info: { color:'#94a3b8', textAlign:'center', marginTop:20 },
-    error: { color:'#f87171', textAlign:'center' },
-    resumen: { display:'flex', gap:12, marginBottom:24, flexWrap:'wrap' },
-    stat: { flex:1, minWidth:100, background:'rgba(255,255,255,0.07)', borderRadius:10, padding:'14px', textAlign:'center', display:'flex', flexDirection:'column', gap:4, color:'#fff', fontSize:22 },
-    tabla: { background:'rgba(255,255,255,0.04)', borderRadius:10, overflow:'hidden', marginBottom:24 },
-    thead: { display:'grid', gridTemplateColumns:'0.5fr 1fr 1fr 1fr 1.5fr', padding:'10px 16px', background:'rgba(99,102,241,0.35)', color:'#a5b4fc', fontSize:13, fontWeight:700, gap:8 },
-    fila: { display:'grid', gridTemplateColumns:'0.5fr 1fr 1fr 1fr 1.5fr', padding:'10px 16px', color:'#e2e8f0', fontSize:13, gap:8, alignItems:'center' },
-    num: { color:'#64748b' },
-    badge: { background:'rgba(99,102,241,0.3)', borderRadius:4, padding:'2px 8px', fontSize:12, color:'#818cf8' },
-    puntos: { color:'#fbbf24', fontWeight:700 },
-    tiempo: { color:'#34d399' },
-    fecha: { color:'#94a3b8', fontSize:12 },
-    navBtns: { display:'flex', gap:12, marginTop:16 },
-    btnVolver: { flex:1, padding:13, borderRadius:8, background:'linear-gradient(90deg,#6366f1,#8b5cf6)', color:'#fff', border:'none', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 },
-    btnLogout: { flex:1, padding:13, borderRadius:8, background:'rgba(239,68,68,0.15)', border:'1px solid rgba(239,68,68,0.4)', color:'#f87171', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 }
+    container: { minHeight: '100vh', overflowY: 'auto', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily: 'sans-serif', padding: '32px 16px' },
+    wrapper: { maxWidth: 720, margin: '0 auto', paddingBottom: 40 },
+    title: { color: '#fff', textAlign: 'center', margin: '0 0 4px', fontSize: 26 },
+    subtitle: { color: '#a5b4fc', textAlign: 'center', margin: '0 0 24px', fontSize: 20, fontWeight: 400 },
+    info: { color: '#94a3b8', textAlign: 'center', marginTop: 20 },
+    error: { color: '#f87171', textAlign: 'center' },
+    resumen: { display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' },
+    stat: { flex: 1, minWidth: 100, background: 'rgba(255,255,255,0.07)', borderRadius: 10, padding: '14px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4, color: '#fff', fontSize: 22 },
+    tabla: { background: 'rgba(255,255,255,0.04)', borderRadius: 10, overflow: 'hidden', marginBottom: 24 },
+    thead: { display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 1fr 1.5fr', padding: '10px 16px', background: 'rgba(99,102,241,0.35)', color: '#a5b4fc', fontSize: 13, fontWeight: 700, gap: 8 },
+    fila: { display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 1fr 1.5fr', padding: '10px 16px', color: '#e2e8f0', fontSize: 13, gap: 8, alignItems: 'center' },
+    num: { color: '#64748b' },
+    badge: { background: 'rgba(99,102,241,0.3)', borderRadius: 4, padding: '2px 8px', fontSize: 12, color: '#818cf8' },
+    puntos: { color: '#fbbf24', fontWeight: 700 },
+    tiempo: { color: '#34d399' },
+    fecha: { color: '#94a3b8', fontSize: 12 },
+    navBtns: { display: 'flex', gap: 12, marginTop: 16 },
+    btnVolver: { flex: 1, padding: 13, borderRadius: 8, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)', color: '#fff', border: 'none', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 },
+    btnLogout: { flex: 1, padding: 13, borderRadius: 8, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)', color: '#f87171', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 }
 }

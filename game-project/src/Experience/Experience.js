@@ -68,7 +68,7 @@ export default class Experience {
       }
     })
 
-    
+
     // Cámara y renderer
     this.camera = new Camera(this)
     this.renderer = new Renderer(this)
@@ -319,16 +319,25 @@ export default class Experience {
 
   startGame() {
     console.log('🎮 Juego iniciado')
-    this.isThirdPerson = true // ⬅️ asegurar el modo
+    this.isThirdPerson = true
     this.tracker.start()
-    // this._startObstacleWaves() // DESACTIVADO
     if (this.menu && this.menu.toggleButton && this.menu.toggleButton.style) {
       this.menu.toggleButton.style.display = 'block'
     }
-
     if (this.world) {
       this.world.gameStarted = true
     }
+
+    // Leer nivel guardado para "Continuar partida" (Actividad 4)
+    const continueLevel = parseInt(sessionStorage.getItem('continueFromLevel'))
+    if (continueLevel && continueLevel > 1) {
+      sessionStorage.removeItem('continueFromLevel')
+      console.log('⏩ Continuando desde nivel', continueLevel)
+      setTimeout(() => {
+        this.world?.levelManager?.goToLevel?.(continueLevel)
+      }, 1500)
+    }
+
     console.log('🎮 Iniciando partida...')
   }
 

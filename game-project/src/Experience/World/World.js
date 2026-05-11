@@ -319,9 +319,9 @@ export default class World {
 
             const portalRadius = this.levelManager.currentLevel === 4 ? 5.0 : 2.5;
             if (horizontalDist < portalRadius) {
-                this.points = -999; // hack para evitar triggers repetidos
+                this.points = -999 // hack para evitar triggers repetidos
 
-                const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize");
+                const finalCoin = this.loader.prizes.find(p => p.role === "finalPrize")
                 if (finalCoin && !finalCoin.collected) {
                     finalCoin.collect()
                     finalCoin.collected = true
@@ -330,26 +330,54 @@ export default class World {
                     }
                 }
 
+                // ── Actividad 4: Guardar partida (equivalente a POST /orders del profe) ──
+                const nivelCompletado = this.levelManager.currentLevel
+                const puntosObtenidos = Math.abs(this.robot?.points || 0)
+                const tiempoTranscurrido = Math.floor(Date.now() / 1000 - (this.experience.tracker?.startTimestamp || Date.now() / 1000))
+
+                fetch(
+                    (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/auth/sessions',
+                    {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Authorization': 'Bearer ' + localStorage.getItem('token')
+                        },
+                        body: JSON.stringify({
+                            nivel: nivelCompletado,
+                            puntos: puntosObtenidos,
+                            tiempo: tiempoTranscurrido
+                        })
+                    }
+                )
+                    .then(() => console.log('✅ Partida guardada: nivel', nivelCompletado))
+                    .catch(() => console.warn('⚠️ No se pudo guardar la partida'))
+                // ── Fin guardar partida ──
+
                 if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
                     const changedLevel = await this.levelManager.nextLevel()
                     if (!changedLevel) {
                         this.experience.modal.show({
                             icon: '🚀',
                             message: 'Nivel 5 pendiente por exportar.\nLa nave ya esta lista para llevarte alli.',
-                            buttons: [
-                                {
-                                    text: 'Continuar',
-                                    onClick: () => { }
-                                }
-                            ]
+                            buttons: [{ text: 'Continuar', onClick: () => { } }]
                         })
-                        this.points = pointsTarget
-                        this.robot.points = pointsTarget
+                        this.points = nivelCompletado
+                        this.robot.points = nivelCompletado
                         return
                     }
+
+                    // ── Guardar nivel actual para "Continuar partida" ──
+                    localStorage.setItem('savedLevel', this.levelManager.currentLevel)
+                    // ── Fin guardar nivel ──
+
                     this.points = 0
                     this.robot.points = 0
                 } else {
+                    // ── Limpiar nivel guardado al terminar el juego completo ──
+                    localStorage.removeItem('savedLevel')
+                    // ── Fin limpiar ──
+
                     const elapsed = this.experience.tracker.stop()
                     this.experience.tracker.saveTime(elapsed)
                     this.experience.tracker.showEndGameModal(elapsed)
