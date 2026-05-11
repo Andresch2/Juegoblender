@@ -12,6 +12,7 @@ export default class GameTracker {
     start() {
         this.startTime = Date.now()
         this._startLoop()
+        this.startTimestamp = Date.now() / 1000
     }
 
     stop() {
