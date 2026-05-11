@@ -2,7 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { Protected } from './routes/Protected'
 import LoginView from './views/LoginView'
+import ProfileView from './views/ProfileView'
+import NivelesView from './views/NivelesView'
+import NivelDetalleView from './views/NivelDetalleView'
 import Experience from './Experience/Experience'
+import MisPartidasView from './views/MisPartidasView'
+
 import './styles/loader.css'
 
 function GameView() {
@@ -40,7 +45,28 @@ export default function App() {
     return (
         <BrowserRouter>
             <Routes>
+                
                 <Route path="/login" element={<LoginView />} />
+                <Route path="/perfil" element={
+                    <Protected>
+                        <ProfileView />
+                    </Protected>
+                } />
+                <Route path="/mis-partidas" element={
+                    <Protected>
+                        <MisPartidasView />
+                    </Protected>
+                } />
+                <Route path="/niveles" element={
+                    <Protected>
+                        <NivelesView />
+                    </Protected>
+                } />
+                <Route path="/niveles/:id" element={
+                    <Protected>
+                        <NivelDetalleView />
+                    </Protected>
+                } />
                 <Route path="/game" element={
                     <Protected>
                         <GameView />
