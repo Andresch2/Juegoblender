@@ -7,6 +7,7 @@ import NivelesView from './views/NivelesView'
 import NivelDetalleView from './views/NivelDetalleView'
 import Experience from './Experience/Experience'
 import MisPartidasView from './views/MisPartidasView'
+import { isFrontendOnly } from './services/session'
 
 import './styles/loader.css'
 
@@ -42,6 +43,8 @@ function GameView() {
 }
 
 export default function App() {
+    const fallbackRoute = isFrontendOnly() ? '/game' : '/login'
+
     return (
         <BrowserRouter>
             <Routes>
@@ -72,7 +75,7 @@ export default function App() {
                         <GameView />
                     </Protected>
                 } />
-                <Route path="*" element={<Navigate to="/login" replace />} />
+                <Route path="*" element={<Navigate to={fallbackRoute} replace />} />
             </Routes>
         </BrowserRouter>
     )

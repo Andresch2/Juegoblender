@@ -9,7 +9,7 @@ export async function request(path, options) {
     }
     if (options?.auth && token) headers.Authorization = `Bearer ${token}`
 
-    const res = await fetch(`${BASE_URL}${path}`, {
+    let res = await fetch(`${BASE_URL}${path}`, {
         method: options?.method || 'GET',
         headers,
         body: options?.body ? JSON.stringify(options.body) : undefined
