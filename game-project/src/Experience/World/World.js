@@ -8,6 +8,7 @@ import Enemy from './Enemy.js'
 import EnemyLarge from './EnemyLarge.js'
 import Environment from './Environment.js'
 import Floor from './Floor.js'
+import Fox from './Fox.js'
 import LevelManager from './LevelManager.js'
 import Robot from './Robot.js'
 import Sound from './Sound.js'
@@ -52,6 +53,7 @@ export default class World {
             this.refreshLevelProgress(1)
 
             this.robot = new Robot(this.experience)
+            this.fox = new Fox(this.experience, this.robot)
 
             // Buscar spawn en los bloques cargados inicialmente
             if (this.loader.loadedBlocks && this.loader.loadedBlocks.length > 0) {
@@ -212,6 +214,7 @@ export default class World {
 
     async update(delta) {
         this.robot?.update()
+        this.fox?.update(delta)
         this.blockPrefab?.update()
 
         // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
@@ -335,23 +338,28 @@ export default class World {
                 const puntosObtenidos = Math.abs(this.robot?.points || 0)
                 const tiempoTranscurrido = Math.floor(Date.now() / 1000 - (this.experience.tracker?.startTimestamp || Date.now() / 1000))
 
-                fetch(
-                    (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/auth/sessions',
-                    {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': 'Bearer ' + localStorage.getItem('token')
-                        },
-                        body: JSON.stringify({
-                            nivel: nivelCompletado,
-                            puntos: puntosObtenidos,
-                            tiempo: tiempoTranscurrido
+                if (import.meta.env.VITE_FRONTEND_ONLY !== 'true') {
+                    fetch(
+                        (import.meta.env.VITE_API_URL || 'http://localhost:3001') + '/auth/sessions',
+                        {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': 'Bearer ' + localStorage.getItem('token')
+                            },
+                            body: JSON.stringify({
+                                nivel: nivelCompletado,
+                                puntos: puntosObtenidos,
+                                tiempo: tiempoTranscurrido
+                            })
+                        }
+                    )
+                        .then((res) => {
+                            if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                            console.log('✅ Partida guardada: nivel', nivelCompletado)
                         })
-                    }
-                )
-                    .then(() => console.log('✅ Partida guardada: nivel', nivelCompletado))
-                    .catch(() => console.warn('⚠️ No se pudo guardar la partida'))
+                        .catch(() => console.warn('⚠️ No se pudo guardar la partida'))
+                }
                 // ── Fin guardar partida ──
 
                 if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
@@ -1003,6 +1011,8 @@ export default class World {
 
         this.robot.group.position.set(spawn.x, spawn.y, spawn.z)
         this.robot.group.rotation.set(0, 0, 0)
+
+        this.fox?.resetNear?.(spawn)
     }
 
     async _processLocalBlocks(blocks) {
