@@ -290,12 +290,14 @@ export default class World {
                     if (finalCoin.model) finalCoin.model.visible = true;
                 }
 
-                new FinalPrizeParticles({
-                    scene: this.scene,
-                    targetPosition: portalPos,
-                    sourcePosition: this.experience.vrDolly?.position ?? this.experience.camera.instance.position,
-                    experience: this.experience
-                })
+                if (this.levelManager.currentLevel !== 1) {
+                    new FinalPrizeParticles({
+                        scene: this.scene,
+                        targetPosition: portalPos,
+                        sourcePosition: this.experience.vrDolly?.position ?? this.experience.camera.instance.position,
+                        experience: this.experience
+                    })
+                }
 
                 this.createPortalVortex(portalPos)
 
@@ -406,6 +408,13 @@ export default class World {
                     child.rotation.z += delta * child.userData.spin
                     child.scale.setScalar(1 + Math.sin(Date.now() * 0.003 + index) * 0.04)
                 }
+                if (child.userData?.spinY) {
+                    child.rotation.y += delta * child.userData.spinY
+                    child.scale.setScalar(1 + Math.sin(Date.now() * 0.003 + index) * 0.035)
+                }
+                if (child.material?.uniforms?.uTime) {
+                    child.material.uniforms.uTime.value += delta
+                }
                 if (child.userData?.isParticles) {
                     const positions = child.geometry.attributes.position.array
                     const velocities = child.userData.velocities
@@ -470,6 +479,7 @@ export default class World {
         const group = new THREE.Group()
         group.position.copy(position)
 
+        const isLevel1 = this.levelManager?.currentLevel === 1
         const isLevel3 = this.levelManager?.currentLevel === 3
         const isLevel4 = this.levelManager?.currentLevel === 4
 
@@ -482,6 +492,13 @@ export default class World {
 
         const mainColor = isLevel4 ? 0xff7a18 : (isLevel3 ? 0x9d4edd : 0x27f5d2)
         const radiusScale = isLevel4 ? 1.65 : 1
+
+        if (isLevel1) {
+            this.createLevelOneShaderVortex(group)
+            this.portalVortexGroup = group
+            this.scene.add(group)
+            return
+        }
 
         for (let i = 0; i < 3; i++) {
             const geometry = new THREE.TorusGeometry((1.1 + i * 0.35) * radiusScale, 0.035 * radiusScale, 8, 80)
@@ -555,6 +572,84 @@ export default class World {
 
         this.portalVortexGroup = group
         this.scene.add(group)
+    }
+
+    createLevelOneShaderVortex(group) {
+        const vortexY = 0.35
+
+        const material = new THREE.ShaderMaterial({
+            uniforms: {
+                uTime: { value: 0 },
+                uColorA: { value: new THREE.Color(0x27f5d2) },
+                uColorB: { value: new THREE.Color(0xffd166) }
+            },
+            vertexShader: `
+                varying vec2 vUv;
+
+                void main() {
+                    vUv = uv;
+                    gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+                }
+            `,
+            fragmentShader: `
+                uniform float uTime;
+                uniform vec3 uColorA;
+                uniform vec3 uColorB;
+                varying vec2 vUv;
+
+                void main() {
+                    vec2 p = vUv - 0.5;
+                    float radius = length(p) * 2.0;
+                    float angle = atan(p.y, p.x);
+
+                    float spiral = sin(angle * 7.0 - radius * 12.0 + uTime * 3.2);
+                    float ripple = sin(radius * 20.0 - uTime * 4.0);
+                    float glow = 1.0 - smoothstep(0.0, 1.0, radius);
+                    float edge = 1.0 - smoothstep(0.78, 1.0, radius);
+
+                    float strength = (0.36 + spiral * 0.28 + ripple * 0.12) * edge;
+                    strength += glow * 0.45;
+
+                    vec3 color = mix(uColorA, uColorB, spiral * 0.5 + 0.5);
+                    gl_FragColor = vec4(color, clamp(strength, 0.0, 0.92));
+                }
+            `,
+            transparent: true,
+            depthWrite: false,
+            side: THREE.DoubleSide,
+            blending: THREE.AdditiveBlending
+        })
+
+        const geometry = new THREE.CircleGeometry(1.75, 96)
+        const frontVortex = new THREE.Mesh(geometry, material)
+        frontVortex.position.y = vortexY
+        frontVortex.userData.spinY = 0.55
+        group.add(frontVortex)
+
+        const crossedVortex = new THREE.Mesh(geometry.clone(), material.clone())
+        crossedVortex.position.y = vortexY
+        crossedVortex.rotation.y = Math.PI / 2
+        crossedVortex.userData.spinY = -0.45
+        group.add(crossedVortex)
+
+        const halo = new THREE.Mesh(
+            new THREE.RingGeometry(1.55, 1.72, 96),
+            new THREE.MeshBasicMaterial({
+                color: 0xffd166,
+                transparent: true,
+                opacity: 0.72,
+                side: THREE.DoubleSide,
+                blending: THREE.AdditiveBlending,
+                depthWrite: false
+            })
+        )
+        halo.position.y = vortexY
+        halo.userData.spinY = 0.25
+        group.add(halo)
+
+        const pointLight = new THREE.PointLight(0x27f5d2, 4, 9)
+        pointLight.position.set(0, vortexY + 0.1, 0)
+        group.add(pointLight)
     }
 
     clearPortalVortex() {
