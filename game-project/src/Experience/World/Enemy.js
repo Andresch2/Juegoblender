@@ -12,8 +12,8 @@ export default class Enemy {
         this.playerRef = playerRef
         this.modelResource = model
 
-        this.baseSpeed = 1.0
-        this.chaseSpeed = 3.2
+        this.baseSpeed = 1.45
+        this.chaseSpeed = 4.4
         this.speed = this.baseSpeed
         this.delayActivation = 0
 
@@ -21,10 +21,10 @@ export default class Enemy {
         this.chasePoints = chasePoints || []
         this.currentPatrolIndex = 0
         this.currentChaseIndex = 0
-        this.detectionRadius = 12
-        this.releaseRadius = 16
-        this.attackDistance = 1.8
-        this.visualYOffset = -3.2
+        this.detectionRadius = 24
+        this.releaseRadius = 32
+        this.attackDistance = 3.0
+        this.visualYOffset = -2.1
         this.isChasing = false
 
         this.proximitySound = new Sound('/sounds/alert.ogg', {
@@ -222,10 +222,11 @@ export default class Enemy {
             return
         }
 
+        const playerInRouteZone = this.isPlayerNearRoute(playerPos)
         if (this.isChasing) {
-            this.isChasing = distanceToPlayer < this.releaseRadius
+            this.isChasing = distanceToPlayer < this.releaseRadius || playerInRouteZone
         } else {
-            this.isChasing = distanceToPlayer < this.detectionRadius
+            this.isChasing = distanceToPlayer < this.detectionRadius || playerInRouteZone
         }
 
         let targetPos
@@ -293,6 +294,16 @@ export default class Enemy {
         this.body.position.y = this.hoverY
         this.model.position.copy(this.body.position)
         this.playAnimation(action)
+    }
+
+    isPlayerNearRoute(playerPos) {
+        if (!this.chasePoints.length) return false
+
+        return this.chasePoints.some(point => {
+            const dx = playerPos.x - point.x
+            const dz = playerPos.z - point.z
+            return Math.sqrt(dx * dx + dz * dz) < 10
+        })
     }
 
     killPlayer() {

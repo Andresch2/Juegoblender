@@ -10,13 +10,16 @@ export default class ToyCarLoader {
         this.resources = this.experience.resources;
         this.physics = this.experience.physics;
         this.prizes = [];
+        this.hazards = [];
         this.loadedBlocks = [];
         this.missingModels = new Set();
     }
 
     getSignTexturePath(blockName) {
         const signTextures = {
-            cartel_bosque_tabla_lev1: '/textures/signs/bosque.png'
+            cartel_bosque_tabla_lev1: '/textures/signs/bosque.png',
+            cartel_ghost_tabla_001_lev3: '/textures/signs/ruinas.png',
+            cartel_ghost_tabla_lev3: '/textures/signs/ruinasghost.png'
         };
 
         return signTextures[blockName] || null;
@@ -29,7 +32,8 @@ export default class ToyCarLoader {
         bbox.getSize(size);
         bbox.getCenter(center);
 
-        const width = Math.max(size.x * 0.92, 0.1);
+        const isSideFacingSign = size.z > size.x;
+        const width = Math.max((isSideFacingSign ? size.z : size.x) * 0.92, 0.1);
         const height = Math.max(size.y * 0.92, 0.1);
         const texture = new THREE.TextureLoader().load(imagePath);
 
@@ -50,7 +54,12 @@ export default class ToyCarLoader {
 
         const plane = new THREE.Mesh(new THREE.PlaneGeometry(width, height), material);
         plane.name = 'sign_image_overlay';
-        plane.position.set(center.x, center.y, bbox.max.z + 0.03);
+        if (isSideFacingSign) {
+            plane.rotation.y = -Math.PI / 2;
+            plane.position.set(bbox.min.x - 0.03, center.y, center.z);
+        } else {
+            plane.position.set(center.x, center.y, bbox.max.z + 0.03);
+        }
         plane.userData.levelObject = true;
 
         model.add(plane);
@@ -280,6 +289,7 @@ export default class ToyCarLoader {
 
     async _processBlocks(blocks, precisePhysicsModels) {
         blocks = this._dedupeBlocks(blocks);
+        this.hazards = [];
 
         // Patrones que SI deben tener colision fisica (superficies caminables)
         const PHYSICS_PATTERNS = [
@@ -432,6 +442,11 @@ export default class ToyCarLoader {
 
             // Agregar modelo visualmente a la escena
             this.scene.add(model);
+            if (nameLower.includes('spikes')) {
+                model.userData.hazard = true;
+                model.userData.hazardName = block.name;
+                this.hazards.push(model);
+            }
 
             // Determinar si este objeto debe tener fisica
             const hasPhysicsPattern = PHYSICS_PATTERNS.some(p => nameLower.includes(p))

@@ -159,5 +159,16 @@
     "final_wall_east_8_lev3",
     "portal_final_l3_lev3",
     "plaza_wall_west_2_001_lev3",
-    "crypt_wall_east_0_001_lev3"
+    "crypt_wall_east_0_001_lev3",
+    "crypt_barrel_lev3",
+    "crypt_table_lev3",
+    "crypt_safe_zone_lev3",
+    "plaza_horse_lev3",
+    "plaza_crate_1_lev3",
+    "plaza_crate_2_lev3",
+    "chamber_spikes_1_lev3",
+    "chamber_spikes_2_lev3",
+    "chase_spikes_1_lev3",
+    "chase_spikes_2_lev3",
+    "portal_safe_zone_lev3"
 ]

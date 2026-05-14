@@ -29,6 +29,7 @@ export default class World {
         this.gameStarted = false
         this.enemies = []
         this.totalDefaultCoins = 0
+        this.finalPrizeParticles = []
 
         this.coinSound = new Sound('/sounds/coin.ogg')
         this.ambientSound = new AmbientSound('/sounds/ambiente.mp3')
@@ -212,10 +213,35 @@ export default class World {
         });
     }
 
+    checkHazards() {
+        if (!this.robot?.body || !this.loader?.hazards?.length) return
+
+        const playerPos = this.robot.body.position
+
+        for (const hazard of this.loader.hazards) {
+            if (!hazard?.parent) continue
+
+            const bbox = new THREE.Box3().setFromObject(hazard)
+            const closestX = Math.max(bbox.min.x, Math.min(playerPos.x, bbox.max.x))
+            const closestZ = Math.max(bbox.min.z, Math.min(playerPos.z, bbox.max.z))
+            const dx = playerPos.x - closestX
+            const dz = playerPos.z - closestZ
+            const horizontalDistance = Math.sqrt(dx * dx + dz * dz)
+            const nearHeight = playerPos.y > bbox.min.y - 0.5 && playerPos.y < bbox.max.y + 1.6
+
+            if (horizontalDistance < 0.65 && nearHeight) {
+                console.log(`Jugador toco peligro: ${hazard.userData.hazardName || hazard.name}`)
+                this.robot.die()
+                return
+            }
+        }
+    }
+
     async update(delta) {
         this.robot?.update()
         this.fox?.update(delta)
         this.blockPrefab?.update()
+        this.checkHazards()
 
         // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
         if (this.gameStarted && this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
@@ -291,12 +317,13 @@ export default class World {
                 }
 
                 if (this.levelManager.currentLevel !== 1) {
-                    new FinalPrizeParticles({
+                    const finalPrizeEffect = new FinalPrizeParticles({
                         scene: this.scene,
                         targetPosition: portalPos,
                         sourcePosition: this.experience.vrDolly?.position ?? this.experience.camera.instance.position,
                         experience: this.experience
                     })
+                    this.finalPrizeParticles.push(finalPrizeEffect)
                 }
 
                 this.createPortalVortex(portalPos)
@@ -365,6 +392,8 @@ export default class World {
                 // ── Fin guardar partida ──
 
                 if (this.levelManager.currentLevel < this.levelManager.totalLevels) {
+                    this.clearFinalPrizeParticles()
+                    this.clearPortalVortex()
                     const changedLevel = await this.levelManager.nextLevel()
                     if (!changedLevel) {
                         this.experience.modal.show({
@@ -428,11 +457,12 @@ export default class World {
                         positions[i3 + 0] = x * Math.cos(velocities[i].spin * delta) - z * Math.sin(velocities[i].spin * delta)
                         positions[i3 + 2] = x * Math.sin(velocities[i].spin * delta) + z * Math.cos(velocities[i].spin * delta)
 
-                        const isLevel4Portal = this.levelManager?.currentLevel === 4
-                        if (positions[i3 + 1] > (isLevel4Portal ? 7 : 5)) {
+                        const currentLevel = this.levelManager?.currentLevel
+                        const isLargePortal = currentLevel === 3 || currentLevel === 4
+                        if (positions[i3 + 1] > (isLargePortal ? 7 : 5)) {
                             positions[i3 + 1] = 0
-                            positions[i3 + 0] = (Math.random() - 0.5) * (isLevel4Portal ? 7 : 4)
-                            positions[i3 + 2] = (Math.random() - 0.5) * (isLevel4Portal ? 7 : 4)
+                            positions[i3 + 0] = (Math.random() - 0.5) * (isLargePortal ? 7 : 4)
+                            positions[i3 + 2] = (Math.random() - 0.5) * (isLargePortal ? 7 : 4)
                         }
                     }
                     child.geometry.attributes.position.needsUpdate = true
@@ -482,6 +512,7 @@ export default class World {
         const isLevel1 = this.levelManager?.currentLevel === 1
         const isLevel3 = this.levelManager?.currentLevel === 3
         const isLevel4 = this.levelManager?.currentLevel === 4
+        const isLargePortal = isLevel3 || isLevel4
 
         // Colores base del portal: Tonalidad fantasma para nivel 3, cyan/amarillo para nivel 1
         const ringColors = isLevel4
@@ -491,7 +522,7 @@ export default class World {
                 : [0x27f5d2, 0xffd166, 0xffffff] // Cyan, amarillo, blanco
 
         const mainColor = isLevel4 ? 0xff7a18 : (isLevel3 ? 0x9d4edd : 0x27f5d2)
-        const radiusScale = isLevel4 ? 1.65 : 1
+        const radiusScale = isLevel4 ? 1.65 : (isLevel3 ? 1.55 : 1)
 
         if (isLevel1) {
             this.createLevelOneShaderVortex(group)
@@ -511,7 +542,7 @@ export default class World {
             const ring = new THREE.Mesh(geometry, material)
             ring.rotation.x = Math.PI / 2
             ring.rotation.z = i * 0.75
-            ring.position.y = (isLevel4 ? 1.5 : 1.05) + i * 0.35
+            ring.position.y = (isLargePortal ? 1.5 : 1.05) + i * 0.35
             ring.userData.spin = i % 2 === 0 ? 1.4 : -1.1
             group.add(ring)
         }
@@ -527,28 +558,28 @@ export default class World {
         for (let i = 0; i < 5; i++) {
             const geometry = new THREE.ConeGeometry(0.08 * radiusScale, 3.2 * radiusScale, 5, 1, true)
             const beam = new THREE.Mesh(geometry, spiralMaterial.clone())
-            beam.position.y = isLevel4 ? 2.5 : 1.9
+            beam.position.y = isLargePortal ? 2.5 : 1.9
             beam.rotation.x = Math.PI / 2
             beam.rotation.z = (i * Math.PI * 2) / 5
             beam.userData.spin = 0.9 + i * 0.12
             group.add(beam)
         }
 
-        const pointLight = new THREE.PointLight(mainColor, isLevel4 ? 6 : 4, isLevel4 ? 14 : 9)
-        pointLight.position.set(0, isLevel4 ? 3.0 : 2.2, 0)
+        const pointLight = new THREE.PointLight(mainColor, isLargePortal ? 4.5 : 4, isLargePortal ? 12 : 9)
+        pointLight.position.set(0, isLargePortal ? 3.0 : 2.2, 0)
         group.add(pointLight)
 
         // --- Partículas del portal ---
-        const particleCount = isLevel4 ? 260 : 150
+        const particleCount = isLargePortal ? 260 : 150
         const particlesGeometry = new THREE.BufferGeometry()
         const particlesPosition = new Float32Array(particleCount * 3)
         const particlesVelocity = []
 
         for (let i = 0; i < particleCount; i++) {
             const i3 = i * 3
-            particlesPosition[i3 + 0] = (Math.random() - 0.5) * (isLevel4 ? 7 : 4)
-            particlesPosition[i3 + 1] = Math.random() * (isLevel4 ? 7 : 5)
-            particlesPosition[i3 + 2] = (Math.random() - 0.5) * (isLevel4 ? 7 : 4)
+            particlesPosition[i3 + 0] = (Math.random() - 0.5) * (isLargePortal ? 7 : 4)
+            particlesPosition[i3 + 1] = Math.random() * (isLargePortal ? 7 : 5)
+            particlesPosition[i3 + 2] = (Math.random() - 0.5) * (isLargePortal ? 7 : 4)
             particlesVelocity.push({
                 y: 0.5 + Math.random() * 1.5,
                 spin: (Math.random() - 0.5) * 2
@@ -558,9 +589,9 @@ export default class World {
         particlesGeometry.setAttribute('position', new THREE.BufferAttribute(particlesPosition, 3))
         const particlesMaterial = new THREE.PointsMaterial({
             color: mainColor,
-            size: isLevel4 ? 0.14 : 0.1,
+            size: isLargePortal ? 0.16 : 0.1,
             transparent: true,
-            opacity: 0.8,
+            opacity: isLevel3 ? 0.65 : 0.8,
             blending: THREE.AdditiveBlending,
             depthWrite: false
         })
@@ -568,6 +599,7 @@ export default class World {
         const particles = new THREE.Points(particlesGeometry, particlesMaterial)
         particles.userData.velocities = particlesVelocity
         particles.userData.isParticles = true
+        particles.userData.portalEffect = true
         group.add(particles)
 
         this.portalVortexGroup = group
@@ -667,6 +699,11 @@ export default class World {
         })
         this.scene.remove(this.portalVortexGroup)
         this.portalVortexGroup = null
+    }
+
+    clearFinalPrizeParticles() {
+        this.finalPrizeParticles?.forEach(effect => effect?.dispose?.())
+        this.finalPrizeParticles = []
     }
 
 
@@ -983,6 +1020,7 @@ export default class World {
             }
         })
 
+        this.clearFinalPrizeParticles()
         this.clearPortalVortex()
 
 
@@ -1015,13 +1053,7 @@ export default class World {
         const spawnBlock = blocksArray.find(b => {
             if (!b.name) return false;
             const name = b.name.toLowerCase();
-            return !name.includes('enemy') && (
-                name.includes('spawn_circle') ||
-                name.includes('player_spawn') ||
-                name.includes('spawn') ||
-                name.includes('respawn') ||
-                name.includes('inicio')
-            );
+            return name.includes('player_spawn') || name.includes('spawn_circle');
         });
 
         if (spawnBlock) {
