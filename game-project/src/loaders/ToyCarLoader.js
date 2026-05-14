@@ -14,6 +14,48 @@ export default class ToyCarLoader {
         this.missingModels = new Set();
     }
 
+    getSignTexturePath(blockName) {
+        const signTextures = {
+            cartel_bosque_tabla_lev1: '/textures/signs/bosque.png'
+        };
+
+        return signTextures[blockName] || null;
+    }
+
+    addSignImagePlane(model, imagePath) {
+        const bbox = new THREE.Box3().setFromObject(model);
+        const size = new THREE.Vector3();
+        const center = new THREE.Vector3();
+        bbox.getSize(size);
+        bbox.getCenter(center);
+
+        const width = Math.max(size.x * 0.92, 0.1);
+        const height = Math.max(size.y * 0.92, 0.1);
+        const texture = new THREE.TextureLoader().load(imagePath);
+
+        if ('colorSpace' in texture) {
+            texture.colorSpace = THREE.SRGBColorSpace;
+        } else {
+            texture.encoding = THREE.sRGBEncoding;
+        }
+
+        texture.flipY = true;
+
+        const material = new THREE.MeshBasicMaterial({
+            map: texture,
+            transparent: true,
+            side: THREE.DoubleSide,
+            depthWrite: false
+        });
+
+        const plane = new THREE.Mesh(new THREE.PlaneGeometry(width, height), material);
+        plane.name = 'sign_image_overlay';
+        plane.position.set(center.x, center.y, bbox.max.z + 0.03);
+        plane.userData.levelObject = true;
+
+        model.add(plane);
+    }
+
     _applyTextureToMeshes(root, imagePath, matcher, options = {}) {
         // Pre-chequeo: buscar meshes objetivo antes de cargar la textura
         const matchedMeshes = [];
@@ -326,6 +368,11 @@ export default class ToyCarLoader {
 
             //  MARCAR modelo como perteneciente al nivel
             model.userData.levelObject = true;
+
+            const signTexturePath = this.getSignTexturePath(block.name);
+            if (signTexturePath) {
+                this.addSignImagePlane(model, signTexturePath);
+            }
 
             // Eliminar cámaras y luces embebidas
             model.traverse((child) => {

@@ -4,1376 +4,1211 @@
         "x": -34,
         "y": 0,
         "z": 14,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_2_lev1",
         "x": -22,
         "y": 0,
         "z": 15,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_3_lev1",
         "x": -10,
         "y": 0,
         "z": 15,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_4_lev1",
         "x": 4,
         "y": 0,
         "z": 15,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_5_lev1",
         "x": 15,
         "y": 0,
         "z": 14,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_6_lev1",
         "x": -38.0067253112793,
         "y": 0,
         "z": -56.478939056396484,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_7_lev1",
         "x": -22,
         "y": 0,
         "z": -62,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_8_lev1",
         "x": -8,
         "y": 0,
         "z": -65.27822875976562,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_9_lev1",
         "x": 18.995548248291016,
         "y": 0,
         "z": -52.411842346191406,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_11_lev1",
         "x": -42.00672912597656,
         "y": 0,
         "z": 0.7352213859558105,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_12_lev1",
         "x": -46.13486862182617,
         "y": 0,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_13_lev1",
         "x": -44.799293518066406,
         "y": 0,
         "z": -40.543006896972656,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_14_lev1",
         "x": 28.61480140686035,
         "y": 0,
         "z": 0.1565558910369873,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_15_lev1",
         "x": 27.927953720092773,
         "y": 0,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mountain_16_lev1",
         "x": 28.428504943847656,
         "y": 0,
         "z": -42,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rio_principal_lev1",
         "x": -36.84173583984375,
         "y": 0.009999999776482582,
         "z": -9.357521057128906,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "puente_principal_lev1",
         "x": -23.468515396118164,
         "y": 0.1599999964237213,
         "z": -13.669821739196777,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_1_lev1",
         "x": -28,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_2_lev1",
         "x": -24,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_3_lev1",
         "x": -20,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_4_lev1",
         "x": -16,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_5_lev1",
         "x": -12,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_6_lev1",
         "x": -8,
         "y": 0.07999999821186066,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_7_lev1",
         "x": -4,
         "y": 0.07999999821186066,
         "z": -4,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_8_lev1",
         "x": -2,
         "y": 0.07999999821186066,
         "z": -8,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_9_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -12,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_10_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -16,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_11_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -20,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_12_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -25,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_13_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -30,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_14_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -35,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_15_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -40,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_16_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -46,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "camino_17_lev1",
         "x": 0,
         "y": 0.07999999821186066,
         "z": -50,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_1_lev1",
         "x": -32,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_2_lev1",
         "x": -32,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_3_lev1",
         "x": -27,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_4_lev1",
         "x": -27,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_5_lev1",
         "x": -22,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_6_lev1",
         "x": -25.035398483276367,
         "y": 0,
         "z": -45.486549377441406,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_7_lev1",
         "x": -17,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_8_lev1",
         "x": -17,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_9_lev1",
         "x": -12,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_10_lev1",
         "x": -12,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_11_lev1",
         "x": -7,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_12_lev1",
         "x": -7,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_13_lev1",
         "x": -2,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_15_lev1",
         "x": 3,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_16_lev1",
         "x": 3,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_17_lev1",
         "x": 8,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_18_lev1",
         "x": 8,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_19_lev1",
         "x": 13,
         "y": 0,
         "z": 7.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_20_lev1",
         "x": 13,
         "y": 0,
         "z": -53.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_21_lev1",
         "x": -30,
         "y": 0,
         "z": 6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_22_lev1",
         "x": 12,
         "y": 0,
         "z": 6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_25_lev1",
         "x": -30,
         "y": 0,
         "z": -6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_26_lev1",
         "x": 12,
         "y": 0,
         "z": -6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_27_lev1",
         "x": -30,
         "y": 0,
         "z": -12,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_28_lev1",
         "x": 12,
         "y": 0,
         "z": -12,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_29_lev1",
         "x": -30,
         "y": 0,
         "z": -18,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_30_lev1",
         "x": 12,
         "y": 0,
         "z": -18,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_31_lev1",
         "x": -30,
         "y": 0,
         "z": -24,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_32_lev1",
         "x": 12,
         "y": 0,
         "z": -24,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_33_lev1",
         "x": -30,
         "y": 0,
         "z": -30,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_34_lev1",
         "x": 12,
         "y": 0,
         "z": -30,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_35_lev1",
         "x": -30,
         "y": 0,
         "z": -36,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_36_lev1",
         "x": 12,
         "y": 0,
         "z": -36,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_37_lev1",
         "x": -30,
         "y": 0,
         "z": -42,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_38_lev1",
         "x": 10.509198188781738,
         "y": 0,
         "z": -42,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_39_lev1",
         "x": -30,
         "y": 0,
         "z": -48,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_40_lev1",
         "x": 12,
         "y": 0,
         "z": -48,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_41_lev1",
         "x": -26,
         "y": 0,
         "z": -6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_42_lev1",
         "x": -23,
         "y": 0,
         "z": -11,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_43_lev1",
         "x": -20,
         "y": 0,
         "z": -7,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_44_lev1",
         "x": -14,
         "y": 0,
         "z": -8,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_45_lev1",
         "x": -8,
         "y": 0,
         "z": -12,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_46_lev1",
         "x": -25,
         "y": 0,
         "z": -21,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_47_lev1",
         "x": -22,
         "y": 0,
         "z": -24,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_48_lev1",
         "x": -18,
         "y": 0,
         "z": -18,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_49_lev1",
         "x": -14,
         "y": 0,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_50_lev1",
         "x": -10,
         "y": 0,
         "z": -26,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_51_lev1",
         "x": 6,
         "y": 0,
         "z": -10,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_52_lev1",
         "x": 8,
         "y": 0,
         "z": -16,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_53_lev1",
         "x": 7,
         "y": 0,
         "z": -24,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_54_lev1",
         "x": 8,
         "y": 0,
         "z": -34,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_55_lev1",
         "x": 7,
         "y": 0,
         "z": -43,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_56_lev1",
         "x": -8,
         "y": 0,
         "z": -36,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_57_lev1",
         "x": -11.428318977355957,
         "y": 0,
         "z": -48.885311126708984,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_58_lev1",
         "x": -7,
         "y": 0,
         "z": -51,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_59_lev1",
         "x": 5,
         "y": 0,
         "z": -45.11975860595703,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_60_lev1",
         "x": -27,
         "y": 0,
         "z": -15,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_61_lev1",
         "x": -19,
         "y": 0,
         "z": -31,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_62_lev1",
         "x": 9,
         "y": 0,
         "z": -29,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "tree_63_lev1",
         "x": 6,
         "y": 0,
         "z": -48,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_1_lev1",
         "x": -25,
         "y": 0,
         "z": -3,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_2_lev1",
         "x": -19,
         "y": 0,
         "z": -6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_3_lev1",
         "x": -11,
         "y": 0,
         "z": -7,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_4_lev1",
         "x": -5,
         "y": 0,
         "z": -15,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_5_lev1",
         "x": 4,
         "y": 0,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_6_lev1",
         "x": 5.419063091278076,
         "y": 0,
         "z": -31,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_7_lev1",
         "x": -8,
         "y": 0,
         "z": -40,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_8_lev1",
         "x": 6,
         "y": 0,
         "z": -47,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_9_lev1",
         "x": -24,
         "y": 0,
         "z": -18,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_10_lev1",
         "x": 10,
         "y": 0,
         "z": -26,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_11_lev1",
         "x": -11,
         "y": 0,
         "z": -48,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "rock_12_lev1",
         "x": -18,
         "y": 0,
         "z": -38,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_1_lev1",
-        "x": -26,
+        "x": -24.274394989013672,
         "y": 0,
         "z": -5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_2_lev1",
         "x": -16,
         "y": 0,
         "z": -5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_3_lev1",
         "x": -5,
         "y": 0,
         "z": -14.18724250793457,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_4_lev1",
         "x": 5,
         "y": 0,
         "z": -21,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_5_lev1",
         "x": -8,
         "y": 0,
         "z": -27,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_6_lev1",
         "x": 4,
         "y": 0,
         "z": -33,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_7_lev1",
         "x": -7,
         "y": 0,
         "z": -45,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "mushroom_8_lev1",
         "x": 6,
         "y": 0,
         "z": -50,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_1_lev1",
         "x": -29,
         "y": 0,
         "z": -2,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_2_lev1",
         "x": -27,
         "y": 0,
         "z": -4,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_3_lev1",
         "x": -23,
         "y": 0,
         "z": -3,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_4_lev1",
         "x": -19,
         "y": 0,
         "z": -8,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_5_lev1",
         "x": -10,
         "y": 0,
         "z": -7,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_6_lev1",
         "x": -3,
         "y": 0,
         "z": -6,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_7_lev1",
         "x": 2,
         "y": 0,
         "z": -10,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_8_lev1",
         "x": -4,
         "y": 0,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_9_lev1",
         "x": 3,
         "y": 0,
         "z": -28,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_10_lev1",
         "x": -6,
         "y": 0,
         "z": -35,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_11_lev1",
         "x": 4,
         "y": 0,
         "z": -40,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_12_lev1",
         "x": -5,
         "y": 0,
         "z": -47,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_13_lev1",
         "x": 3,
         "y": 0,
         "z": -50,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_14_lev1",
         "x": -17,
         "y": 0,
         "z": -20,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_15_lev1",
         "x": 5,
         "y": 0,
         "z": -33,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_16_lev1",
         "x": -25,
         "y": 0,
         "z": -25,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_17_lev1",
         "x": -14,
         "y": 0,
         "z": -34,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "flower_18_lev1",
         "x": 9,
         "y": 0,
         "z": -39,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "pond_1_lev1",
         "x": -22,
         "y": 0,
         "z": -17,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "pond_2_lev1",
         "x": 7,
         "y": 0,
         "z": -11,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "pond_3_lev1",
         "x": -7,
         "y": 0,
         "z": -32,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "fox_inicio_lev1",
-        "x": -30,
+        "x": -30.464990615844727,
         "y": 0,
         "z": -5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "apple_1_lev1",
         "x": -24,
         "y": 0,
         "z": -8,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "apple_2_lev1",
         "x": 4.640501022338867,
         "y": 0,
         "z": -0.38231849670410156,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "spawn_circle_lev1",
         "x": -28,
         "y": 0.029999999329447746,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_inicio_texto_lev1",
         "x": -28.155010223388672,
         "y": 1.9352178573608398,
         "z": 4.727996349334717,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_inicio_lev1",
         "x": -28.850000381469727,
         "y": 1,
         "z": 4.800000190734863,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "fogata_inicio_lev1",
         "x": -30.799999237060547,
         "y": 0.18000000715255737,
         "z": -2.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "banco_1_lev1",
         "x": -33,
         "y": 0.3199999928474426,
         "z": -1,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "banco_2_lev1",
         "x": -30.799999237060547,
         "y": 0.3199999928474426,
         "z": -3.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_z1_texto_lev1",
         "x": -20,
         "y": 1.9800000190734863,
-        "z": 4.493996620178223,
-        "level": 1,
-        "role": "default"
+        "z": 4.617228984832764,
+        "level": 1
     },
     {
         "name": "cartel_z1_lev1",
         "x": -20.850000381469727,
         "y": 1,
         "z": 4.800000190734863,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z1_1_lev1",
         "x": -24,
         "y": 1.149999976158142,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z1_2_lev1",
         "x": -20,
         "y": 1.149999976158142,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z1_3_lev1",
         "x": -16,
         "y": 1.149999976158142,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z1_4_lev1",
         "x": -12,
         "y": 1.149999976158142,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z1_5_lev1",
         "x": -8,
         "y": 1.149999976158142,
         "z": 0,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z1_tronco_1_lev1",
         "x": -22,
         "y": 0.3199999928474426,
         "z": -3,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z1_tronco_2_lev1",
         "x": -18,
         "y": 0.3199999928474426,
         "z": 3,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z1_tronco_3_lev1",
         "x": -13,
         "y": 0.3199999928474426,
         "z": -3.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_z2_texto_lev1",
         "x": -4.953385353088379,
         "y": 2.213273525238037,
         "z": 3.809422254562378,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z2_1_lev1",
         "x": -4,
         "y": 1.149999976158142,
         "z": -3,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z2_2_lev1",
         "x": -2,
         "y": 1.149999976158142,
         "z": -7,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z2_3_lev1",
         "x": 0,
         "y": 1.149999976158142,
         "z": -10,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_z3_texto_lev1",
         "x": -6.946013450622559,
         "y": 1.600590705871582,
         "z": -11.092308044433594,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z3_1_lev1",
         "x": 0,
         "y": 1.7616547346115112,
         "z": -12.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z3_2_lev1",
         "x": 0.6000000238418579,
         "y": 0.48753008246421814,
         "z": -16.875953674316406,
-        "level": 1,
-        "role": "default"
+        "level": 1
+    },
+    {
+        "name": "coin_z3_3_lev1",
+        "x": -0.5,
+        "y": 1.8592000007629395,
+        "z": -18.5,
+        "level": 1
     },
     {
         "name": "coin_z3_4_lev1",
         "x": 0,
         "y": 1.4696508646011353,
         "z": -22,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_z4_texto_lev1",
         "x": -7.646473407745361,
         "y": 1.710522174835205,
         "z": -24.947267532348633,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z4_tronco_1_lev1",
         "x": 1.2999999523162842,
         "y": 0.3199999928474426,
         "z": -26,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z4_tronco_2_lev1",
         "x": -1.5,
         "y": 0.3199999928474426,
         "z": -29.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z4_tronco_3_lev1",
         "x": 1.2000000476837158,
         "y": 0.3199999928474426,
         "z": -33.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "z4_tronco_4_lev1",
         "x": -1.600000023841858,
         "y": 0.3199999928474426,
         "z": -37,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_1_lev1",
         "x": -2,
         "y": 1.149999976158142,
         "z": -25.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_2_lev1",
         "x": 2,
         "y": 1.149999976158142,
         "z": -28,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_3_lev1",
         "x": -2.5,
         "y": 1.149999976158142,
         "z": -31,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_4_lev1",
         "x": 2.5,
         "y": 1.149999976158142,
         "z": -34,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_5_lev1",
         "x": -2,
         "y": 1.149999976158142,
         "z": -37,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z4_6_lev1",
@@ -1388,64 +1223,42 @@
         "x": 0,
         "y": 0.3199999928474426,
         "z": -48,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z5_1_lev1",
         "x": -1.5,
         "y": 1.149999976158142,
         "z": -44,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z5_2_lev1",
         "x": 1.5,
         "y": 1.149999976158142,
         "z": -46,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z5_3_lev1",
         "x": 0,
         "y": 1.149999976158142,
         "z": -48.5,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z5_4_lev1",
         "x": -1.5,
         "y": 1.149999976158142,
         "z": -50,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "coin_z5_5_lev1",
         "x": 1.5,
         "y": 1.149999976158142,
         "z": -52,
-        "level": 1,
-        "role": "default"
-    },
-    {
-        "name": "cartel_meta_texto_lev1",
-        "x": 5.730000019073486,
-        "y": 1.9800000190734863,
-        "z": -52,
-        "level": 1,
-        "role": "default"
-    },
-    {
-        "name": "cartel_meta_lev1",
-        "x": 4.949999809265137,
-        "y": 1,
-        "z": -52,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "portal_final_lev1",
@@ -1460,63 +1273,90 @@
         "x": 5.699999809265137,
         "y": 0.18000000715255737,
         "z": -53,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "portal_roca_0_lev1",
         "x": 3,
         "y": 0,
         "z": -55,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "portal_roca_3_lev1",
         "x": -3,
         "y": 0,
         "z": -55,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
-        "name": "tree_57_lev1",
+        "name": "tree_57_lev1.001",
         "x": -16.89203643798828,
         "y": 0,
         "z": -36.500885009765625,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
-        "name": "tree_22_lev1",
+        "name": "tree_22_lev1.001",
         "x": 15.156814575195312,
         "y": 0,
         "z": -5.655933380126953,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
-        "name": "tree_22_lev1",
+        "name": "tree_22_lev1.002",
         "x": 15.508920669555664,
         "y": 0,
         "z": -30.18195915222168,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
-        "name": "z4_tronco_1_lev1",
+        "name": "z4_tronco_1_lev1.001",
         "x": 0.4064865708351135,
         "y": 0.3199999928474426,
         "z": -21.365642547607422,
-        "level": 1,
-        "role": "default"
+        "level": 1
     },
     {
         "name": "cartel_z2_lev1",
         "x": -8.09169864654541,
         "y": 0.8883775472640991,
         "z": -24.283586502075195,
-        "level": 1,
-        "role": "default"
+        "level": 1
+    },
+    {
+        "name": "cartel_bosque_tabla_lev1",
+        "x": -27.149118423461914,
+        "y": 0,
+        "z": -3.993596076965332,
+        "level": 1
+    },
+    {
+        "name": "cartel_bosque_poste_izq_lev1",
+        "x": -28.610015869140625,
+        "y": 1.100000023841858,
+        "z": -3.993596076965332,
+        "level": 1
+    },
+    {
+        "name": "cartel_bosque_poste_der_lev1",
+        "x": -25.681241989135742,
+        "y": 1.100000023841858,
+        "z": -3.993596076965332,
+        "level": 1
+    },
+    {
+        "name": "cartel_bosque_top_lev1",
+        "x": -27.149118423461914,
+        "y": 3.0999999046325684,
+        "z": -3.993596076965332,
+        "level": 1
+    },
+    {
+        "name": "cartel_bosque_bot_lev1",
+        "x": -27.149118423461914,
+        "y": 1.5199999809265137,
+        "z": -3.993596076965332,
+        "level": 1
     }
 ]
