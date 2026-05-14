@@ -41,6 +41,8 @@ export default class FinalPrizeParticles {
     })
 
     this.points = new THREE.Points(this.geometry, material)
+    this.points.userData.levelObject = true
+    this.points.userData.portalEffect = true
     this.scene.add(this.points)
 
     this.target = targetPosition.clone()
@@ -74,6 +76,8 @@ export default class FinalPrizeParticles {
   }
 
   dispose() {
+    if (this.disposed) return
+    this.disposed = true
     this.experience.time.off('tick', this.update)
     this.scene.remove(this.points)
     this.geometry.dispose()
