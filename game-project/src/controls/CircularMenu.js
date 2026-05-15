@@ -158,6 +158,85 @@ export default class CircularMenu {
     })
     document.body.appendChild(this.levelLabel)
 
+    // HUD: Vida del jugador
+    this.healthContainer = document.createElement('div')
+    this.healthContainer.id = 'hud-health'
+    Object.assign(this.healthContainer.style, {
+      position: 'fixed',
+      top: '54px',
+      left: '70px',
+      minWidth: '190px',
+      background: 'rgba(0,0,0,0.68)',
+      color: '#ffffff',
+      padding: '7px 10px',
+      borderRadius: '8px',
+      zIndex: 9999,
+      fontFamily: 'monospace',
+      pointerEvents: 'none',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '8px',
+      border: '1px solid rgba(255,255,255,0.22)'
+    })
+
+    this.healthText = document.createElement('span')
+    this.healthText.innerText = 'Vida'
+    Object.assign(this.healthText.style, {
+      fontSize: '14px',
+      fontWeight: 'bold',
+      whiteSpace: 'nowrap'
+    })
+
+    this.healthTrack = document.createElement('div')
+    Object.assign(this.healthTrack.style, {
+      flex: '1',
+      display: 'flex',
+      alignItems: 'center',
+      gap: '6px',
+      minWidth: '120px'
+    })
+
+    this.healthHearts = []
+    for (let i = 0; i < 5; i += 1) {
+      const heart = document.createElement('span')
+      const clipId = `health-heart-clip-${i}`
+      heart.innerHTML = `
+        <svg viewBox="0 0 24 22" width="22" height="20" aria-hidden="true">
+          <defs>
+            <clipPath id="${clipId}">
+              <rect class="heart-fill-clip" x="0" y="0" width="24" height="22"></rect>
+            </clipPath>
+          </defs>
+          <path class="heart-base" d="M12 20.4C5.4 14.6 2 11.4 2 7.2C2 4.2 4.3 2 7.2 2C8.9 2 10.6 2.8 12 4.3C13.4 2.8 15.1 2 16.8 2C19.7 2 22 4.2 22 7.2C22 11.4 18.6 14.6 12 20.4Z" fill="rgba(255,255,255,0.16)" stroke="rgba(255,255,255,0.35)" stroke-width="1.4"/>
+          <path class="heart-fill" clip-path="url(#${clipId})" d="M12 20.4C5.4 14.6 2 11.4 2 7.2C2 4.2 4.3 2 7.2 2C8.9 2 10.6 2.8 12 4.3C13.4 2.8 15.1 2 16.8 2C19.7 2 22 4.2 22 7.2C22 11.4 18.6 14.6 12 20.4Z" fill="#ef4444" stroke="#fecaca" stroke-width="1.4"/>
+        </svg>
+      `
+      Object.assign(heart.style, {
+        width: '22px',
+        height: '20px',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        transition: 'transform 0.18s ease, opacity 0.18s ease, filter 0.18s ease'
+      })
+      this.healthTrack.appendChild(heart)
+      this.healthHearts.push(heart)
+    }
+
+    this.healthValue = document.createElement('span')
+    this.healthValue.innerText = '5/5'
+    Object.assign(this.healthValue.style, {
+      width: '34px',
+      textAlign: 'right',
+      fontSize: '13px',
+      fontWeight: 'bold'
+    })
+
+    this.healthContainer.appendChild(this.healthText)
+    this.healthContainer.appendChild(this.healthTrack)
+    this.healthContainer.appendChild(this.healthValue)
+    document.body.appendChild(this.healthContainer)
+
     // HUD: Jugadores
 
     this.playersLabel = document.createElement('div')
@@ -274,6 +353,24 @@ export default class CircularMenu {
     if (this.levelLabel) this.levelLabel.innerText = `Nivel: ${level}`
   }
 
+  setHealth(health, maxHealth) {
+    if (!this.healthHearts || !this.healthValue) return
+
+    const max = Math.max(Number(maxHealth) || 1, 1)
+    const current = Math.max(0, Math.min(Number(health) || 0, max))
+    this.healthValue.innerText = `${Number.isInteger(current) ? current : current.toFixed(1)}/${max}`
+
+    this.healthHearts.forEach((heart, index) => {
+      const fillAmount = Math.max(0, Math.min(current - index, 1))
+      const clip = heart.querySelector('.heart-fill-clip')
+      if (clip) clip.setAttribute('width', `${24 * fillAmount}`)
+
+      heart.style.opacity = fillAmount > 0 ? '1' : '0.55'
+      heart.style.transform = fillAmount > 0 ? 'scale(1)' : 'scale(0.9)'
+      heart.style.filter = fillAmount > 0 ? 'drop-shadow(0 0 4px rgba(239,68,68,0.65))' : 'none'
+    })
+  }
+
   setTimer(seconds) {
     if (this.timer) this.timer.innerText = `⏱ ${seconds}s`
   }
@@ -292,5 +389,6 @@ export default class CircularMenu {
     this.timer?.remove()
     this.status?.remove()
     this.levelLabel?.remove()
+    this.healthContainer?.remove()
   }
 }

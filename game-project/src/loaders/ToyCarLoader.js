@@ -19,7 +19,9 @@ export default class ToyCarLoader {
         const signTextures = {
             cartel_bosque_tabla_lev1: '/textures/signs/bosque.png',
             cartel_ghost_tabla_001_lev3: '/textures/signs/ruinas.png',
-            cartel_ghost_tabla_lev3: '/textures/signs/ruinasghost.png'
+            cartel_ghost_tabla_lev3: '/textures/signs/ruinasghost.png',
+            cartel_espacio_tabla_lev4: '/textures/signs/espacio.png',
+            cartel_lava_tabla_lev4: '/textures/signs/espaciolava.png'
         };
 
         return signTextures[blockName] || null;
@@ -363,6 +365,7 @@ export default class ToyCarLoader {
 
             const nameLower = block.name.toLowerCase();
             const isInvisible = INVISIBLE_PATTERNS.some(p => nameLower.includes(p));
+            const isDamageHazard = /^lv\d+_b_lev4$/.test(nameLower);
             if (isInvisible) {
                 console.log(`Objeto invisible (no agregado a escena): ${block.name}`);
                 continue;
@@ -442,8 +445,10 @@ export default class ToyCarLoader {
 
             // Agregar modelo visualmente a la escena
             this.scene.add(model);
-            if (nameLower.includes('spikes')) {
+            if (nameLower.includes('spikes') || isDamageHazard) {
                 model.userData.hazard = true;
+                model.userData.hazardMode = isDamageHazard ? 'damage' : 'death';
+                model.userData.hazardDamage = isDamageHazard ? 0.5 : 999;
                 model.userData.hazardName = block.name;
                 this.hazards.push(model);
             }
@@ -453,7 +458,7 @@ export default class ToyCarLoader {
             const isObstacleForced = OBSTACLE_PATTERNS.some(p => nameLower.startsWith(p))
             const isDecoration = DECORATION_PATTERNS.some(p => nameLower.includes(p))
             const isPrecise = Array.isArray(precisePhysicsModels) && precisePhysicsModels.includes(block.name);
-            const shouldHavePhysics = isPrecise || ((hasPhysicsPattern || isObstacleForced) && !isDecoration)
+            const shouldHavePhysics = !isDamageHazard && (isPrecise || ((hasPhysicsPattern || isObstacleForced) && !isDecoration))
             const isWaterSurface = ['rio', 'river', 'water', 'agua', 'pond'].some(p => nameLower.includes(p));
 
             if (!shouldHavePhysics) {

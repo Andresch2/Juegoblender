@@ -15,13 +15,13 @@ export default class EnemyLarge {
         this.currentPatrolIndex = 0
 
         this.baseSpeed = 0.75
-        this.chaseSpeed = 2.2
+        this.chaseSpeed = 2.6
         this.detectionRadius = 14
         this.releaseRadius = 19
         this.attackDistance = 2.0
         this.isChasing = false
         this.delayActivation = 0
-        this.visualYOffset = -2.2
+        this.visualYOffset = -1.15
 
         this.proximitySound = new Sound('/sounds/alert.ogg', {
             loop: true,
@@ -236,16 +236,17 @@ export default class EnemyLarge {
     }
 
     killPlayer() {
-        if (this.hasKilledPlayer) return
-        this.hasKilledPlayer = true
-
-        if (typeof this.playerRef?.die === 'function') {
+        if (typeof this.playerRef?.takeDamage === 'function') {
+            this.playerRef.takeDamage(1)
+        } else if (typeof this.playerRef?.die === 'function') {
             this.playerRef.die()
         }
 
-        this.experience?.world?.triggerDefeat?.()
+        if (!this.playerRef?.body) {
+            this.experience?.world?.triggerDefeat?.()
+        }
 
-        if (this.model.parent) {
+        if (!this.playerRef?.body && this.model.parent) {
             new FinalPrizeParticles({
                 scene: this.scene,
                 targetPosition: this.body.position,

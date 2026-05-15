@@ -156,8 +156,7 @@ export default class World {
         const enemyConfigs = [
             { x: -4, z: 14, patrol: [{ x: -10, z: 12 }, { x: 0, z: 7 }, { x: 6, z: 16 }] },
             { x: 13, z: 4, patrol: [{ x: 9, z: -4 }, { x: 19, z: 0 }, { x: 17, z: 11 }] },
-            { x: -13, z: -8, patrol: [{ x: -18, z: -14 }, { x: -7, z: -18 }, { x: -4, z: -5 }] },
-            { x: 9, z: -18, patrol: [{ x: 2, z: -22 }, { x: 15, z: -25 }, { x: 18, z: -11 }] }
+            { x: -13, z: -8, patrol: [{ x: -18, z: -14 }, { x: -7, z: -18 }, { x: -4, z: -5 }] }
         ]
 
         enemyConfigs.forEach((config, index) => {
@@ -231,7 +230,11 @@ export default class World {
 
             if (horizontalDistance < 0.65 && nearHeight) {
                 console.log(`Jugador toco peligro: ${hazard.userData.hazardName || hazard.name}`)
-                this.robot.die()
+                if (hazard.userData.hazardMode === 'damage' && typeof this.robot.takeDamage === 'function') {
+                    this.robot.takeDamage(hazard.userData.hazardDamage || 1)
+                } else {
+                    this.robot.die()
+                }
                 return
             }
         }
@@ -784,9 +787,10 @@ export default class World {
 
             this.points = 0;
             this.robot.points = 0;
+            this.robot.restoreHealth?.();
             this.finalPrizeActivated = false;
             this.experience.menu?.setLevel?.(level);
-            this.experience.menu.setStatus?.(`🎖️ Puntos: ${this.points}`);
+            this.experience.menu?.setPoints?.(this.points, this.getCurrentPointsTarget());
 
             if (blocksArray.length > 0) {
                 // Intentar cargar configuración de física precisa (Trimesh)

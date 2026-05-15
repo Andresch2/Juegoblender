@@ -1210,6 +1210,11 @@ export const sources = [
         "path": "/models/toycar4/b_g0_grass_1_lev4.glb"
     },
     {
+        "name": "b_g1_grass_1_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/b_g1_grass_1_lev4.glb"
+    },
+    {
         "name": "b_g10_grass_1_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/b_g10_grass_1_lev4.glb"
@@ -1228,11 +1233,6 @@ export const sources = [
         "name": "b_g13_grass_1_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/b_g13_grass_1_lev4.glb"
-    },
-    {
-        "name": "b_g1_grass_1_lev4",
-        "type": "gltfModel",
-        "path": "/models/toycar4/b_g1_grass_1_lev4.glb"
     },
     {
         "name": "b_g2_grass_1_lev4",
@@ -1740,6 +1740,56 @@ export const sources = [
         "path": "/models/toycar4/c_sp7_metalsupport_lev4.glb"
     },
     {
+        "name": "cartel_espacio_bot_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_espacio_bot_lev4.glb"
+    },
+    {
+        "name": "cartel_espacio_poste_der_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_espacio_poste_der_lev4.glb"
+    },
+    {
+        "name": "cartel_espacio_poste_izq_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_espacio_poste_izq_lev4.glb"
+    },
+    {
+        "name": "cartel_espacio_tabla_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_espacio_tabla_lev4.glb"
+    },
+    {
+        "name": "cartel_espacio_top_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_espacio_top_lev4.glb"
+    },
+    {
+        "name": "cartel_lava_bot_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_lava_bot_lev4.glb"
+    },
+    {
+        "name": "cartel_lava_poste_der_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_lava_poste_der_lev4.glb"
+    },
+    {
+        "name": "cartel_lava_poste_izq_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_lava_poste_izq_lev4.glb"
+    },
+    {
+        "name": "cartel_lava_tabla_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_lava_tabla_lev4.glb"
+    },
+    {
+        "name": "cartel_lava_top_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cartel_lava_top_lev4.glb"
+    },
+    {
         "name": "cn_at1_asteroids_mesh_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/cn_at1_asteroids_mesh_lev4.glb"
@@ -1760,6 +1810,11 @@ export const sources = [
         "path": "/models/toycar4/cn_g1_0_grass_2_lev4.glb"
     },
     {
+        "name": "cn_g1_1_grass_3_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/cn_g1_1_grass_3_lev4.glb"
+    },
+    {
         "name": "cn_g1_10_grass_1_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/cn_g1_10_grass_1_lev4.glb"
@@ -1778,11 +1833,6 @@ export const sources = [
         "name": "cn_g1_13_grass_3_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/cn_g1_13_grass_3_lev4.glb"
-    },
-    {
-        "name": "cn_g1_1_grass_3_lev4",
-        "type": "gltfModel",
-        "path": "/models/toycar4/cn_g1_1_grass_3_lev4.glb"
     },
     {
         "name": "cn_g1_2_grass_1_lev4",
@@ -2660,6 +2710,11 @@ export const sources = [
         "path": "/models/toycar4/player_spawn_circle_lev4.glb"
     },
     {
+        "name": "portal_final_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/portal_final_lev4.glb"
+    },
+    {
         "name": "se_at0_asteroids_mesh_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/se_at0_asteroids_mesh_lev4.glb"
@@ -3035,6 +3090,11 @@ export const sources = [
         "path": "/models/toycar4/sp_sp2_metalsupport_lev4.glb"
     },
     {
+        "name": "sp_sp2_metalsupport.001_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/sp_sp2_metalsupport.001_lev4.glb"
+    },
+    {
         "name": "w100_formation_rock_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/w100_formation_rock_lev4.glb"
@@ -3195,6 +3255,11 @@ export const sources = [
         "path": "/models/toycar4/w39_formation_rock_lev4.glb"
     },
     {
+        "name": "w4_formation_rock_lev4",
+        "type": "gltfModel",
+        "path": "/models/toycar4/w4_formation_rock_lev4.glb"
+    },
+    {
         "name": "w41_formation_rock_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/w41_formation_rock_lev4.glb"
@@ -3225,9 +3290,9 @@ export const sources = [
         "path": "/models/toycar4/w48_formation_rock_lev4.glb"
     },
     {
-        "name": "w4_formation_rock_lev4",
+        "name": "w5_formation_rock_lev4",
         "type": "gltfModel",
-        "path": "/models/toycar4/w4_formation_rock_lev4.glb"
+        "path": "/models/toycar4/w5_formation_rock_lev4.glb"
     },
     {
         "name": "w51_formation_rock_lev4",
@@ -3270,9 +3335,9 @@ export const sources = [
         "path": "/models/toycar4/w59_formation_rock_lev4.glb"
     },
     {
-        "name": "w5_formation_rock_lev4",
+        "name": "w6_formation_rock_lev4",
         "type": "gltfModel",
-        "path": "/models/toycar4/w5_formation_rock_lev4.glb"
+        "path": "/models/toycar4/w6_formation_rock_lev4.glb"
     },
     {
         "name": "w60_formation_rock_lev4",
@@ -3303,11 +3368,6 @@ export const sources = [
         "name": "w69_formation_rock_lev4",
         "type": "gltfModel",
         "path": "/models/toycar4/w69_formation_rock_lev4.glb"
-    },
-    {
-        "name": "w6_formation_rock_lev4",
-        "type": "gltfModel",
-        "path": "/models/toycar4/w6_formation_rock_lev4.glb"
     },
     {
         "name": "w70_formation_rock_lev4",

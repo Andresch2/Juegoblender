@@ -15,8 +15,8 @@ export default class Robot {
         this.points = 0
 
         // VIDA
-        this.health = 3
-        this.maxHealth = 3
+        this.health = 5
+        this.maxHealth = 5
         this.lastDamageTime = 0
         this.damageCooldown = 800
 
@@ -24,6 +24,7 @@ export default class Robot {
         this.setSounds()
         this.setPhysics()
         this.setAnimation()
+        this.updateHealthHud()
     }
 
     setModel() {
@@ -171,8 +172,9 @@ export default class Robot {
         this.lastDamageTime = now
         if (!this.body) return
 
-        this.health -= amount
+        this.health = Math.max(0, this.health - amount)
         console.log('💥 Vida restante:', this.health)
+        this.updateHealthHud()
 
         // Flash rojo
         this.model.traverse(child => {
@@ -185,6 +187,16 @@ export default class Robot {
         }, 200)
 
         if (this.health <= 0) this.die()
+    }
+
+    updateHealthHud() {
+        this.experience.menu?.setHealth?.(this.health, this.maxHealth)
+    }
+
+    restoreHealth() {
+        this.health = this.maxHealth
+        this.lastDamageTime = 0
+        this.updateHealthHud()
     }
 
     update() {
@@ -299,7 +311,7 @@ export default class Robot {
     }
 
     revive() {
-        this.health = this.maxHealth
+        this.restoreHealth()
         this.setPhysics()
         this.group.rotation.set(0, 0, 0)
         this.animation.actions.death.stop()

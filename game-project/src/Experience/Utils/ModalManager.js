@@ -114,4 +114,14 @@ export default class ModalManager {
   hide() {
     this.overlay.style.display = 'none'
   }
+
+  destroy() {
+    this.overlay?.remove()
+    this.overlay = null
+    this.box = null
+    this.icon = null
+    this.text = null
+    this.buttonsContainer = null
+    this.closeBtn = null
+  }
 }
