@@ -277,7 +277,7 @@ export default class World {
             if (!prize.pivot || prize.role === "finalPrize") return // Ignorar finalPrize del array aquí
 
             const dist = prize.pivot.position.distanceTo(pos)
-            if (dist < 1.8 && moved && !prize.collected) {
+            if (dist < 3.5 && moved && !prize.collected) {
                 prize.collect()
                 prize.collected = true
 
