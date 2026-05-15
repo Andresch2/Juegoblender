@@ -1,7 +1,7 @@
 // Spawn configurable por nivel. Si el JSON trae spawn, se usa ese valor.
 const LEVEL_SPAWNS = {
     1: { x: 0, y: 2, z: 0 },
-    2: { x: -59.408, y: 59.24, z: 0.957543 },
+    2: { x: 61.287, y: 5.606, z: -26.809 },
     3: { x: -90.98, y: 2, z: 34.34 },
     4: { x: -18, y: 2, z: 28 },
     5: { x: -72, y: 2, z: 0 }
