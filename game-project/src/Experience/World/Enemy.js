@@ -90,20 +90,18 @@ export default class Enemy {
 
         this._onCollide = (event) => {
             if (event.body === this.playerRef?.body) {
-                if (typeof this.playerRef.die === 'function') {
-                    this.playerRef.die()
+                if (typeof this.playerRef.takeDamage === 'function') {
+                    this.playerRef.takeDamage(1)
                 }
 
-                this.proximitySound?.stop()
-
-                if (this.model.parent) {
+                if (!this.playerRef?.body && this.model.parent) {
+                    this.proximitySound?.stop()
                     new FinalPrizeParticles({
                         scene: this.scene,
                         targetPosition: this.body.position,
                         sourcePosition: this.body.position,
                         experience: this.experience
                     })
-
                     this.destroy()
                 }
             }
@@ -307,14 +305,15 @@ export default class Enemy {
     }
 
     killPlayer() {
-        if (this.hasKilledPlayer) return
-        this.hasKilledPlayer = true
-
-        if (typeof this.playerRef?.die === 'function') {
+        if (typeof this.playerRef?.takeDamage === 'function') {
+            this.playerRef.takeDamage(1)
+        } else if (typeof this.playerRef?.die === 'function') {
             this.playerRef.die()
         }
 
-        this.experience?.world?.triggerDefeat?.()
+        if (!this.playerRef?.body) {
+            this.experience?.world?.triggerDefeat?.()
+        }
     }
 
     destroy() {

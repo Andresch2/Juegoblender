@@ -344,6 +344,10 @@ export default class Experience {
 
 
   resetGame() {
+    if (window.location.pathname === '/game') {
+      window.location.href = '/perfil'
+      return
+    }
     console.log('♻️ Reiniciando juego...')
     // Notificar desconexión al servidor
     this.socketManager?.socket?.disconnect()
@@ -379,7 +383,7 @@ export default class Experience {
   }
 
 
-  resetGameToFirstLevel() {
+  async resetGameToFirstLevel() {
     console.log('♻️ Reiniciando al nivel');
 
     // 💀 Destruir enemigo previo si existe
@@ -393,9 +397,20 @@ export default class Experience {
 
     // Resetear variables de World
     this.world.points = 0;
-    this.world.robot.points = 0;
+    if (this.world.robot) {
+      this.world.robot.points = 0;
+      if (!this.world.robot.body) {
+        this.world.robot.revive()
+      } else {
+        this.world.robot.restoreHealth?.()
+      }
+    }
     this.world.loader.prizes = [];
     this.world.defeatTriggered = false
+    this.world.finalPrizeActivated = false
+    this.world.gameStarted = true
+    this.menu?.setHealth?.(this.world.robot?.health ?? 5, this.world.robot?.maxHealth ?? 5)
+    this.menu?.setPoints?.(0, 0)
 
     // Resetear nivel actual
     this.world.levelManager.currentLevel = 1;
@@ -404,7 +419,7 @@ export default class Experience {
     this.world.clearCurrentScene();
 
     // Cargar nivel 1 de nuevo
-    this.world.loadLevel(1);
+    await this.world.loadLevel(1);
 
     // Reiniciar el seguimiento de tiempo
     this.tracker.destroy(); // Detener el loop anterior
