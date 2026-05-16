@@ -225,11 +225,19 @@ export default class World {
     }
 
     triggerDefeat() {
-        if (this.defeatTriggered) return;
-        this.defeatTriggered = true;
+        if (this.defeatTriggered) return
+        this.defeatTriggered = true
+
+        const currentLevel = this.levelManager?.currentLevel || 1
+
+        // Apagar y eliminar enemigos para que no quede el sonido pegado
+        if (this.enemies?.length) {
+            this.enemies.forEach(enemy => enemy?.destroy?.())
+            this.enemies = []
+        }
 
         if (window.userInteracted && this.loseSound) {
-            this.loseSound.play();
+            this.loseSound.play()
         }
 
         this.experience.modal.show({
@@ -238,14 +246,31 @@ export default class World {
             buttons: [
                 {
                     text: '🔁 Reintentar',
-                    onClick: () => this.experience.resetGameToFirstLevel()
+                    onClick: async () => {
+                        this.defeatTriggered = false
+
+                        if (this.robot?.revive) {
+                            this.robot.revive()
+                        }
+
+                        await this.loadLevel(currentLevel)
+                    }
                 },
                 {
                     text: '❌ Salir',
-                    onClick: () => this.experience.resetGame()
+                    onClick: () => {
+                        this.defeatTriggered = false
+
+                        if (this.enemies?.length) {
+                            this.enemies.forEach(enemy => enemy?.destroy?.())
+                            this.enemies = []
+                        }
+
+                        this.experience.resetGame()
+                    }
                 }
             ]
-        });
+        })
     }
 
     checkHazards() {
@@ -823,6 +848,7 @@ export default class World {
 
             this.points = 0;
             this.robot.points = 0;
+            this.defeatTriggered = false;
             this.robot.restoreHealth?.();
             this.finalPrizeActivated = false;
             this.experience.menu?.setLevel?.(level);

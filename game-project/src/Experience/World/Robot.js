@@ -40,6 +40,22 @@ export default class Robot {
         this.model.traverse((child) => {
             if (child instanceof THREE.Mesh) {
                 child.castShadow = true
+
+                // Clonar materiales para no dañar el material original del GLB
+                if (child.material) {
+                    if (Array.isArray(child.material)) {
+                        child.material = child.material.map((mat) => {
+                            const cloned = mat.clone()
+                            cloned.userData.originalColor = cloned.color ? cloned.color.clone() : null
+                            return cloned
+                        })
+                    } else {
+                        child.material = child.material.clone()
+                        child.material.userData.originalColor = child.material.color
+                            ? child.material.color.clone()
+                            : null
+                    }
+                }
             }
         })
     }
@@ -88,6 +104,7 @@ export default class Robot {
         this.animation.mixer = new THREE.AnimationMixer(this.model)
 
         const anims = this.resources.items.playerModel.animations
+        console.log('Animaciones del personaje:', anims.map(clip => clip.name))
 
         // Mapa por nombre para no depender del índice
         const clipMap = {}
@@ -119,6 +136,20 @@ export default class Robot {
         this.animation.actions.dance = this.animation.mixer.clipAction(
             clipMap['CharacterArmature|Wave']
         )
+        // Animación opcional cuando recibe golpe.
+        // Si el modelo no trae Hit/Hurt/Damage, usa Wave como respaldo.
+        const hitClip =
+            clipMap['CharacterArmature|Hit'] ||
+            clipMap['CharacterArmature|Hurt'] ||
+            clipMap['CharacterArmature|Damage'] ||
+            clipMap['CharacterArmature|React'] ||
+            clipMap['CharacterArmature|Wave']
+
+        if (hitClip) {
+            this.animation.actions.hit = this.animation.mixer.clipAction(hitClip)
+            this.animation.actions.hit.setLoop(THREE.LoopOnce)
+            this.animation.actions.hit.clampWhenFinished = false
+        }
 
         // Arrancar en idle
         this.animation.actions.current = this.animation.actions.idle
@@ -168,25 +199,38 @@ export default class Robot {
 
     takeDamage(amount) {
         const now = Date.now()
+
         if (now - this.lastDamageTime < this.damageCooldown) return
         this.lastDamageTime = now
+
         if (!this.body) return
 
         this.health = Math.max(0, this.health - amount)
         console.log('💥 Vida restante:', this.health)
+
         this.updateHealthHud()
 
-        // Flash rojo
-        this.model.traverse(child => {
-            if (child.isMesh) child.material.color?.set(0xff0000)
-        })
-        setTimeout(() => {
-            this.model.traverse(child => {
-                if (child.isMesh) child.material.color?.set(0xffffff)
-            })
-        }, 200)
+        // No cambiar colores ni materiales.
+        // Solo reproducir una animación si existe.
+        if (
+            this.animation?.actions?.hit &&
+            this.animation.actions.current !== this.animation.actions.death
+        ) {
+            this.animation.play('hit')
 
-        if (this.health <= 0) this.die()
+            setTimeout(() => {
+                if (
+                    this.body &&
+                    this.animation.actions.current === this.animation.actions.hit
+                ) {
+                    this.animation.play('idle')
+                }
+            }, 450)
+        }
+
+        if (this.health <= 0) {
+            this.die()
+        }
     }
 
     updateHealthHud() {
@@ -197,6 +241,30 @@ export default class Robot {
         this.health = this.maxHealth
         this.lastDamageTime = 0
         this.updateHealthHud()
+        this.resetDamageVisual()
+    }
+    resetDamageVisual() {
+        if (this.damageTimeout) {
+            clearTimeout(this.damageTimeout)
+            this.damageTimeout = null
+        }
+
+        this.model.traverse((child) => {
+            if (!child.isMesh || !child.material) return
+
+            const restoreMaterial = (mat) => {
+                if (mat?.color && mat.userData?.originalColor) {
+                    mat.color.copy(mat.userData.originalColor)
+                    mat.needsUpdate = true
+                }
+            }
+
+            if (Array.isArray(child.material)) {
+                child.material.forEach(restoreMaterial)
+            } else {
+                restoreMaterial(child.material)
+            }
+        })
     }
 
     update() {
@@ -287,33 +355,44 @@ export default class Robot {
     }
 
     die() {
-        if (this.animation.actions.current === this.animation.actions.death) return
+        if (this.isDead) return
+        this.isDead = true
 
-        this.animation.actions.current.fadeOut(0.2)
-        this.animation.actions.death.reset().fadeIn(0.2).play()
-        this.animation.actions.current = this.animation.actions.death
+        if (this.animation.actions.current !== this.animation.actions.death) {
+            this.animation.actions.current.fadeOut(0.2)
+            this.animation.actions.death.reset().fadeIn(0.2).play()
+            this.animation.actions.current = this.animation.actions.death
+        }
 
         this.walkSound.stop()
-        
-        if (this.experience.world?.triggerDefeat) {
-            this.experience.world.triggerDefeat()
-        }
 
         if (this.body && this.physics.world.bodies.includes(this.body)) {
             this.physics.world.removeBody(this.body)
         }
+
         this.body = null
 
         this.group.position.y -= 0.5
         this.group.rotation.x = -Math.PI / 2
-        
-        console.log(' Robot ha muerto')
+
+        console.log('Robot ha muerto')
+
+        if (this.experience.world?.triggerDefeat) {
+            this.experience.world.triggerDefeat()
+        }
     }
 
     revive() {
+        this.isDead = false
         this.restoreHealth()
-        this.setPhysics()
+
+        if (!this.body) {
+            this.setPhysics()
+        }
+
         this.group.rotation.set(0, 0, 0)
+        this.group.position.y = 0
+
         this.animation.actions.death.stop()
         this.animation.actions.idle.reset().play()
         this.animation.actions.current = this.animation.actions.idle
