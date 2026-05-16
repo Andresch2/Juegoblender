@@ -22,12 +22,16 @@ export default class EnemyLarge {
         this.isChasing = false
         this.delayActivation = 0
         this.visualYOffset = -1.15
+        this.lastAttackTime = 0
+        this.attackCooldown = 900
 
         this.proximitySound = new Sound('/sounds/alert.ogg', {
             loop: true,
             volume: 0
         })
-        this.proximitySound.play()
+
+        this.alertSoundPlaying = false
+        this.hasTriggeredDefeat = false
 
         this.model = new THREE.Group()
         this.model.name = 'EnemyLarge'
@@ -147,6 +151,25 @@ export default class EnemyLarge {
         previous?.fadeOut(fade)
         this.animation.current = action
     }
+    startAlertSound(volume = 0.5) {
+        if (!window.userInteracted) return
+
+        if (!this.alertSoundPlaying) {
+            this.proximitySound?.play()
+            this.alertSoundPlaying = true
+        }
+
+        this.proximitySound?.setVolume?.(volume)
+    }
+
+    stopAlertSound() {
+        this.proximitySound?.setVolume?.(0)
+
+        if (this.alertSoundPlaying) {
+            this.proximitySound?.stop()
+            this.alertSoundPlaying = false
+        }
+    }
 
     update(delta) {
         this.animation?.mixer?.update(delta)
@@ -156,7 +179,10 @@ export default class EnemyLarge {
             return
         }
 
-        if (!this.body || !this.playerRef?.body) return
+        if (!this.body || !this.playerRef?.body || this.playerRef?.health <= 0) {
+            this.stopAlertSound()
+            return
+        }
 
         const playerPos = this.playerRef.body.position
         const enemyPos = this.body.position
@@ -198,9 +224,14 @@ export default class EnemyLarge {
         }
 
         const maxDistance = 12
-        const clampedDistance = Math.min(distanceToPlayer, maxDistance)
-        this.proximitySound?.setVolume((1 - clampedDistance / maxDistance) * 0.75)
 
+        if (this.isChasing && distanceToPlayer < maxDistance) {
+            const clampedDistance = Math.min(distanceToPlayer, maxDistance)
+            const volume = (1 - clampedDistance / maxDistance) * 0.65
+            this.startAlertSound(volume)
+        } else {
+            this.stopAlertSound()
+        }
         const direction = new CANNON.Vec3(
             targetPos.x - enemyPos.x,
             0,
@@ -236,28 +267,30 @@ export default class EnemyLarge {
     }
 
     killPlayer() {
+        if (this.hasTriggeredDefeat) return
+
+        const now = Date.now()
+
+        // Evita que quite vida 60 veces por segundo
+        if (now - this.lastAttackTime < this.attackCooldown) return
+        this.lastAttackTime = now
+
         if (typeof this.playerRef?.takeDamage === 'function') {
             this.playerRef.takeDamage(1)
         } else if (typeof this.playerRef?.die === 'function') {
             this.playerRef.die()
         }
 
-        if (!this.playerRef?.body) {
+        // Si el jugador murió, apagar sonido y mostrar derrota una sola vez
+        if (!this.playerRef?.body || this.playerRef?.health <= 0) {
+            this.hasTriggeredDefeat = true
+            this.stopAlertSound()
             this.experience?.world?.triggerDefeat?.()
-        }
-
-        if (!this.playerRef?.body && this.model.parent) {
-            new FinalPrizeParticles({
-                scene: this.scene,
-                targetPosition: this.body.position,
-                sourcePosition: this.body.position,
-                experience: this.experience
-            })
         }
     }
 
     destroy() {
-        this.proximitySound?.stop()
+        this.stopAlertSound()
         this.animation?.mixer?.stopAllAction()
 
         if (this.model) {
