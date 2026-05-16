@@ -183,6 +183,42 @@ export default class World {
 
         console.log(`Nivel 4: ${this.enemies.length} enemigos grandes creados`)
     }
+    spawnLevel5Zombie() {
+        if (!this.robot?.body?.position || !this.zombieTemplate) return
+
+        if (this.enemies?.length) {
+            this.enemies.forEach(e => e?.destroy?.())
+            this.enemies = []
+        }
+
+        // Posición inicial del zombie en nivel 5.
+        // Después puedes ajustar x y z según dónde quieras que aparezca.
+        const position = new THREE.Vector3(0, 1.5, -12)
+
+        // Ruta simple de patrulla para el zombie.
+        // Estos puntos se pueden ajustar al mapa del nivel 5.
+        const patrolPoints = [
+            { x: -8, y: 1.5, z: -12 },
+            { x: 8, y: 1.5, z: -12 },
+            { x: 8, y: 1.5, z: 4 },
+            { x: -8, y: 1.5, z: 4 }
+        ]
+
+        const zombie = new EnemyLarge({
+            scene: this.scene,
+            physicsWorld: this.experience.physics.world,
+            playerRef: this.robot,
+            model: this.zombieTemplate,
+            position,
+            experience: this.experience,
+            patrolPoints
+        })
+
+        zombie.delayActivation = 0
+        this.enemies.push(zombie)
+
+        console.log('Nivel 5: zombie creado')
+    }
 
     toggleAudio() {
         this.ambientSound.toggle()
@@ -861,6 +897,11 @@ export default class World {
             this.spawnLevel4Enemies()
             return
         }
+        if (level === 5) {
+            this._updateEnemyTemplate(level)
+            this.spawnLevel5Zombie()
+            return
+        }
 
         if (this.enemies?.length) {
             this.enemies.forEach(enemy => enemy?.destroy?.());
@@ -874,6 +915,7 @@ export default class World {
     _updateEnemyTemplate(level) {
         let enemyModel = null
         this.enemyLargeTemplate = null
+        this.zombieTemplate = null
 
         if (level === 3) {
             enemyModel = this.resources.items.ghostskull
@@ -886,6 +928,14 @@ export default class World {
             this.enemyLargeTemplate = this.resources.items.enemyLarge
             if (this.enemyLargeTemplate) {
                 console.log('Usando Enemy Large para el nivel 4')
+            }
+        }
+        if (level === 5) {
+            this.zombieTemplate = this.resources.items.zombieModel
+            if (this.zombieTemplate) {
+                console.log('Usando Zombie para el nivel 5')
+            } else {
+                console.warn('No se encontró zombieModel. Revisa sources.js y /models/Enemy/Zombie.glb')
             }
         }
 
