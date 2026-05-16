@@ -2622,6 +2622,11 @@ export default [
         "path": "/models/Enemy/Enemy Large.glb"
     },
     {
+        "name": "zombieModel",
+        "type": "gltfModel",
+        "path": "/models/Enemy/Zombie.glb"
+    },
+    {
         "name": "bar_z1a_b_lev5",
         "type": "gltfModel",
         "path": "/models/toycar5/bar_z1a_b_lev5.glb"
