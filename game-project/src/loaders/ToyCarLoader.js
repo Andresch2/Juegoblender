@@ -21,7 +21,16 @@ export default class ToyCarLoader {
             cartel_ghost_tabla_001_lev3: '/textures/signs/ruinas.png',
             cartel_ghost_tabla_lev3: '/textures/signs/ruinasghost.png',
             cartel_espacio_tabla_lev4: '/textures/signs/espacio.png',
-            cartel_lava_tabla_lev4: '/textures/signs/espaciolava.png'
+            cartel_lava_tabla_lev4: '/textures/signs/espaciolava.png',
+            cartel_ciudad_tabla_lev5: '/textures/signs/ciudad.png',
+            cartel_trafico_tabla_lev5: '/textures/signs/ciudadtrafico.png',
+
+            // Mallas nuevas exportadas desde Blender
+            cartel1_frontal_lev5: '/textures/signs/ciudad.png',
+            cartel1_trasero_lev5: '/textures/signs/ciudad.png',
+
+            cartel2_frontal_lev5: '/textures/signs/ciudadtrafico.png',
+            cartel2_trasero_lev5: '/textures/signs/ciudadtrafico.png',
         };
 
         return signTextures[blockName] || null;
@@ -91,7 +100,7 @@ export default class ToyCarLoader {
                 } else {
                     texture.encoding = THREE.sRGBEncoding;
                 }
-                texture.flipY = false;
+                texture.flipY = options.flipY ?? false;
                 const wrapS = options.wrapS || THREE.ClampToEdgeWrapping;
                 const wrapT = options.wrapT || THREE.ClampToEdgeWrapping;
                 texture.wrapS = wrapS;
@@ -132,13 +141,22 @@ export default class ToyCarLoader {
                     if (Array.isArray(child.material)) {
                         child.material.forEach((mat) => {
                             mat.map = texture;
+
+                            mat.side = THREE.DoubleSide;
+
                             mat.needsUpdate = true;
                         });
                     } else if (child.material) {
                         child.material.map = texture;
+
+                        child.material.side = THREE.DoubleSide;
+
                         child.material.needsUpdate = true;
                     } else {
-                        child.material = new THREE.MeshBasicMaterial({ map: texture, side: THREE.DoubleSide });
+                        child.material = new THREE.MeshBasicMaterial({
+                            map: texture,
+                            side: THREE.DoubleSide
+                        });
                     }
                     applied++;
                 });
@@ -154,6 +172,61 @@ export default class ToyCarLoader {
                 console.error('❌ Error cargando textura', imagePath, err);
             }
         );
+    }
+    _applySignTextureToBoard(model, block, signTexturePath) {
+        const blockName = block.name || '';
+        const nameLower = blockName.toLowerCase();
+
+        if (!nameLower.includes('cartel')) {
+            return false;
+        }
+
+        model.updateMatrixWorld(true);
+
+        console.log(`Mallas en ${blockName}:`);
+        model.traverse((child) => {
+            if (child.isMesh) {
+                console.log('  →', child.name || '(sin nombre)');
+            }
+        });
+
+        // Caso nuevo:
+        // Si el bloque YA ES una de las mallas de imagen exportadas desde Blender,
+        // aplicamos la textura a todas las mallas internas de ese GLB.
+        const isImagePanel =
+            nameLower === 'cartel1_frontal_lev5' ||
+            nameLower === 'cartel1_trasero_lev5' ||
+            nameLower === 'cartel2_frontal_lev5' ||
+            nameLower === 'cartel2_trasero_lev5';
+
+        if (isImagePanel) {
+            const shouldMirrorX =
+                nameLower === 'cartel1_frontal_lev5' ||
+                nameLower === 'cartel2_frontal_lev5';
+
+            this._applyTextureToMeshes(
+                model,
+                signTexturePath,
+                (child) => child.isMesh,
+                {
+                    center: { x: 0.5, y: 0.5 },
+
+                    // Si el cartel trasero se ve en espejo, esto lo corrige.
+                    mirrorX: shouldMirrorX,
+
+                    // Déjalo en false primero. Solo cámbialo a true si sale de cabeza.
+                    flipY: true
+                }
+            );
+
+            console.log(`Textura aplicada directamente a la malla: ${blockName}`);
+            return true;
+        }
+
+        // Para los carteles antiguos no hacemos nada,
+        // porque las imágenes ahora están en las mallas separadas.
+        console.log(`Cartel base sin textura directa: ${blockName}`);
+        return false;
     }
 
     _publicPath(path) {
@@ -383,8 +456,11 @@ export default class ToyCarLoader {
             model.userData.levelObject = true;
 
             const signTexturePath = this.getSignTexturePath(block.name);
+
             if (signTexturePath) {
-                this.addSignImagePlane(model, signTexturePath);
+                // Aplicar la textura directamente sobre la malla del tablero.
+                // No usar addSignImagePlane porque crea un plano flotante separado.
+                this._applySignTextureToBoard(model, block, signTexturePath);
             }
 
             // Eliminar cámaras y luces embebidas
@@ -395,12 +471,12 @@ export default class ToyCarLoader {
             });
 
             //  Manejo de carteles: aplicar textura a meshes
-            this._applyTextureToMeshes(
-                model,
-                '/textures/ima1.jpg',
-                (child) => child.name === 'Cylinder001' || (child.name && child.name.toLowerCase().includes('cylinder')),
-                { rotation: -Math.PI / 2, center: { x: 0.5, y: 0.5 }, mirrorX: true }
-            );
+            //this._applyTextureToMeshes(
+            //    model,
+            //    '/textures/ima1.jpg',
+            //    (child) => child.name === 'Cylinder001' || (child.name && child.name.toLowerCase().includes('cylinder')),
+            //   { rotation: -Math.PI / 2, center: { x: 0.5, y: 0.5 }, mirrorX: true }
+            //);
 
             //  Integración especial para modelos baked
             if (block.name.includes('baked')) {
@@ -568,4 +644,4 @@ export default class ToyCarLoader {
         return Array.from(byName.values());
     }
 
-}
+} 
