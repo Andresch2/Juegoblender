@@ -143,6 +143,8 @@ export default class World {
         // Activar de inmediato
         enemy.delayActivation = 0
         this.enemies.push(enemy)
+        this.gameStarted = true
+
     }
 
     spawnLevel4Enemies() {
@@ -182,6 +184,7 @@ export default class World {
         })
 
         console.log(`Nivel 4: ${this.enemies.length} enemigos grandes creados`)
+        this.gameStarted = true
     }
     spawnLevel5Zombie() {
         if (!this.robot?.body?.position || !this.zombieTemplate) return
