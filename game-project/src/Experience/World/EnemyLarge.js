@@ -14,8 +14,8 @@ export default class EnemyLarge {
         this.patrolPoints = patrolPoints
         this.currentPatrolIndex = 0
 
-        this.baseSpeed = 0.75
-        this.chaseSpeed = 2.6
+        this.baseSpeed = 0.60
+        this.chaseSpeed = 1.8
         this.detectionRadius = 14
         this.releaseRadius = 19
         this.attackDistance = 2.0
@@ -186,7 +186,7 @@ export default class EnemyLarge {
         })
     }
 
-    playAnimation(action, fade = 0.22) {
+    playAnimation(action, fade = 0.4) {
         if (!action || action === this.animation?.current) return
 
         const previous = this.animation.current
@@ -344,6 +344,7 @@ export default class EnemyLarge {
             this.body.velocity.y = 0
             this.body.velocity.z = direction.z
             this.body.position.y = this.hoverY
+            if (action) action.timeScale = Math.max(0.5, speed / this.baseSpeed)
             this.playAnimation(action)
         } else {
             this.stopMoving()
