@@ -3,8 +3,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const modelsPath = path.join('C:/Users/User/Desktop/Juego_blender/Juegoblender/game-project/public/models/toycar2');
-const outputPath = path.join(__dirname, '../data/sources_2.js');
+const modelsPath = path.join('C:/Users/User/Desktop/Juego_blender/Juegoblender/game-project/public/models/toycar5');
+const outputPath = path.join(__dirname, '../data/sources_5.js');
 
 if (!fs.existsSync(modelsPath)) {
     console.error('❌ El directorio no existe:', modelsPath);
@@ -20,7 +20,7 @@ files.forEach(file => {
         sources.push({
             name,
             type: 'gltfModel',
-            path: `/models/toycar2/${file}`
+            path: `/models/toycar5/${file}`
         });
     }
 });

@@ -3112,6 +3112,76 @@ export default [
         "path": "/models/toycar5/bench_s9_bench_1_lev5.glb"
     },
     {
+        "name": "cartel1_frontal_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel1_frontal_lev5.glb"
+    },
+    {
+        "name": "cartel1_trasero_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel1_trasero_lev5.glb"
+    },
+    {
+        "name": "cartel2_frontal_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel2_frontal_lev5.glb"
+    },
+    {
+        "name": "cartel2_trasero_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel2_trasero_lev5.glb"
+    },
+    {
+        "name": "cartel_ciudad_bot_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_ciudad_bot_lev5.glb"
+    },
+    {
+        "name": "cartel_ciudad_poste_der_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_ciudad_poste_der_lev5.glb"
+    },
+    {
+        "name": "cartel_ciudad_poste_izq_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_ciudad_poste_izq_lev5.glb"
+    },
+    {
+        "name": "cartel_ciudad_tabla_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_ciudad_tabla_lev5.glb"
+    },
+    {
+        "name": "cartel_ciudad_top_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_ciudad_top_lev5.glb"
+    },
+    {
+        "name": "cartel_trafico_bot_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_trafico_bot_lev5.glb"
+    },
+    {
+        "name": "cartel_trafico_poste_der_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_trafico_poste_der_lev5.glb"
+    },
+    {
+        "name": "cartel_trafico_poste_izq_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_trafico_poste_izq_lev5.glb"
+    },
+    {
+        "name": "cartel_trafico_tabla_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_trafico_tabla_lev5.glb"
+    },
+    {
+        "name": "cartel_trafico_top_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/cartel_trafico_top_lev5.glb"
+    },
+    {
         "name": "coin_city_1_lev5",
         "type": "gltfModel",
         "path": "/models/toycar5/coin_city_1_lev5.glb"
@@ -3280,46 +3350,6 @@ export default [
         "name": "crack_9_lev5",
         "type": "gltfModel",
         "path": "/models/toycar5/crack_9_lev5.glb"
-    },
-    {
-        "name": "crt_final_p1_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_final_p1_lev5.glb"
-    },
-    {
-        "name": "crt_final_p2_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_final_p2_lev5.glb"
-    },
-    {
-        "name": "crt_final_tb_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_final_tb_lev5.glb"
-    },
-    {
-        "name": "crt_final_tx_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_final_tx_lev5.glb"
-    },
-    {
-        "name": "crt_inicio_p1_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_inicio_p1_lev5.glb"
-    },
-    {
-        "name": "crt_inicio_p2_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_inicio_p2_lev5.glb"
-    },
-    {
-        "name": "crt_inicio_tb_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_inicio_tb_lev5.glb"
-    },
-    {
-        "name": "crt_inicio_tx_lev5",
-        "type": "gltfModel",
-        "path": "/models/toycar5/crt_inicio_tx_lev5.glb"
     },
     {
         "name": "crt_z1_p1_lev5",
@@ -4880,6 +4910,16 @@ export default [
         "name": "mwall_norte_top_lev5",
         "type": "gltfModel",
         "path": "/models/toycar5/mwall_norte_top_lev5.glb"
+    },
+    {
+        "name": "mwall_sur_body.001.001_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/mwall_sur_body.001.001_lev5.glb"
+    },
+    {
+        "name": "mwall_sur_body.001.002_lev5",
+        "type": "gltfModel",
+        "path": "/models/toycar5/mwall_sur_body.001.002_lev5.glb"
     },
     {
         "name": "mwall_sur_body.001_lev5",
