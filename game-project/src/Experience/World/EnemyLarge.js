@@ -24,6 +24,10 @@ export default class EnemyLarge {
         this.visualYOffset = -1.15
         this.lastAttackTime = 0
         this.attackCooldown = 900
+        // Movimiento del zombie
+        this.movementMode = 'walk2'
+        this.modeTimer = 0
+        this.nextModeChange = 3 + Math.random() * 3
 
         this.proximitySound = new Sound('/sounds/alert.ogg', {
             loop: true,
@@ -44,15 +48,7 @@ export default class EnemyLarge {
 
         this.model.traverse((child) => {
             if (child.isMesh) {
-                child.visible = true
                 child.castShadow = true
-                child.frustumCulled = false
-                if (child.material) {
-                    child.material.transparent = false
-                    child.material.opacity = 1
-                    child.material.visible = true
-                    child.material.needsUpdate = true
-                }
             }
         })
 
@@ -118,6 +114,7 @@ export default class EnemyLarge {
 
     setAnimation() {
         const animations = this.modelResource?.animations || []
+
         this.animation = {
             mixer: null,
             actions: {},
@@ -125,22 +122,68 @@ export default class EnemyLarge {
         }
 
         if (!animations.length) {
-            console.warn('Enemy Large no trae animaciones.')
+            console.warn('El zombie no trae animaciones.')
             return
         }
 
+        console.log('Animaciones del zombie:', animations.map(clip => clip.name))
+
         this.animation.mixer = new THREE.AnimationMixer(this.visual)
+
         animations.forEach((clip) => {
             this.animation.actions[clip.name] = this.animation.mixer.clipAction(clip)
         })
 
-        this.animation.idleAction = this.animation.actions['CharacterArmature|Idle'] || this.animation.actions[animations[0].name]
-        this.animation.walkAction = this.animation.actions['CharacterArmature|Walk'] || this.animation.idleAction
-        this.animation.runAction = this.animation.actions['CharacterArmature|Run'] || this.animation.walkAction
-        this.animation.attackAction = this.animation.actions['CharacterArmature|Punch'] || this.animation.idleAction
+        // Busca por nombre exacto O con prefijo Armature| (depende del GLB)
+        const getClip = (name) => {
+            return animations.find(clip =>
+                clip.name === name ||
+                clip.name === `Armature|${name}`
+            )
+        }
+
+        const idleClip =
+            getClip('Idle') ||
+            animations[0]
+
+        const walkSlowClip =
+            getClip('Walk2') ||
+            getClip('Walk') ||
+            idleClip
+
+        const walkClip =
+            getClip('Walk') ||
+            walkSlowClip
+
+        const crawlRunClip =
+            getClip('Running_Crawl') ||
+            walkClip
+
+        const attackClip =
+            getClip('Attack') ||
+            getClip('Bite_ground') ||
+            getClip('Headbutt') ||
+            idleClip
+
+        this.animation.idleAction = this.animation.mixer.clipAction(idleClip)
+        this.animation.walkSlowAction = this.animation.mixer.clipAction(walkSlowClip)
+        this.animation.walkAction = this.animation.mixer.clipAction(walkClip)
+        this.animation.crawlRunAction = this.animation.mixer.clipAction(crawlRunClip)
+        this.animation.attackAction = this.animation.mixer.clipAction(attackClip)
+
+        this.animation.attackAction.setLoop(THREE.LoopOnce)
+        this.animation.attackAction.clampWhenFinished = false
 
         this.animation.current = this.animation.idleAction
-        this.animation.current?.reset().fadeIn(0.2).play()
+        this.animation.current.reset().fadeIn(0.2).play()
+
+        console.log('Animaciones usadas por el zombie:', {
+            idle: idleClip.name,
+            caminarLento: walkSlowClip.name,
+            caminarNormal: walkClip.name,
+            correr: crawlRunClip.name,
+            atacar: attackClip.name
+        })
     }
 
     playAnimation(action, fade = 0.22) {
@@ -168,6 +211,43 @@ export default class EnemyLarge {
         if (this.alertSoundPlaying) {
             this.proximitySound?.stop()
             this.alertSoundPlaying = false
+        }
+    }
+    updateZombieMovementMode(delta, isChasing) {
+        this.modeTimer += delta
+
+        if (this.modeTimer < this.nextModeChange) return
+
+        this.modeTimer = 0
+
+        if (isChasing) {
+            // Cuando persigue, tiene más probabilidad de ir rápido
+            const useCrawl = Math.random() < 0.65
+
+            if (useCrawl) {
+                this.movementMode = 'crawl'
+                this.nextModeChange = 1.5 + Math.random() * 1.5
+            } else {
+                this.movementMode = 'walk'
+                this.nextModeChange = 2 + Math.random() * 2
+            }
+
+            return
+        }
+
+        // Cuando patrulla, normalmente camina lento,
+        // a veces camina normal y pocas veces corre en crawl.
+        const random = Math.random()
+
+        if (random < 0.15) {
+            this.movementMode = 'crawl'
+            this.nextModeChange = 1.2 + Math.random() * 1.3
+        } else if (random < 0.50) {
+            this.movementMode = 'walk'
+            this.nextModeChange = 2.5 + Math.random() * 2
+        } else {
+            this.movementMode = 'walk2'
+            this.nextModeChange = 3 + Math.random() * 3
         }
     }
 
@@ -202,15 +282,34 @@ export default class EnemyLarge {
 
         let targetPos
         let speed = this.baseSpeed
-        let action = this.animation?.walkAction
+        let action = this.animation?.walkSlowAction || this.animation?.walkAction
+
+        this.updateZombieMovementMode(delta, this.isChasing)
 
         if (this.isChasing) {
             targetPos = playerPos
-            speed = this.chaseSpeed
-            action = this.animation?.runAction
+
+            if (this.movementMode === 'crawl') {
+                speed = this.chaseSpeed * 1.15
+                action = this.animation?.crawlRunAction || this.animation?.walkAction
+            } else {
+                speed = this.chaseSpeed * 0.8
+                action = this.animation?.walkAction || this.animation?.walkSlowAction
+            }
+
         } else if (this.patrolPoints.length > 0) {
             const currentPoint = this.patrolPoints[this.currentPatrolIndex]
             targetPos = new CANNON.Vec3(currentPoint.x, this.hoverY, currentPoint.z)
+            if (this.movementMode === 'crawl') {
+                speed = this.baseSpeed * 2.4
+                action = this.animation?.crawlRunAction || this.animation?.walkAction
+            } else if (this.movementMode === 'walk') {
+                speed = this.baseSpeed * 1.4
+                action = this.animation?.walkAction || this.animation?.walkSlowAction
+            } else {
+                speed = this.baseSpeed
+                action = this.animation?.walkSlowAction || this.animation?.walkAction
+            }
 
             const dxToPoint = targetPos.x - enemyPos.x
             const dzToPoint = targetPos.z - enemyPos.z
