@@ -7,11 +7,25 @@ export default class Resources extends EventEmitter {
         super()
 
         this.sources = sources
+        // En produccion no conviene precargar todos los GLB de los 5 niveles.
+        // Solo se cargan los recursos base; los modelos de cada nivel se piden
+        // bajo demanda desde ToyCarLoader cuando se entra al nivel.
+        const initialResourceNames = new Set([
+            'environmentMapTexture',
+            'grassColorTexture',
+            'grassNormalTexture',
+            'foxModel',
+            'playerModel',
+            'ghostskull',
+            'enemyLarge',
+            'zombieModel'
+        ])
+        this.preloadSources = this.sources.filter(source => initialResourceNames.has(source.name))
         this.items = {}
         this.errors = []
-        this.toLoad = this.sources.length
+        this.toLoad = this.preloadSources.length
         this.loaded = 0
-        this.queue = [...this.sources]
+        this.queue = [...this.preloadSources]
         this.activeLoads = 0
         this.maxConcurrentLoads = 12
 
