@@ -38,7 +38,7 @@ export default class CircularMenu {
     this.toggleButton.innerText = '⚙️'
     this.toggleButton.title = 'Mostrar menú'
     this.toggleButton.setAttribute('aria-label', 'Mostrar menú')
-    this.toggleButton.style.cssText = baseStyle + 'top: 80px; right: 20px;'
+    this.toggleButton.style.cssText = baseStyle + 'top: 110px; right: 20px;'
     container.appendChild(this.toggleButton)
     // Ocultar inicialmente
     this.toggleButton.style.display = 'none'
@@ -46,14 +46,12 @@ export default class CircularMenu {
 
     // Lista de botones de acción
     const actions = [
-      { icon: '🔊', title: 'Audio', onClick: onAudioToggle },
-      { icon: '🚶', title: 'Modo Caminata', onClick: onWalkMode },
-      { icon: '🖥️', title: 'Pantalla Completa', onClick: onFullscreen },
-      { icon: '🥽', title: 'Modo VR', onClick: () => this.vrIntegration.toggleVR() },
-      { icon: '👨‍💻', title: 'Acerca de', onClick: () => this.showAboutModal() },
       { icon: '🏅', title: 'Mis Partidas', onClick: () => { window.location.href = '/mis-partidas' } },
       { icon: '👤', title: 'Mi Perfil', onClick: () => { window.location.href = '/perfil' } },
       { icon: '📋', title: 'Catálogo de Niveles', onClick: () => { window.location.href = '/niveles' } },
+      { icon: '🔊', title: 'Audio', onClick: onAudioToggle },
+      { icon: '🖥️', title: 'Pantalla Completa', onClick: onFullscreen },
+      { icon: '👨‍💻', title: 'Acerca de', onClick: () => this.showAboutModal() },
       { icon: '❌', title: 'Cancelar Juego', onClick: onCancelGame }
     ]
 
@@ -79,7 +77,7 @@ export default class CircularMenu {
         boxShadow: '0 0 10px #00fff7',
         backdropFilter: 'blur(4px)',
         zIndex: 9999,
-        top: `${140 + index * 60}px`,
+        top: `${170 + index * 60}px`,
         right: '20px',
         opacity: '0',
         pointerEvents: 'none'
@@ -97,6 +95,9 @@ export default class CircularMenu {
       this.actionButtons.push(btn)
     })
 
+    // HUD principal:
+    // Muestra tiempo, puntos, nivel, vida y jugadores durante la partida.
+    // Sirve como evidencia de la Actividad 3.
     // HUD: Tiempo
     this.timer = document.createElement('div')
     this.timer.id = 'hud-timer'
@@ -137,7 +138,8 @@ export default class CircularMenu {
     })
     document.body.appendChild(this.status)
 
-    // HUD: Nivel actual y progreso de monedas
+    // HUD: Nivel actual.
+    // Se actualiza desde World.refreshLevelProgress al cambiar de nivel.
     this.levelLabel = document.createElement('div')
     this.levelLabel.id = 'hud-level'
     this.levelLabel.innerText = 'Nivel: 1'
@@ -158,7 +160,8 @@ export default class CircularMenu {
     })
     document.body.appendChild(this.levelLabel)
 
-    // HUD: Vida del jugador
+    // HUD: Vida del jugador.
+    // Se dibuja con SVG para evitar emojis y permitir 5 corazones completos.
     this.healthContainer = document.createElement('div')
     this.healthContainer.id = 'hud-health'
     Object.assign(this.healthContainer.style, {

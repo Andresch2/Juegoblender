@@ -5,11 +5,11 @@ import { request } from '../services/http'
 import { clearToken } from '../services/session'
 
 const NIVELES = [
-    { id: 1, nombre: 'Nivel 1 — Bosque Inicial', icono: '🌲' },
-    { id: 2, nombre: 'Nivel 2 — Laberinto', icono: '🌀' },
-    { id: 3, nombre: 'Nivel 3 — Ciudad', icono: '🏙️' },
-    { id: 4, nombre: 'Nivel 4 — Industrial', icono: '🏭' },
-    { id: 5, nombre: 'Nivel 5 — Final', icono: '🏆' },
+    { id: 1, nombre: 'Nivel 1 - Bosque Inicial', icono: 'N1' },
+    { id: 2, nombre: 'Nivel 2 - Laberinto', icono: 'N2' },
+    { id: 3, nombre: 'Nivel 3 - Ciudad', icono: 'N3' },
+    { id: 4, nombre: 'Nivel 4 - Industrial', icono: 'N4' },
+    { id: 5, nombre: 'Nivel 5 - Final', icono: 'N5' },
 ]
 
 export default function NivelesView() {
@@ -38,14 +38,15 @@ export default function NivelesView() {
                 setLoading(false)
             }
         }
+
         cargarConteos()
     }, [])
 
     return (
         <div style={styles.container}>
             <div style={styles.wrapper}>
-                <h1 style={styles.title}>🎮 Juego Blender</h1>
-                <h2 style={styles.subtitle}>Catálogo de Niveles</h2>
+                <h1 style={styles.title}>Juego Blender</h1>
+                <h2 style={styles.subtitle}>Catalogo de Niveles</h2>
 
                 {loading && <p style={styles.info}>Cargando niveles...</p>}
                 {error && <p role="alert" style={styles.error}>{error}</p>}
@@ -64,11 +65,11 @@ export default function NivelesView() {
                                     <span style={styles.icono}>{nivel.icono}</span>
                                     <span style={styles.nombreNivel}>{nivel.nombre}</span>
                                     <div style={styles.stats}>
-                                        <span>📦 {info.total ?? '—'} objetos</span>
-                                        <span>🪙 {info.coins ?? '—'} coins</span>
-                                        <span>🌀 {info.portal ?? '—'} portal</span>
+                                        <span>Obj: {info.total ?? '-'}</span>
+                                        <span>Coins: {info.coins ?? '-'}</span>
+                                        <span>Portal: {info.portal ?? '-'}</span>
                                     </div>
-                                    <span style={styles.ver}>Ver detalle →</span>
+                                    <span style={styles.ver}>Ver detalle</span>
                                 </button>
                             )
                         })}
@@ -77,10 +78,10 @@ export default function NivelesView() {
 
                 <div style={styles.navBtns}>
                     <button onClick={() => navigate('/game')} style={styles.btnVolver}>
-                        ▶ Volver al Juego
+                        Volver al Juego
                     </button>
                     <button onClick={() => { clearToken(); navigate('/login') }} style={styles.btnLogout}>
-                        🚪 Cerrar Sesión
+                        Cerrar Sesion
                     </button>
                 </div>
             </div>
@@ -89,19 +90,19 @@ export default function NivelesView() {
 }
 
 const styles = {
-    container: { minHeight:'100vh', overflowY:'auto', background:'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily:'sans-serif', padding:'32px 16px' },
-    wrapper: { maxWidth:700, margin:'0 auto' },
-    title: { color:'#fff', textAlign:'center', margin:'0 0 4px', fontSize:26 },
-    subtitle: { color:'#a5b4fc', textAlign:'center', margin:'0 0 28px', fontSize:20, fontWeight:400 },
-    info: { color:'#94a3b8', textAlign:'center' },
-    error: { color:'#f87171', textAlign:'center' },
-    grid: { display:'flex', flexDirection:'column', gap:14 },
-    card: { background:'rgba(255,255,255,0.07)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:12, padding:'18px 22px', cursor:'pointer', textAlign:'left', color:'#fff', display:'flex', flexDirection:'column', gap:8, transition:'background 0.2s' },
-    icono: { fontSize:28 },
-    nombreNivel: { fontSize:17, fontWeight:700, color:'#e2e8f0' },
-    stats: { display:'flex', gap:16, fontSize:13, color:'#94a3b8' },
-    ver: { fontSize:13, color:'#818cf8', marginTop:4 },
-    navBtns: { display:'flex', gap:12, marginTop:28 },
-    btnVolver: { flex:1, padding:13, borderRadius:8, background:'linear-gradient(90deg,#6366f1,#8b5cf6)', color:'#fff', border:'none', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 },
-    btnLogout: { flex:1, padding:13, borderRadius:8, background:'rgba(239,68,68,0.15)', border:'1px solid rgba(239,68,68,0.4)', color:'#f87171', fontSize:15, cursor:'pointer', fontWeight:600, minHeight:44 }
+    container: { position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflowY: 'auto', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily: 'sans-serif', padding: '24px 16px', boxSizing: 'border-box' },
+    wrapper: { maxWidth: 700, margin: '0 auto', paddingBottom: 80 },
+    title: { color: '#fff', textAlign: 'center', margin: '0 0 4px', fontSize: 26 },
+    subtitle: { color: '#a5b4fc', textAlign: 'center', margin: '0 0 28px', fontSize: 20, fontWeight: 400 },
+    info: { color: '#94a3b8', textAlign: 'center' },
+    error: { color: '#f87171', textAlign: 'center' },
+    grid: { display: 'flex', flexDirection: 'column', gap: 14 },
+    card: { background: 'rgba(255,255,255,0.07)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: 12, padding: '18px 22px', cursor: 'pointer', textAlign: 'left', color: '#fff', display: 'flex', flexDirection: 'column', gap: 8, transition: 'background 0.2s' },
+    icono: { width: 34, height: 34, borderRadius: 8, display: 'inline-flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(99,102,241,0.28)', color: '#c7d2fe', fontSize: 14, fontWeight: 800, letterSpacing: 0 },
+    nombreNivel: { fontSize: 17, fontWeight: 700, color: '#e2e8f0' },
+    stats: { display: 'flex', gap: 16, fontSize: 13, color: '#94a3b8', flexWrap: 'wrap' },
+    ver: { fontSize: 13, color: '#818cf8', marginTop: 4 },
+    navBtns: { display: 'flex', gap: 12, marginTop: 28 },
+    btnVolver: { flex: 1, padding: 13, borderRadius: 8, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)', color: '#fff', border: 'none', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 },
+    btnLogout: { flex: 1, padding: 13, borderRadius: 8, background: 'rgba(239,68,68,0.15)', border: '1px solid rgba(239,68,68,0.4)', color: '#f87171', fontSize: 15, cursor: 'pointer', fontWeight: 600, minHeight: 44 }
 }

@@ -10,9 +10,10 @@ import Environment from './Environment.js'
 import Floor from './Floor.js'
 import Fox from './Fox.js'
 import LevelManager from './LevelManager.js'
-import Robot from './Robot.js'
+import Adventurer from './Adventurer.js'
 import Sound from './Sound.js'
 import ThirdPersonCamera from './ThirdPersonCamera.js'
+import ZombieEnemy from './ZombieEnemy.js'
 
 // Nivel mínimo para que aparezcan enemigos
 const ENEMY_MIN_LEVEL = 3
@@ -53,7 +54,7 @@ export default class World {
             await this.loader.loadFromAPI()
             this.refreshLevelProgress(1)
 
-            this.robot = new Robot(this.experience)
+            this.robot = new Adventurer(this.experience)
             this.fox = new Fox(this.experience, this.robot)
 
             // Buscar spawn en los bloques cargados inicialmente
@@ -186,7 +187,7 @@ export default class World {
         console.log(`Nivel 4: ${this.enemies.length} enemigos grandes creados`)
         this.gameStarted = true
     }
-    spawnLevel5Zombie() {
+    spawnLevel5Zombies() {
         if (!this.robot?.body?.position || !this.zombieTemplate) return
 
         if (this.enemies?.length) {
@@ -195,32 +196,48 @@ export default class World {
         }
 
         // Posición inicial del zombie en nivel 5.
-        // Después puedes ajustar x y z según dónde quieras que aparezca.
-        const position = new THREE.Vector3(0, 1.5, -12)
-
-        // Ruta simple de patrulla para el zombie.
-        // Estos puntos se pueden ajustar al mapa del nivel 5.
-        const patrolPoints = [
-            { x: -8, y: 1.5, z: -12 },
-            { x: 8, y: 1.5, z: -12 },
-            { x: 8, y: 1.5, z: 4 },
-            { x: -8, y: 1.5, z: 4 }
+        const zombieConfigs = [
+            {
+                x: -14, z: -18,
+                patrol: [{ x: -20, z: -18 }, { x: -8, z: -18 }, { x: -8, z: -6 }, { x: -20, z: -6 }]
+            },
+            {
+                x: 12, z: -16,
+                patrol: [{ x: 6, z: -18 }, { x: 20, z: -18 }, { x: 20, z: -4 }, { x: 6, z: -4 }]
+            },
+            {
+                x: -12, z: 10,
+                patrol: [{ x: -20, z: 4 }, { x: -5, z: 4 }, { x: -5, z: 16 }, { x: -20, z: 16 }]
+            },
+            {
+                x: 14, z: 12,
+                patrol: [{ x: 6, z: 5 }, { x: 22, z: 5 }, { x: 22, z: 18 }, { x: 6, z: 18 }]
+            }
         ]
 
-        const zombie = new EnemyLarge({
-            scene: this.scene,
-            physicsWorld: this.experience.physics.world,
-            playerRef: this.robot,
-            model: this.zombieTemplate,
-            position,
-            experience: this.experience,
-            patrolPoints
+        zombieConfigs.forEach((config, index) => {
+            const position = new THREE.Vector3(config.x, 1.5, config.z)
+            const patrolPoints = config.patrol.map(point => ({
+                x: point.x,
+                y: 1.5,
+                z: point.z
+            }))
+
+            const zombie = new ZombieEnemy({
+                scene: this.scene,
+                physicsWorld: this.experience.physics.world,
+                playerRef: this.robot,
+                model: this.zombieTemplate,
+                position,
+                experience: this.experience,
+                patrolPoints
+            })
+
+            zombie.delayActivation = index * 0.35
+            this.enemies.push(zombie)
         })
 
-        zombie.delayActivation = 0
-        this.enemies.push(zombie)
-
-        console.log('Nivel 5: zombie creado')
+        console.log(`Nivel 5: ${this.enemies.length} zombies creados`)
     }
 
     toggleAudio() {
@@ -310,7 +327,7 @@ export default class World {
         this.blockPrefab?.update()
         this.checkHazards()
 
-        // 🧟‍♂️ Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
+        // Solo actualizar enemigos si el juego ya comenzó Y el nivel lo permite
         if (this.gameStarted && this.levelManager.currentLevel >= ENEMY_MIN_LEVEL) {
             this.enemies?.forEach(e => e.update(delta))
         }
@@ -485,8 +502,10 @@ export default class World {
                     // ── Fin limpiar ──
 
                     const elapsed = this.experience.tracker.stop()
+                    const finalCoins = Math.max(this.points || 0, this.robot?.points || 0)
+                    const targetCoins = this.getCurrentPointsTarget()
                     this.experience.tracker.saveTime(elapsed)
-                    this.experience.tracker.showEndGameModal(elapsed)
+                    this.experience.tracker.showEndGameModal(elapsed, finalCoins, targetCoins)
 
                     this.experience.obstacleWavesDisabled = true
                     clearTimeout(this.experience.obstacleWaveTimeout)
@@ -776,6 +795,9 @@ export default class World {
 
     async loadLevel(level) {
         try {
+            // CARGA MULTINIVEL:
+            // Primero intenta traer los bloques desde backend/Mongo.
+            // Si falla, el juego usa JSON locales para funcionar sin backend.
             const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:3001';
             const apiUrl = `${backendUrl}/api/blocks?level=${level}`;
 
@@ -806,6 +828,9 @@ export default class World {
                 console.warn(`⚠️ No se pudo conectar con el backend. Usando datos locales para nivel ${level}...`);
 
 
+                // MODO FRONTEND INDEPENDIENTE:
+                // Para Vercel o pruebas sin Mongo se lee el JSON local
+                // y se filtra por el campo "level".
                 const combinedLocalUrl = publicPath('data/toy_car_blocks.json');
                 const levelLocalUrl = publicPath(`data/toy_car_blocks${level}.json`);
                 let localUrl = combinedLocalUrl;
@@ -843,6 +868,9 @@ export default class World {
             if (blocksArray.length === 0) {
                 throw new Error(`No hay bloques para el nivel ${level}. Revisa backend, Mongo o los JSON locales.`);
             }
+            // SPAWN POR NIVEL:
+            // Busca player_spawn exportado desde Blender; si no existe,
+            // usa el spawn configurado en LevelManager.
             let spawnPoint = this.getSpawnForLevel(level, blocksArray);
 
             // Guardar datos del nivel (incluye empties como rutas)
@@ -883,6 +911,8 @@ export default class World {
                 }
 
                 // Procesar bloques con la configuración obtenida
+                // ToyCarLoader convierte cada registro JSON en modelo GLB,
+                // coin, portal, cartel, peligro o cuerpo fisico Cannon.
                 await this.loader._processBlocks(blocksArray, preciseModels);
             } else {
                 await this.loader.loadFromURL(apiUrl);
@@ -894,10 +924,15 @@ export default class World {
                 p.collected = false;
             });
 
+            // PROGRESO DEL NIVEL:
+            // Las coins default cuentan para la meta. La finalPrize
+            // aparece cuando ya se recolectaron todas las monedas.
             this.refreshLevelProgress(level);
             console.log(`🎯 Total de monedas default para el nivel ${level}: ${this.totalDefaultCoins}`);
 
             this.resetRobotPosition(spawnPoint);
+            // ENEMIGOS POR NIVEL:
+            // Nivel 3 usa GhostSkull, nivel 4 Enemy Large y nivel 5 zombies.
             this.setupEnemiesForLevel(level);
             console.log(`✅ Nivel ${level} cargado con spawn en`, spawnPoint);
         } catch (error) {
@@ -910,6 +945,7 @@ export default class World {
     }
 
     async setupEnemiesForLevel(level) {
+        // Nivel 3: GhostSkull con ruta, zona de deteccion y persecucion.
         if (level === ENEMY_MIN_LEVEL) { // Solo en nivel 3
             // Actualizar el modelo del enemigo para el nivel correcto
             this._updateEnemyTemplate(level)
@@ -921,14 +957,16 @@ export default class World {
             return;
         }
 
+        // Nivel 4: Enemy Large, separado para ajustar escala, dano y animaciones.
         if (level === 4) {
             this._updateEnemyTemplate(level)
             this.spawnLevel4Enemies()
             return
         }
+        // Nivel 5: zombies en clase separada para no afectar los enemigos anteriores.
         if (level === 5) {
             this._updateEnemyTemplate(level)
-            this.spawnLevel5Zombie()
+            this.spawnLevel5Zombies()
             return
         }
 

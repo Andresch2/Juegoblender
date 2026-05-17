@@ -16,6 +16,9 @@ export default class ToyCarLoader {
     }
 
     getSignTexturePath(blockName) {
+        // CARTELES POR NIVEL:
+        // El nombre exportado desde Blender decide que imagen se aplica.
+        // Asi no se toca cada GLB manualmente en Three.js.
         const signTextures = {
             cartel_bosque_tabla_lev1: '/textures/signs/bosque.png',
             cartel_ghost_tabla_001_lev3: '/textures/signs/ruinas.png',
@@ -46,34 +49,45 @@ export default class ToyCarLoader {
         const isSideFacingSign = size.z > size.x;
         const width = Math.max((isSideFacingSign ? size.z : size.x) * 0.92, 0.1);
         const height = Math.max(size.y * 0.92, 0.1);
-        const texture = new THREE.TextureLoader().load(imagePath);
 
-        if ('colorSpace' in texture) {
-            texture.colorSpace = THREE.SRGBColorSpace;
-        } else {
-            texture.encoding = THREE.sRGBEncoding;
-        }
+        const createMaterial = () => {
+            const texture = new THREE.TextureLoader().load(imagePath);
 
-        texture.flipY = true;
+            if ('colorSpace' in texture) {
+                texture.colorSpace = THREE.SRGBColorSpace;
+            } else {
+                texture.encoding = THREE.sRGBEncoding;
+            }
 
-        const material = new THREE.MeshBasicMaterial({
-            map: texture,
-            transparent: true,
-            side: THREE.DoubleSide,
-            depthWrite: false
-        });
+            texture.flipY = true;
 
-        const plane = new THREE.Mesh(new THREE.PlaneGeometry(width, height), material);
-        plane.name = 'sign_image_overlay';
+            return new THREE.MeshBasicMaterial({
+                map: texture,
+                transparent: true,
+                side: THREE.FrontSide,
+                depthWrite: false,
+                depthTest: true
+            });
+        };
+
+        const createPlane = (name) => {
+            const plane = new THREE.Mesh(new THREE.PlaneGeometry(width, height), createMaterial());
+            plane.name = name;
+            plane.userData.levelObject = true;
+            return plane;
+        };
+
+        const frontPlane = createPlane('sign_image_overlay_front');
+
         if (isSideFacingSign) {
-            plane.rotation.y = -Math.PI / 2;
-            plane.position.set(bbox.min.x - 0.03, center.y, center.z);
-        } else {
-            plane.position.set(center.x, center.y, bbox.max.z + 0.03);
-        }
-        plane.userData.levelObject = true;
+            frontPlane.rotation.y = -Math.PI / 2;
+            frontPlane.position.set(bbox.min.x - 0.035, center.y, center.z);
 
-        model.add(plane);
+        } else {
+            frontPlane.position.set(center.x, center.y, bbox.max.z + 0.035);
+        }
+
+        model.add(frontPlane);
     }
 
     _applyTextureToMeshes(root, imagePath, matcher, options = {}) {
@@ -225,8 +239,9 @@ export default class ToyCarLoader {
 
         // Para los carteles antiguos no hacemos nada,
         // porque las imágenes ahora están en las mallas separadas.
-        console.log(`Cartel base sin textura directa: ${blockName}`);
-        return false;
+        this.addSignImagePlane(model, signTexturePath);
+        console.log(`Imagen agregada al cartel: ${blockName}`);
+        return true;
     }
 
     _publicPath(path) {
@@ -366,7 +381,9 @@ export default class ToyCarLoader {
         blocks = this._dedupeBlocks(blocks);
         this.hazards = [];
 
-        // Patrones que SI deben tener colision fisica (superficies caminables)
+        // FISICAS POR NOMBRE:
+        // Los objetos exportados desde Blender se clasifican por prefijos.
+        // Esto permite que cada nivel cargue fisicas sin escribir objeto por objeto.
         const PHYSICS_PATTERNS = [
             // Caminos lev1 (sin física - el floor los sostiene)
             // 'camino',  ← comentado intencionalmente
@@ -389,13 +406,13 @@ export default class ToyCarLoader {
             'mesh3_model',
             // Agua
             'pond', 'rio', 'river', 'water',
-            // Nivel 3 - Cripta/Mazmorra
+            // Nivel 3 - Ruinas/cripta: muros, pasillos, portales y zonas.
             'entrada_', 'plaza_', 'corridor_', 'doors_', 'main_path', 'cartel_inicio_texto',
             'chamber_', 'chase_', 'crypt_', 'final_', 'portal_',
-            // Nivel 4 - Espacial
+            // Nivel 4 - Espacial: rocas, soportes, nave, bases y plataformas.
             'formation_rock', 'asteroids_mesh', 'connector', 'metalsupport',
             'spaceship', 'building', 'house_', 'lv1_', 'lv2_', 'lv3_', 'lv4_', 'crt_',
-            // Nivel 5 - Ciudad final
+            // Nivel 5 - Ciudad final: calles, aceras, puentes y barreras.
             'road', 'street', 'sidewalk', 'platform', 'bridge', 'wall_', 'bar_', 'barrier',
             'fence', 'portal_base', 'portal_aro', 'tower', 'city', 'stairs', 'step'
         ]
@@ -458,8 +475,8 @@ export default class ToyCarLoader {
             const signTexturePath = this.getSignTexturePath(block.name);
 
             if (signTexturePath) {
-                // Aplicar la textura directamente sobre la malla del tablero.
-                // No usar addSignImagePlane porque crea un plano flotante separado.
+                // Actividad 6: los dos carteles de cada nivel usan imagenes
+                // segun el nombre de la tabla exportada desde Blender.
                 this._applySignTextureToBoard(model, block, signTexturePath);
             }
 
@@ -505,6 +522,8 @@ export default class ToyCarLoader {
             //  Si es un premio (coin)
             const isCollectibleCoin = nameLower.startsWith('coin_') && !nameLower.includes('coin_structure');
             if (isCollectibleCoin) {
+                // Actividad 2 y 4: cada coin viene del JSON/Mongo.
+                // role default suma al progreso; role finalPrize activa el cambio de nivel.
                 const prize = new Prize({
                     model,
                     position: new THREE.Vector3(block.x, block.y, block.z),
@@ -522,6 +541,8 @@ export default class ToyCarLoader {
             // Agregar modelo visualmente a la escena
             this.scene.add(model);
             if (nameLower.includes('spikes') || isDamageHazard) {
+                // Peligros del escenario:
+                // pinchos matan, zonas de lava bajan vida.
                 model.userData.hazard = true;
                 model.userData.hazardMode = isDamageHazard ? 'damage' : 'death';
                 model.userData.hazardDamage = isDamageHazard ? 0.5 : 999;
@@ -588,6 +609,8 @@ export default class ToyCarLoader {
             let finalBodyPos = new CANNON.Vec3(bodyCenter.x, bodyCenter.y, bodyCenter.z);
 
             if (isPrecise) {
+                // Fisica precisa:
+                // Trimesh se usa en objetos donde una caja simple no respeta la forma.
                 shape = createTrimeshShapeFromModel(model);
                 if (shape) {
                     // Los vértices del Trimesh ya están en coordenadas de mundo, 

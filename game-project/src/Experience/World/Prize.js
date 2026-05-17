@@ -2,6 +2,10 @@ import * as THREE from 'three'
 
 export default class Prize {
     constructor({ model, position, scene, role = 'default', sound = null }) {
+        // role = default:
+        // moneda normal que suma puntos y cuenta para activar el portal.
+        // role = finalPrize:
+        // moneda/portal final que aparece cuando se completa la meta del nivel.
         this.scene = scene
         this.collected = false
         this.role = role

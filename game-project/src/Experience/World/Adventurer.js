@@ -3,8 +3,11 @@ import * as THREE from 'three'
 import * as SkeletonUtils from 'three/examples/jsm/utils/SkeletonUtils.js'
 import Sound from './Sound.js'
 
-export default class Robot {
+export default class Adventurer {
     constructor(experience) {
+        // Personaje jugable principal:
+        // concentra movimiento, vida,
+        // sonidos, fisica y animaciones del aventurero.
         this.experience = experience
         this.scene = this.experience.scene
         this.resources = this.experience.resources
@@ -19,6 +22,7 @@ export default class Robot {
         this.maxHealth = 5
         this.lastDamageTime = 0
         this.damageCooldown = 800
+        this.hitAnimationUntil = 0
 
         this.setModel()
         this.setSounds()
@@ -61,6 +65,8 @@ export default class Robot {
     }
 
     setPhysics() {
+        // Cannon-es usa una esfera para mover el personaje.
+        // La rotacion se bloquea para que el modelo no ruede visualmente.
         const shape = new CANNON.Sphere(0.45)
 
         this.body = new CANNON.Body({
@@ -87,7 +93,6 @@ export default class Robot {
                 this.body.velocity.x *= 12 / hv
                 this.body.velocity.z *= 12 / hv
             }
-            // Clamp agresivo hacia arriba — evita el lanzamiento al pisar bordes
             if (this.body.velocity.y > 3) this.body.velocity.y = 3
         })
 
@@ -95,8 +100,8 @@ export default class Robot {
     }
 
     setSounds() {
-        this.walkSound = new Sound('/sounds/robot/walking.mp3', { loop: true, volume: 0.5 })
-        this.jumpSound = new Sound('/sounds/robot/jump.mp3', { volume: 0.8 })
+        this.walkSound = new Sound('/sounds/Adventurer/walking.mp3', { loop: true, volume: 0.5 })
+        this.jumpSound = new Sound('/sounds/Adventurer/jump.mp3', { volume: 0.8 })
     }
 
     setAnimation() {
@@ -143,7 +148,7 @@ export default class Robot {
             clipMap['CharacterArmature|Hurt'] ||
             clipMap['CharacterArmature|Damage'] ||
             clipMap['CharacterArmature|React'] ||
-            clipMap['CharacterArmature|Wave']
+            clipMap['CharacterArmature|HitReact']
 
         if (hitClip) {
             this.animation.actions.hit = this.animation.mixer.clipAction(hitClip)
@@ -191,6 +196,48 @@ export default class Robot {
         return result.hasHit
     }
 
+    getGroundHitAt(x, z) {
+        const start = new CANNON.Vec3(x, this.body.position.y + 0.35, z)
+        const end = new CANNON.Vec3(x, this.body.position.y - 0.85, z)
+        const result = new CANNON.RaycastResult()
+        this.physics.world.raycastClosest(start, end, { skipBackfaces: true }, result)
+        return result.hasHit ? result : null
+    }
+
+    smoothLevel4Contacts(moveDirection) {
+        // Ajuste especifico del nivel 4:
+        // suaviza choques con objetos espaciales y ayuda a subir bordes bajos
+        // sin cambiar la velocidad normal del jugador.
+        const currentLevel = this.experience.world?.levelManager?.currentLevel || 1
+        if (currentLevel !== 4 || !this.body) return
+
+        const hv = Math.sqrt(this.body.velocity.x ** 2 + this.body.velocity.z ** 2)
+        if (hv > 5.2) {
+            this.body.velocity.x *= 5.2 / hv
+            this.body.velocity.z *= 5.2 / hv
+        }
+
+        if (Math.abs(this.body.velocity.y) > 1.2) {
+            this.body.velocity.y = Math.sign(this.body.velocity.y) * 1.2
+        }
+
+        if (!moveDirection || !this.isGrounded()) return
+
+        const currentHit = this.getGroundHitAt(this.body.position.x, this.body.position.z)
+        const frontHit = this.getGroundHitAt(
+            this.body.position.x + moveDirection.x * 0.65,
+            this.body.position.z + moveDirection.z * 0.65
+        )
+
+        if (!currentHit || !frontHit) return
+
+        const stepHeight = frontHit.hitPointWorld.y - currentHit.hitPointWorld.y
+        if (stepHeight > 0.05 && stepHeight <= 0.55) {
+            this.body.position.y += Math.min(stepHeight + 0.03, 0.16)
+            if (this.body.velocity.y < 1.2) this.body.velocity.y = 1.2
+        }
+    }
+
     respawn() {
         if (this.experience.world?.resetRobotPosition) {
             this.experience.world.resetRobotPosition()
@@ -198,6 +245,8 @@ export default class Robot {
     }
 
     takeDamage(amount) {
+        // Sistema de vida:
+        // enemigos y peligros llaman este metodo para restar corazones.
         const now = Date.now()
 
         if (now - this.lastDamageTime < this.damageCooldown) return
@@ -209,6 +258,7 @@ export default class Robot {
         console.log('💥 Vida restante:', this.health)
 
         this.updateHealthHud()
+        this.flashDamage()
 
         // No cambiar colores ni materiales.
         // Solo reproducir una animación si existe.
@@ -216,6 +266,7 @@ export default class Robot {
             this.animation?.actions?.hit &&
             this.animation.actions.current !== this.animation.actions.death
         ) {
+            this.hitAnimationUntil = now + 420
             this.animation.play('hit')
 
             setTimeout(() => {
@@ -267,6 +318,29 @@ export default class Robot {
         })
     }
 
+    flashDamage() {
+        this.resetDamageVisual()
+
+        this.model.traverse((child) => {
+            if (!child.isMesh || !child.material) return
+
+            const tintMaterial = (mat) => {
+                if (mat?.color) {
+                    mat.color.set('#ff3b3b')
+                    mat.needsUpdate = true
+                }
+            }
+
+            if (Array.isArray(child.material)) {
+                child.material.forEach(tintMaterial)
+            } else {
+                tintMaterial(child.material)
+            }
+        })
+
+        this.damageTimeout = setTimeout(() => this.resetDamageVisual(), 180)
+    }
+
     update() {
         if (this.animation.actions.current === this.animation.actions.death) return
         if (!this.body) return
@@ -276,10 +350,13 @@ export default class Robot {
 
         const keys = this.keyboard.getState()
         const isShift = keys.shift || false
+        // Actividad 10:
+        // Shift + W/flecha arriba usa la animacion y velocidad de correr.
         const moveForce = isShift ? 120 : 75
         const maxSpeed = isShift ? 10 : 6
         const turnSpeed = 2.5
         let isMoving = false
+        let moveDirection = null
 
 
         if (keys.left) {
@@ -299,14 +376,17 @@ export default class Robot {
                 this.body.position
             )
             isMoving = true
+            moveDirection = forward
         }
 
         if (keys.down) {
+            const backward = forward.clone().multiplyScalar(-1)
             this.body.applyForce(
-                new CANNON.Vec3(-forward.x * moveForce, 0, -forward.z * moveForce),
+                new CANNON.Vec3(backward.x * moveForce, 0, backward.z * moveForce),
                 this.body.position
             )
             isMoving = true
+            moveDirection = backward
         }
 
         // Limitar velocidad horizontal — CLAVE para no resbalar
@@ -337,6 +417,16 @@ export default class Robot {
 
         // Anti-caída
         if (this.body.position.y < -5) this.respawn()
+
+        this.smoothLevel4Contacts(moveDirection)
+
+        if (
+            this.animation.actions.current === this.animation.actions.hit &&
+            Date.now() < this.hitAnimationUntil
+        ) {
+            this.group.position.copy(this.body.position)
+            return
+        }
 
         // Animaciones
         if (isMoving) {
@@ -375,7 +465,7 @@ export default class Robot {
         this.group.position.y -= 0.5
         this.group.rotation.x = -Math.PI / 2
 
-        console.log('Robot ha muerto')
+        console.log('Adventurer ha muerto')
 
         if (this.experience.world?.triggerDefeat) {
             this.experience.world.triggerDefeat()

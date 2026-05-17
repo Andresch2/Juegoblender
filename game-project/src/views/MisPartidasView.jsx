@@ -27,38 +27,36 @@ export default function MisPartidasView() {
     return (
         <div style={styles.container}>
             <div style={styles.wrapper}>
-                <h1 style={styles.title}>🎮 Juego Blender</h1>
+                <h1 style={styles.title}>Juego Blender</h1>
                 <h2 style={styles.subtitle}>Mis Partidas</h2>
 
                 {loading && <p style={styles.info}>Cargando partidas...</p>}
                 {error && <p role="alert" style={styles.error}>{error}</p>}
 
                 {!loading && !error && sesiones.length === 0 && (
-                    <p style={styles.info}>Aún no tienes partidas registradas. ¡Juega para ver tu historial!</p>
+                    <p style={styles.info}>Aun no tienes partidas registradas. Juega para ver tu historial.</p>
                 )}
 
                 {!loading && !error && sesiones.length > 0 && (
                     <>
-                        {/* Resumen total */}
                         <div style={styles.resumen}>
                             <div style={styles.stat}>
-                                <span>🎮</span>
+                                <span>Partidas</span>
                                 <strong>{sesiones.length}</strong>
                                 <small>Partidas</small>
                             </div>
                             <div style={styles.stat}>
-                                <span>🏆</span>
+                                <span>Puntos</span>
                                 <strong>{totalPuntos}</strong>
                                 <small>Puntos totales</small>
                             </div>
                             <div style={styles.stat}>
-                                <span>⭐</span>
+                                <span>Record</span>
                                 <strong>{Math.max(...sesiones.map(s => s.puntos))}</strong>
                                 <small>Mejor puntaje</small>
                             </div>
                         </div>
 
-                        {/* Tabla de partidas */}
                         <div style={styles.tabla}>
                             <div style={styles.thead}>
                                 <span>#</span>
@@ -76,8 +74,8 @@ export default function MisPartidasView() {
                                     <span>
                                         <span style={styles.badge}>Nivel {s.nivel}</span>
                                     </span>
-                                    <span style={styles.puntos}>🏅 {s.puntos}</span>
-                                    <span style={styles.tiempo}>⏱ {formatTiempo(s.tiempo)}</span>
+                                    <span style={styles.puntos}>{s.puntos}</span>
+                                    <span style={styles.tiempo}>{formatTiempo(s.tiempo)}</span>
                                     <span style={styles.fecha}>
                                         {new Date(s.fecha).toLocaleDateString('es-CO')}
                                     </span>
@@ -98,12 +96,12 @@ export default function MisPartidasView() {
                         }}
                         style={styles.btnVolver}
                     >
-                        ▶ {localStorage.getItem('savedLevel') > 1
-                            ? `Continuar — Nivel ${localStorage.getItem('savedLevel')}`
+                        {localStorage.getItem('savedLevel') > 1
+                            ? `Continuar - Nivel ${localStorage.getItem('savedLevel')}`
                             : 'Volver al Juego'}
                     </button>
                     <button onClick={() => { clearToken(); navigate('/login') }} style={styles.btnLogout}>
-                        🚪 Cerrar Sesión
+                        Cerrar Sesion
                     </button>
                 </div>
             </div>
@@ -112,14 +110,14 @@ export default function MisPartidasView() {
 }
 
 const styles = {
-    container: { minHeight: '100vh', overflowY: 'auto', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily: 'sans-serif', padding: '32px 16px' },
-    wrapper: { maxWidth: 720, margin: '0 auto', paddingBottom: 40 },
+    container: { position: 'fixed', inset: 0, width: '100vw', height: '100vh', overflowY: 'auto', background: 'linear-gradient(135deg,#0f0c29,#302b63,#24243e)', fontFamily: 'sans-serif', padding: '24px 16px', boxSizing: 'border-box' },
+    wrapper: { maxWidth: 720, margin: '0 auto', paddingBottom: 80 },
     title: { color: '#fff', textAlign: 'center', margin: '0 0 4px', fontSize: 26 },
     subtitle: { color: '#a5b4fc', textAlign: 'center', margin: '0 0 24px', fontSize: 20, fontWeight: 400 },
     info: { color: '#94a3b8', textAlign: 'center', marginTop: 20 },
     error: { color: '#f87171', textAlign: 'center' },
     resumen: { display: 'flex', gap: 12, marginBottom: 24, flexWrap: 'wrap' },
-    stat: { flex: 1, minWidth: 100, background: 'rgba(255,255,255,0.07)', borderRadius: 10, padding: '14px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4, color: '#fff', fontSize: 22 },
+    stat: { flex: 1, minWidth: 100, background: 'rgba(255,255,255,0.07)', borderRadius: 10, padding: '14px', textAlign: 'center', display: 'flex', flexDirection: 'column', gap: 4, color: '#fff', fontSize: 18 },
     tabla: { background: 'rgba(255,255,255,0.04)', borderRadius: 10, overflow: 'hidden', marginBottom: 24 },
     thead: { display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 1fr 1.5fr', padding: '10px 16px', background: 'rgba(99,102,241,0.35)', color: '#a5b4fc', fontSize: 13, fontWeight: 700, gap: 8 },
     fila: { display: 'grid', gridTemplateColumns: '0.5fr 1fr 1fr 1fr 1.5fr', padding: '10px 16px', color: '#e2e8f0', fontSize: 13, gap: 8, alignItems: 'center' },

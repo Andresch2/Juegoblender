@@ -1,5 +1,4 @@
 import * as THREE from 'three'
-import { VRButton } from 'three/examples/jsm/webxr/VRButton.js'
 
 export default class VRIntegration {
   constructor({ renderer, scene, camera, vrDolly, modalManager, experience }) {
@@ -31,20 +30,6 @@ export default class VRIntegration {
 
   _initXR() {
     this.renderer.xr.enabled = true
-    const vrBtn = VRButton.createButton(this.renderer)
-    document.body.appendChild(vrBtn)
-
-    setTimeout(() => {
-      if (vrBtn.innerText?.includes('NOT SUPPORTED')) {
-        vrBtn.style.display = 'none'
-      } else {
-        vrBtn.style.display = 'block'
-        vrBtn.style.position = 'absolute'
-        vrBtn.style.bottom = '20px'
-        vrBtn.style.left = '20px'
-        vrBtn.style.zIndex = '9999'
-      }
-    }, 100)
 
     this.renderer.setAnimationLoop(() => {
       const delta = this.clock.getDelta()
