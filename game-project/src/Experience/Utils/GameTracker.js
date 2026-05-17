@@ -55,9 +55,12 @@ export default class GameTracker {
     }
 
     //Modal de fin de juego
-    showEndGameModal(currentTime) {
+    showEndGameModal(currentTime, coins = 0, targetCoins = 0) {
         const best = this.getBestTimes()
         const ranking = best.map((t, i) => `#${i + 1}: ${t}s`).join('\n')
+        const coinsLine = targetCoins > 0
+            ? `\n🪙 Coins: ${coins} / ${targetCoins}`
+            : ''
 
         if (!this.modal || typeof this.modal.show !== 'function') {
             console.warn('⚠️ No se puede mostrar el modal de fin: modal no definido.')
@@ -66,7 +69,7 @@ export default class GameTracker {
 
         this.modal.show({
             icon: '🏁',
-            message: `¡Felicidades!\nTerminaste la partida.\n⏱ Tu tiempo: ${currentTime}s\n\n🏆 Mejores tiempos:\n${ranking}`,
+            message: `¡Felicidades!\nTerminaste la partida.\n⏱ Tu tiempo: ${currentTime}s${coinsLine}\n\n🏆 Mejores tiempos:\n${ranking}`,
             buttons: [
                 {
                     text: '🔁 Reintentar',

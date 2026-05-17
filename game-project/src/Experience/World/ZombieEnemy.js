@@ -1,10 +1,9 @@
 import * as CANNON from 'cannon-es'
 import * as THREE from 'three'
 import { clone as cloneSkeleton } from 'three/examples/jsm/utils/SkeletonUtils.js'
-import FinalPrizeParticles from '../Utils/FinalPrizeParticles.js'
 import Sound from './Sound.js'
 
-export default class EnemyLarge {
+export default class ZombieEnemy {
     constructor({ scene, physicsWorld, playerRef, model, position, experience, patrolPoints = [] }) {
         this.experience = experience
         this.scene = scene
@@ -14,17 +13,16 @@ export default class EnemyLarge {
         this.patrolPoints = patrolPoints
         this.currentPatrolIndex = 0
 
-        this.baseSpeed = 0.60
-        this.chaseSpeed = 1.8
-        this.detectionRadius = 14
-        this.releaseRadius = 19
-        this.attackDistance = 2.0
+        this.baseSpeed = 0.55
+        this.chaseSpeed = 1.65
+        this.detectionRadius = 16
+        this.releaseRadius = 21
+        this.attackDistance = 1.85
         this.isChasing = false
         this.delayActivation = 0
-        this.visualYOffset = -1.15
+        this.visualYOffset = -1.32
         this.lastAttackTime = 0
         this.attackCooldown = 900
-        this.attackAnimationUntil = 0
         this.movementMode = 'walk2'
         this.modeTimer = 0
         this.nextModeChange = 3 + Math.random() * 3
@@ -38,24 +36,22 @@ export default class EnemyLarge {
         this.hasTriggeredDefeat = false
 
         this.model = new THREE.Group()
-        this.model.name = 'EnemyLarge'
+        this.model.name = 'ZombieEnemy'
         this.model.position.copy(position)
 
         this.visual = this._cloneModel(model)
-        this.visual.scale.setScalar(0.42)
+        this.visual.scale.setScalar(0.40)
         this.visual.position.y = this.visualYOffset
         this.model.add(this.visual)
 
         this.model.traverse((child) => {
-            if (child.isMesh) {
-                child.castShadow = true
-            }
+            if (child.isMesh) child.castShadow = true
         })
 
         this.scene.add(this.model)
         this.setAnimation()
 
-        const shape = new CANNON.Sphere(0.75)
+        const shape = new CANNON.Sphere(0.68)
         this.body = new CANNON.Body({
             mass: 0,
             type: CANNON.Body.KINEMATIC,
@@ -78,9 +74,7 @@ export default class EnemyLarge {
         this.model.userData.physicsBody = this.body
 
         this._onCollide = (event) => {
-            if (event.body === this.playerRef?.body) {
-                this.killPlayer()
-            }
+            if (event.body === this.playerRef?.body) this.killPlayer()
         }
         this.body.addEventListener('collide', this._onCollide)
     }
@@ -126,50 +120,27 @@ export default class EnemyLarge {
             return
         }
 
-        console.log('Animaciones del zombie:', animations.map(clip => clip.name))
-
         this.animation.mixer = new THREE.AnimationMixer(this.visual)
 
         animations.forEach((clip) => {
             this.animation.actions[clip.name] = this.animation.mixer.clipAction(clip)
         })
 
-        // Busca por nombre exacto o con prefijo de armature segun el GLB.
-        const getClip = (name) => {
-            return animations.find(clip =>
-                clip.name === name ||
-                clip.name === `Armature|${name}` ||
-                clip.name === `CharacterArmature|${name}` ||
-                clip.name.endsWith(`|${name}`)
-            )
-        }
+        const getClip = (name) => animations.find(clip =>
+            clip.name === name ||
+            clip.name === `Armature|${name}` ||
+            clip.name.endsWith(`|${name}`)
+        )
 
-        const idleClip =
-            getClip('Idle') ||
-            animations[0]
-
-        const walkSlowClip =
-            getClip('Walk') ||
-            idleClip
-
-        const walkClip =
-            getClip('Walk') ||
-            walkSlowClip
-
-        const crawlRunClip =
-            getClip('Run') ||
-            walkClip
-
-        const attackClip =
-            getClip('Punch') ||
-            getClip('Attack') ||
-            getClip('HitReact') ||
-            idleClip
+        const idleClip = getClip('Idle') || animations[0]
+        const walkSlowClip = getClip('Walk2') || getClip('Walk') || idleClip
+        const walkClip = getClip('Walk') || walkSlowClip
+        const attackClip = getClip('Attack') || getClip('Bite_ground') || getClip('Headbutt') || idleClip
 
         this.animation.idleAction = this.animation.mixer.clipAction(idleClip)
         this.animation.walkSlowAction = this.animation.mixer.clipAction(walkSlowClip)
         this.animation.walkAction = this.animation.mixer.clipAction(walkClip)
-        this.animation.crawlRunAction = this.animation.mixer.clipAction(crawlRunClip)
+        this.animation.runAction = this.animation.walkAction
         this.animation.attackAction = this.animation.mixer.clipAction(attackClip)
 
         this.animation.attackAction.setLoop(THREE.LoopOnce)
@@ -178,42 +149,21 @@ export default class EnemyLarge {
         this.animation.current = this.animation.idleAction
         this.animation.current.reset().fadeIn(0.2).play()
 
-        console.log('Animaciones usadas por el zombie:', {
+        console.log('Animaciones usadas por zombie nivel 5:', {
             idle: idleClip.name,
             caminarLento: walkSlowClip.name,
-            caminarNormal: walkClip.name,
-            correr: crawlRunClip.name,
+            caminar: walkClip.name,
             atacar: attackClip.name
         })
     }
 
-    playAnimation(action, fade = 0.4) {
+    playAnimation(action, fade = 0.25) {
         if (!action || action === this.animation?.current) return
 
         const previous = this.animation.current
         action.reset().fadeIn(fade).play()
         previous?.fadeOut(fade)
         this.animation.current = action
-    }
-
-    startAttackAnimation() {
-        if (!this.body) return
-
-        this.body.velocity.set(0, 0, 0)
-        this.body.position.y = this.hoverY
-        this.model.position.copy(this.body.position)
-
-        const action = this.animation?.attackAction || this.animation?.idleAction
-        if (action) {
-            action.timeScale = 1.1
-            if (this.animation?.current === action && Date.now() > this.attackAnimationUntil) {
-                action.reset().play()
-            } else if (this.animation?.current !== action) {
-                this.playAnimation(action, 0.12)
-            }
-        }
-
-        this.attackAnimationUntil = Date.now() + 650
     }
 
     startAlertSound(volume = 0.5) {
@@ -235,37 +185,21 @@ export default class EnemyLarge {
             this.alertSoundPlaying = false
         }
     }
+
     updateZombieMovementMode(delta, isChasing) {
         this.modeTimer += delta
-
         if (this.modeTimer < this.nextModeChange) return
 
         this.modeTimer = 0
 
         if (isChasing) {
-            // Cuando persigue, tiene más probabilidad de ir rápido
-            const useCrawl = Math.random() < 0.55
-
-            if (useCrawl) {
-                this.movementMode = 'run'
-                this.nextModeChange = 1.5 + Math.random() * 1.5
-            } else {
-                this.movementMode = 'walk'
-                this.nextModeChange = 2 + Math.random() * 2
-            }
-
+            this.movementMode = Math.random() < 0.7 ? 'run' : 'walk'
+            this.nextModeChange = 1.4 + Math.random() * 1.6
             return
         }
 
-        const random = Math.random()
-
-        if (random < 0.50) {
-            this.movementMode = 'walk'
-            this.nextModeChange = 2.5 + Math.random() * 2
-        } else {
-            this.movementMode = 'walk2'
-            this.nextModeChange = 3 + Math.random() * 3
-        }
+        this.movementMode = Math.random() < 0.45 ? 'walk' : 'walk2'
+        this.nextModeChange = 2.5 + Math.random() * 3
     }
 
     update(delta) {
@@ -288,15 +222,8 @@ export default class EnemyLarge {
         const distanceToPlayer = Math.sqrt(dxToPlayer * dxToPlayer + dzToPlayer * dzToPlayer)
 
         if (distanceToPlayer < this.attackDistance) {
-            this.startAttackAnimation()
+            this.stopMoving(this.animation?.attackAction || this.animation?.idleAction)
             this.killPlayer()
-            return
-        }
-
-        if (Date.now() < this.attackAnimationUntil) {
-            this.body.velocity.set(0, 0, 0)
-            this.body.position.y = this.hoverY
-            this.model.position.copy(this.body.position)
             return
         }
 
@@ -312,27 +239,20 @@ export default class EnemyLarge {
 
         if (this.isChasing) {
             targetPos = playerPos
-
             if (this.movementMode === 'run') {
-                speed = this.chaseSpeed * 1.15
-                action = this.animation?.crawlRunAction || this.animation?.walkAction
+                speed = this.chaseSpeed
+                action = this.animation?.runAction || this.animation?.walkAction
             } else {
-                speed = this.chaseSpeed * 0.8
+                speed = this.chaseSpeed * 0.78
                 action = this.animation?.walkAction || this.animation?.walkSlowAction
             }
-
         } else if (this.patrolPoints.length > 0) {
             const currentPoint = this.patrolPoints[this.currentPatrolIndex]
             targetPos = new CANNON.Vec3(currentPoint.x, this.hoverY, currentPoint.z)
-            if (this.movementMode === 'run') {
-                speed = this.baseSpeed * 2.4
-                action = this.animation?.crawlRunAction || this.animation?.walkAction
-            } else if (this.movementMode === 'walk') {
-                speed = this.baseSpeed * 1.4
+
+            if (this.movementMode === 'walk') {
+                speed = this.baseSpeed * 1.35
                 action = this.animation?.walkAction || this.animation?.walkSlowAction
-            } else {
-                speed = this.baseSpeed
-                action = this.animation?.walkSlowAction || this.animation?.walkAction
             }
 
             const dxToPoint = targetPos.x - enemyPos.x
@@ -347,7 +267,6 @@ export default class EnemyLarge {
         }
 
         const maxDistance = 12
-
         if (this.isChasing && distanceToPlayer < maxDistance) {
             const clampedDistance = Math.min(distanceToPlayer, maxDistance)
             const volume = (1 - clampedDistance / maxDistance) * 0.65
@@ -355,6 +274,7 @@ export default class EnemyLarge {
         } else {
             this.stopAlertSound()
         }
+
         const direction = new CANNON.Vec3(
             targetPos.x - enemyPos.x,
             0,
@@ -368,7 +288,7 @@ export default class EnemyLarge {
             this.body.velocity.y = 0
             this.body.velocity.z = direction.z
             this.body.position.y = this.hoverY
-            if (action) action.timeScale = Math.min(1.8, Math.max(0.5, speed / this.baseSpeed))
+            if (action) action.timeScale = Math.min(1.9, Math.max(0.7, speed / this.baseSpeed))
             this.playAnimation(action)
         } else {
             this.stopMoving()
@@ -394,8 +314,6 @@ export default class EnemyLarge {
         if (this.hasTriggeredDefeat) return
 
         const now = Date.now()
-
-        // Evita que quite vida 60 veces por segundo
         if (now - this.lastAttackTime < this.attackCooldown) return
         this.lastAttackTime = now
 
@@ -405,7 +323,6 @@ export default class EnemyLarge {
             this.playerRef.die()
         }
 
-        // Si el jugador murió, apagar sonido y mostrar derrota una sola vez
         if (!this.playerRef?.body || this.playerRef?.health <= 0) {
             this.hasTriggeredDefeat = true
             this.stopAlertSound()
@@ -417,9 +334,7 @@ export default class EnemyLarge {
         this.stopAlertSound()
         this.animation?.mixer?.stopAllAction()
 
-        if (this.model) {
-            this.scene.remove(this.model)
-        }
+        if (this.model) this.scene.remove(this.model)
 
         if (this.body) {
             this.body.removeEventListener('collide', this._onCollide)

@@ -1,6 +1,6 @@
 // src/network/SocketManager.js
-import * as THREE from 'three'
 import { io } from 'socket.io-client'
+import * as THREE from 'three'
 
 export default class SocketManager {
     constructor(experience) {
@@ -95,10 +95,10 @@ export default class SocketManager {
 
 
     _createRemoteRobot(id, position) {
-        const original = this.experience.resources.items.robotModel
+        const original = this.experience.resources.items.playerModel
 
         if (!original || !original.scene || !original.animations) {
-            console.warn('⚠️ robotModel no está completamente cargado')
+            console.warn('playerModel no está completamente cargado')
             return
         }
 
